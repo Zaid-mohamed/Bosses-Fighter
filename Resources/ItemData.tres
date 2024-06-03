@@ -1,16 +1,8 @@
-[gd_resource type="Resource" script_class="Item_Data" load_steps=2 format=3 uid="uid://5tu2586l4p54"]
+[gd_resource type="Resource" script_class="Item_Data" load_steps=2 format=3 uid="uid://b74078cqp0hj6"]
 
-[sub_resource type="GDScript" id="GDScript_5h10j"]
-script/source = "extends Resource
-
-class_name Item_Data
-
-@export_group(\"Information\")
-@export var Price : int
-@export var Damage : int
-"
+[ext_resource type="Script" path="res://scripts/resources scripts/item_data.gd" id="1_odm71"]
 
 [resource]
-script = SubResource("GDScript_5h10j")
+script = ExtResource("1_odm71")
 Price = 0
 Damage = 0
