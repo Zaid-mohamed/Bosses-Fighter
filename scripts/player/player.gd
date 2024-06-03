@@ -22,7 +22,7 @@ extends CharacterBody2D
 
 func _physics_process(delta: float) -> void:
 	movement()
-	
+	handle_animation()
 	handle_facing()
 
 
@@ -47,3 +47,10 @@ func handle_facing():
 		body.flip_h = true
 	elif Input.is_action_just_pressed("ui_right"):
 		body.flip_h = false
+
+# the function that handles the animations
+func handle_animation():
+	if velocity != Vector2.ZERO:
+		anim.play("Run", 0.25)
+	else:
+		anim.play("Idle", 0.25)
