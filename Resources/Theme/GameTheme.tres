@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dosdsspgt0bd"]
+
+[ext_resource type="Texture2D" uid="uid://dm6yhuih7tr1s" path="res://Assets/UI/panel texture.png" id="1_dkbav"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0007t"]
+texture = ExtResource("1_dkbav")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+
+[resource]
+Panel/styles/panel = SubResource("StyleBoxTexture_0007t")
