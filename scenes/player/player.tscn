@@ -188,8 +188,4 @@ position = Vector2(26, 1)
 unique_name_in_owner = true
 wait_time = 0.15
 
-[node name="Panel" type="Panel" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-
 [connection signal="timeout" from="ItemsPivot/HitCoolDown" to="ItemsPivot" method="_on_hit_cool_down_timeout"]
