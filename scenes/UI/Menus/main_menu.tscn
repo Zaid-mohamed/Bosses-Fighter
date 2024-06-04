@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c05qes2hc0hoo"]
+
+[ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="1_es006"]
+[ext_resource type="PackedScene" uid="uid://blpjs8wquhhp4" path="res://scenes/UI/OnGroundButton.tscn" id="2_0mu40"]
+
+[node name="Main Menu" type="Node2D"]
+y_sort_enabled = true
+
+[node name="player" parent="." instance=ExtResource("1_es006")]
+position = Vector2(116, 95)
+
+[node name="Buttton" parent="." instance=ExtResource("2_0mu40")]
+position = Vector2(121, 52)

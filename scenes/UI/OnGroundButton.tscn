@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://blpjs8wquhhp4"]
+
+[ext_resource type="Texture2D" uid="uid://bewmnba1outtx" path="res://Assets/UI/Button.png" id="1_m5xan"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7n24i"]
+size = Vector2(36, 14)
+
+[node name="Buttton" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2, -12)
+texture = ExtResource("1_m5xan")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -9.0
+offset_top = -20.0
+offset_right = 11.0
+offset_bottom = -9.0
+theme_override_font_sizes/font_size = 10
+text = "Play"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -14)
+shape = SubResource("RectangleShape2D_7n24i")
