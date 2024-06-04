@@ -54,3 +54,5 @@ func handle_animation():
 		anim.play("Run", 0.25)
 	else:
 		anim.play("Idle", 0.25)
+
+

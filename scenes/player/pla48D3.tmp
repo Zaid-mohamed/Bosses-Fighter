@@ -180,12 +180,12 @@ hit_length = 20.0
 [node name="Sword" parent="ItemsPivot" instance=ExtResource("4_rcdo3")]
 position = Vector2(26, 1)
 
-[node name="OrgPosIndicator" type="Marker2D" parent="ItemsPivot"]
+[node name="OrgPos" type="Marker2D" parent="ItemsPivot"]
 unique_name_in_owner = true
 position = Vector2(26, 1)
 
 [node name="HitCoolDown" type="Timer" parent="ItemsPivot"]
 unique_name_in_owner = true
-wait_time = 0.15
+wait_time = 0.2
 
 [connection signal="timeout" from="ItemsPivot/HitCoolDown" to="ItemsPivot" method="_on_hit_cool_down_timeout"]
