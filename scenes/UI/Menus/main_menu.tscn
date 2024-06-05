@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c05qes2hc0hoo"]
+[gd_scene load_steps=5 format=3 uid="uid://c05qes2hc0hoo"]
 
 [ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="1_es006"]
 [ext_resource type="PackedScene" uid="uid://blpjs8wquhhp4" path="res://scenes/UI/OnGroundButton.tscn" id="2_0mu40"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ixb7"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dpy5j"]
 
 [node name="Main Menu" type="Node2D"]
 y_sort_enabled = true
@@ -11,3 +15,25 @@ position = Vector2(116, 95)
 
 [node name="Buttton" parent="." instance=ExtResource("2_0mu40")]
 position = Vector2(121, 54)
+
+[node name="Boundry" type="StaticBody2D" parent="."]
+editor_description = "The Borders of the scene"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Boundry"]
+position = Vector2(140, 185)
+shape = SubResource("WorldBoundaryShape2D_7ixb7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Boundry"]
+position = Vector2(323, 87)
+rotation = -1.57079
+shape = SubResource("WorldBoundaryShape2D_dpy5j")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Boundry"]
+position = Vector2(135, 4)
+rotation = -3.14159
+shape = SubResource("WorldBoundaryShape2D_dpy5j")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Boundry"]
+position = Vector2(-1, 93)
+rotation = -4.71238
+shape = SubResource("WorldBoundaryShape2D_dpy5j")
