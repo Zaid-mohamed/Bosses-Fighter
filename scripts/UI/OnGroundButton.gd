@@ -58,3 +58,4 @@ func _on_body_exited(body: Node2D) -> void:
 	button_sprite.frame -= 1
 	# raise the label to match the released shape sprite 
 	title_label.global_position.y -= 3.5
+	
