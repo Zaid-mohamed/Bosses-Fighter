@@ -41,7 +41,6 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	# lower the label to match the pressed shape sprite
 	title_label.global_position.y += 3.5
-	SceneChanger.change_scene("res://scenes/world/world.tscn")
 	
 
 func _on_body_exited(body: Node2D) -> void:
