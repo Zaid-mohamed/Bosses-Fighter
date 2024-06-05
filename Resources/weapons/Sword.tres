@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="Item_Data" load_steps=3 format=3 uid="uid://bhb2olam8gmcc"]
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bhb2olam8gmcc"]
 
-[ext_resource type="PackedScene" uid="uid://c23ak475exnls" path="res://scenes/weapons/sword.tscn" id="1_mlf42"]
 [ext_resource type="Script" path="res://scripts/resources scripts/item_data.gd" id="1_oqfgn"]
+[ext_resource type="AnimationLibrary" uid="uid://d27h71h05jlr4" path="res://Resources/weapons/Sword/SwordLibrary.tres" id="1_wi5kj"]
+[ext_resource type="Texture2D" uid="uid://7uamcbjpw4fy" path="res://Assets/weapons/sword.png" id="3_j5xdn"]
 
 [resource]
 script = ExtResource("1_oqfgn")
-name = "Sword"
+Name = "Sword"
 Price = 5
 Damage = 3
-scene = ExtResource("1_mlf42")
+texture = ExtResource("3_j5xdn")
+anim_library = ExtResource("1_wi5kj")

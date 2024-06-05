@@ -11,13 +11,18 @@ extends CharacterBody2D
 # deceleration
 @export var decel : float
 
-
+@export var item_data : ItemData
 # onready vars
+
+@onready var item: Item = %Item
 
 @onready var body: Sprite2D = %body
 @onready var anim: AnimationPlayer = %Anim
 
 
+
+func _ready() -> void:
+	item.update_data(item_data)
 
 
 func _physics_process(delta: float) -> void:

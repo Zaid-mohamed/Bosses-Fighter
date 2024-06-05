@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2toj317momvs"]
+[gd_scene load_steps=14 format=3 uid="uid://d2toj317momvs"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_54yo8"]
 [ext_resource type="Texture2D" uid="uid://18pufyc8ggqp" path="res://Assets/player/player.png" id="1_qqepf"]
 [ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="2_h4i6m"]
 [ext_resource type="Resource" uid="uid://bhb2olam8gmcc" path="res://Resources/weapons/Sword.tres" id="2_k6iir"]
 [ext_resource type="Script" path="res://scripts/player/Item.gd" id="4_2b6i5"]
+[ext_resource type="Texture2D" uid="uid://7uamcbjpw4fy" path="res://Assets/weapons/sword.png" id="6_i0m1s"]
 [ext_resource type="AnimationLibrary" uid="uid://d27h71h05jlr4" path="res://Resources/weapons/Sword/SwordLibrary.tres" id="6_wx25a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_blwlu"]
@@ -186,6 +187,7 @@ anim = NodePath("AnimationPlayer")
 
 [node name="Sprite" type="Sprite2D" parent="Item"]
 position = Vector2(15, 0)
+texture = ExtResource("6_i0m1s")
 offset = Vector2(12, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Item"]
@@ -203,5 +205,5 @@ disabled = true
 
 [node name="BoredTimer" type="Timer" parent="Item"]
 unique_name_in_owner = true
-wait_time = 5.0
+wait_time = 10.0
 autostart = true

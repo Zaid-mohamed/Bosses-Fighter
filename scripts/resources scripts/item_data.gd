@@ -1,10 +1,13 @@
 extends Resource
 
-class_name Item_Data
+class_name ItemData
 
 @export_group("Information")
 
-@export var name : String
+@export var Name : String
 @export var Price : int
 @export var Damage : int
-@export var scene : PackedScene
+@export var texture : Texture2D
+@export var anim_library : AnimationLibrary
+
+

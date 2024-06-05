@@ -5,7 +5,16 @@ extends Node2D
 ###########################################
 ##########################################
 
-## this mechanic is not finished don't try to complete it!
+# THIS CODE IS NOW USELESS
+# THIS CODE IS NOW USELESS
+# THIS CODE IS NOW USELESS
+# THIS CODE IS NOW USELESS
+# THIS CODE IS NOW USELESS
+# THIS CODE IS NOW USELESS
+# THIS CODE IS NOW USELESS
+# THIS CODE IS NOW USELESS
+# THIS CODE IS NOW USELESS
+# THIS CODE IS NOW USELESS
 
 ##############################################
 ##############################################
@@ -30,32 +39,21 @@ var holded_item : Node2D:
 	get:
 		return get_child(0)
 
-# can the pivot rotate ?
-var can_rotate : bool = true
 
 # is currently hitting?
 var hitting : bool = false
-
+# can rotate?
+var can_rotate : bool = true
 
 func _process(delta: float) -> void:
 	
-	handle_rotations()
 	
 	# if pressed attack and not already hitting
 	if Input.is_action_just_pressed("attack") && !hitting:
 		hit()
 
 
-# the function that handles the rotation of the pivot
-func handle_rotations():
-	# if can not rotate return 
-	if !can_rotate: return
-	
-	
-	var mouse_direction = (get_global_mouse_position() - global_position).normalized()
-	# lerp the rotation to the mouse direction angle (you can send me to explain more)
-	rotation = lerp_angle(rotation, mouse_direction.angle(), 0.4)
-	
+
 func hit():
 	#if already hitting, return
 	if hitting:
