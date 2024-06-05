@@ -1,24 +1,44 @@
-[gd_scene load_steps=3 format=3 uid="uid://blpjs8wquhhp4"]
+[gd_scene load_steps=5 format=3 uid="uid://blpjs8wquhhp4"]
 
-[ext_resource type="Texture2D" uid="uid://bewmnba1outtx" path="res://Assets/UI/Button.png" id="1_m5xan"]
+[ext_resource type="Texture2D" uid="uid://cmajlrw6htqku" path="res://Assets/UI/ButtonSpriteSheet.png" id="1_acynq"]
+[ext_resource type="Script" path="res://scripts/UI/OnGroundButton.gd" id="1_qwcfn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7n24i"]
-size = Vector2(36, 14)
+size = Vector2(34, 17)
 
-[node name="Buttton" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6mox"]
+size = Vector2(32, 10)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="OnGroundButton" type="StaticBody2D"]
+
+[node name="DetectionArea" type="Area2D" parent="."]
+position = Vector2(0, 23)
+script = ExtResource("1_qwcfn")
+
+[node name="ButtonSprite" type="Sprite2D" parent="DetectionArea"]
+unique_name_in_owner = true
 position = Vector2(2, -12)
-texture = ExtResource("1_m5xan")
+texture = ExtResource("1_acynq")
+hframes = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="TitleLabel" type="Label" parent="DetectionArea"]
+unique_name_in_owner = true
 offset_left = -9.0
 offset_top = -20.0
 offset_right = 11.0
 offset_bottom = -9.0
 theme_override_font_sizes/font_size = 10
 text = "Play"
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(1, -14.5)
+shape = SubResource("RectangleShape2D_7n24i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -14)
-shape = SubResource("RectangleShape2D_7n24i")
+position = Vector2(1, 6)
+shape = SubResource("RectangleShape2D_n6mox")
+disabled = true
+
+[connection signal="body_entered" from="DetectionArea" to="DetectionArea" method="_on_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="DetectionArea" method="_on_body_exited"]
