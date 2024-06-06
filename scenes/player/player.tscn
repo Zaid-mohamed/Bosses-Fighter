@@ -153,7 +153,8 @@ item_data = ExtResource("2_k6iir")
 [node name="body" type="Node2D" parent="."]
 
 [node name="shadow" type="Sprite2D" parent="body"]
-position = Vector2(0, -4)
+unique_name_in_owner = true
+position = Vector2(-0.5, -4)
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_h4i6m")
 
@@ -163,6 +164,7 @@ texture = ExtResource("1_qqepf")
 offset = Vector2(0, -9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -3)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_blwlu")

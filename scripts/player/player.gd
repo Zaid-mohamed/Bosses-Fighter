@@ -18,6 +18,7 @@ extends CharacterBody2D
 
 @onready var body: Sprite2D = %body
 @onready var anim: AnimationPlayer = %Anim
+@onready var shadow: Sprite2D = %shadow
 
 
 
@@ -48,10 +49,16 @@ func movement():
 
 # handles the direction the player faces
 func handle_facing():
-	if Input.is_action_just_pressed("ui_left"):
+	if Input.is_action_just_pressed("ui_left") && !body.flip_h:
+		# make the sprite look left
 		body.flip_h = true
-	elif Input.is_action_just_pressed("ui_right"):
+		# move the shadow to match the sprite (the body)
+		shadow.position.x = 0.5
+	elif Input.is_action_just_pressed("ui_right") && body.flip_h:
+		# make the sprite look right
 		body.flip_h = false
+		# move the shadow to match the sprite (the body)
+		shadow.position.x = -0.5
 
 # the function that handles the animations
 func handle_animation():
