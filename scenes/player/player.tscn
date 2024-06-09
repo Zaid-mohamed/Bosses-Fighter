@@ -148,7 +148,7 @@ script = ExtResource("1_54yo8")
 speed = 250.0
 accel = 1000.0
 decel = 1000.0
-item_data = ExtResource("2_k6iir")
+current_item_data = ExtResource("2_k6iir")
 
 [node name="body" type="Node2D" parent="."]
 

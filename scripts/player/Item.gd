@@ -65,7 +65,7 @@ func handle_rotations():
 func handle_input():
 	if Input.is_action_just_pressed("attack"):
 		# if pressed attack play attack animation
-		play_animation("Attack", get_owner().item_data)
+		play_animation("Attack", get_owner().current_item_data)
 		# and restart the bored timer
 		restart_bored_timer()
 	

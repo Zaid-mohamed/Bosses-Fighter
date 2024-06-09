@@ -11,7 +11,9 @@ extends CharacterBody2D
 # deceleration
 @export var decel : float
 
-@export var item_data : ItemData
+
+# the current item the player holds
+@export var current_item_data : ItemData
 # onready vars
 
 @onready var item: Item = %Item
@@ -23,7 +25,7 @@ extends CharacterBody2D
 
 
 func _ready() -> void:
-	item.update_data(item_data)
+	item.update_data(current_item_data)
 
 
 func _physics_process(delta: float) -> void:
