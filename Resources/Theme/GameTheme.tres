@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://dosdsspgt0bd"]
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://dosdsspgt0bd"]
 
 [ext_resource type="Texture2D" uid="uid://bewmnba1outtx" path="res://Assets/UI/Button.png" id="1_4gxvo"]
 [ext_resource type="Texture2D" uid="uid://bh7b6bvdfavfo" path="res://Assets/UI/ButtonPressed.png" id="1_aggcf"]
@@ -25,9 +25,17 @@ texture_margin_top = 10.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pxpph"]
+texture = ExtResource("1_dkbav")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 10.0
+
 [resource]
 Button/styles/focus = SubResource("StyleBoxTexture_7fqly")
 Button/styles/hover = SubResource("StyleBoxTexture_k6e5s")
 Button/styles/normal = SubResource("StyleBoxTexture_7fqly")
 Button/styles/pressed = SubResource("StyleBoxTexture_k6e5s")
 Panel/styles/panel = SubResource("StyleBoxTexture_0007t")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_pxpph")

@@ -1,0 +1,59 @@
+[gd_scene load_steps=4 format=3 uid="uid://begv84q2lqhsc"]
+
+[ext_resource type="PackedScene" uid="uid://elp8cbwwtets" path="res://scenes/inventory stuff/slot.tscn" id="1_0ifx1"]
+[ext_resource type="Script" path="res://scripts/inventory_stuff/inventory_dialog.gd" id="1_0r853"]
+[ext_resource type="Resource" uid="uid://d17cmx1vld47j" path="res://Resources/inventory stuff/TestInventory.tres" id="2_bin6s"]
+
+[node name="InventoryDialog" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 68.0
+offset_top = 16.0
+offset_right = -66.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0r853")
+inventory_data = ExtResource("2_bin6s")
+
+[node name="SlotsContainer" type="GridContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 4
+
+[node name="Slot" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
+
+[node name="Slot2" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
+
+[node name="Slot3" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
+
+[node name="Slot4" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
+
+[node name="Slot5" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
+
+[node name="Slot6" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
+
+[node name="Slot7" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
+
+[node name="Slot8" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
+
+[node name="Slot9" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
+
+[node name="Slot10" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
+
+[node name="Slot11" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
+
+[node name="Slot12" parent="SlotsContainer" instance=ExtResource("1_0ifx1")]
+layout_mode = 2
