@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 
 # a group of exported variables for motion quantaties
-
 @export_group("movement stats")
 # speed
 @export var speed : float

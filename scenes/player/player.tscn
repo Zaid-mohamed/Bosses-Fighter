@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2toj317momvs"]
+[gd_scene load_steps=16 format=3 uid="uid://d2toj317momvs"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_54yo8"]
 [ext_resource type="Texture2D" uid="uid://18pufyc8ggqp" path="res://Assets/player/player.png" id="1_qqepf"]
@@ -6,6 +6,9 @@
 [ext_resource type="Resource" uid="uid://bhb2olam8gmcc" path="res://Resources/weapons/Sword.tres" id="2_k6iir"]
 [ext_resource type="Script" path="res://scripts/player/Item.gd" id="4_2b6i5"]
 [ext_resource type="AnimationLibrary" uid="uid://d27h71h05jlr4" path="res://Resources/weapons/Sword/SwordLibrary.tres" id="6_wx25a"]
+[ext_resource type="Script" path="res://scripts/player/Inventory.gd" id="7_qtdns"]
+[ext_resource type="PackedScene" uid="uid://begv84q2lqhsc" path="res://scenes/inventory stuff/inventory_dialog.tscn" id="8_u0r8e"]
+[ext_resource type="PackedScene" uid="uid://elp8cbwwtets" path="res://scenes/inventory stuff/slot.tscn" id="9_vcfmq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_blwlu"]
 radius = 3.0
@@ -207,3 +210,32 @@ disabled = true
 unique_name_in_owner = true
 wait_time = 10.0
 autostart = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Inventory" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 163.0
+offset_top = 89.0
+offset_right = 203.0
+offset_bottom = 129.0
+script = ExtResource("7_qtdns")
+
+[node name="PlayerInventoryDialog" parent="UI/Inventory" instance=ExtResource("8_u0r8e")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -92.0
+offset_top = -74.0
+offset_right = 54.0
+offset_bottom = 31.0
+
+[node name="GrabbedSlot" parent="UI/Inventory" instance=ExtResource("9_vcfmq")]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -154.0
+offset_top = -51.0
+offset_right = -114.0
+offset_bottom = -11.0

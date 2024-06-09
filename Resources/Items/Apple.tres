@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://x5c6x4yt2stu"]
+
+[ext_resource type="Script" path="res://scripts/resources scripts/item_data.gd" id="1_8bi4n"]
+[ext_resource type="Texture2D" uid="uid://bgvii45j64jbw" path="res://Assets/Items/Apple.png" id="2_ecxtd"]
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5gtmo"]
+
+[resource]
+script = ExtResource("1_8bi4n")
+Name = "Apple"
+Description = "Tasty"
+texture = ExtResource("2_ecxtd")
+anim_library = SubResource("AnimationLibrary_5gtmo")
+stackable = true

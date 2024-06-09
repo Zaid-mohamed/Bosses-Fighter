@@ -14,7 +14,7 @@ var can_rotate : bool = true
 
 func _ready() -> void:
 	# connect the timeout signal to play animation bored 
-	bored_timer.timeout.connect(func(): play_animation("Bored", get_owner().item_data))
+	bored_timer.timeout.connect(func(): play_animation("Bored", get_owner().current_item_data))
 
 
 
