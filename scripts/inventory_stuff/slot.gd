@@ -13,6 +13,7 @@ signal slot_clicked (index, mouse_index, dialog)
 
 func set_slot_data(new_slot_data : SlotData):
 	# if there is no slot_data, stop!
+	
 	if !new_slot_data: return
 	#  the slot data will be equal to the new slot data
 	slot_data = new_slot_data
@@ -41,9 +42,9 @@ func _on_mouse_entered() -> void:
 func _on_mouse_exited() -> void:
 	if name == "GrabbedSlot" : return
 	# create the tween
-	var scale_up_tween = create_tween()
+	var scale_down_tween = create_tween()
 	# tween the scale
-	scale_up_tween.tween_property(self, "scale", Vector2.ONE, 0.1)
+	scale_down_tween.tween_property(self, "scale", Vector2.ONE, 0.1)
 #endregion
 
 
