@@ -32,7 +32,7 @@ func _process(delta: float) -> void:
 
 
 # this function is called when the inventory being interacted.
-func _inventory_interacted(inventory_data : InventoryData , button_index, slot_index):
+func _inventory_interacted(inventory_data : InventoryData , button_index, slot_index, dialog):
 	print("Got Inventort Interacted At %s" % name)
 	# match the grabbed_slot_data, and the button index (which mouse button has been clicked).
 	match [grabbed_slot_data, button_index]:
@@ -44,7 +44,7 @@ func _inventory_interacted(inventory_data : InventoryData , button_index, slot_i
 			# set the slot_data of the grabbed_slot to the grabbed_slot_data.
 			grabbed_slot.set_slot_data(grabbed_slot_data) 
 			# update the inventory (to make the effect visually).
-			player_inventory_dialog.update_inventory_dialog(inventory_data)
+			dialog.update_inventory_dialog(inventory_data)
 			# show the grabbed_slot if the grabbed_slot_data got a value from inventroy.grab_slot_data function above
 			if grabbed_slot_data : grabbed_slot.show()
 		# if the grabbed_slot_data has a "SlotData" (the player is holding a slot by the mosue)
@@ -53,12 +53,12 @@ func _inventory_interacted(inventory_data : InventoryData , button_index, slot_i
 			#check if we can not put the data we have to the a slot with the given index.
 			if !inventory_data.put_slot_data(slot_index, grabbed_slot.slot_data):
 				# if so update the inventory and return (dont continue).
-				player_inventory_dialog.update_inventory_dialog(inventory_data)		
+				dialog.update_inventory_dialog(inventory_data)		
 				return
 			# if yes :
 			
 			# update the inventory.
-			player_inventory_dialog.update_inventory_dialog(inventory_data)
+			dialog.update_inventory_dialog(inventory_data)
 			# make the grabbed_slot_data null (because the put this data in a slot in the inventory).
 			grabbed_slot_data = null
 			# set the slot_dat of grabbed_slot to grabbed_slot_data (null) .

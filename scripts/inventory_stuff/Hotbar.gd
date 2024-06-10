@@ -8,7 +8,7 @@ extends PanelContainer
 
 const SLOT_SCENE := preload("res://scenes/inventory stuff/slot.tscn")
 
-
+ 
 func _ready() -> void:
 	
 	update_inventory_dialog(inventory_data)

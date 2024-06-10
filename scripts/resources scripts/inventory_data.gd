@@ -8,11 +8,11 @@ class_name InventoryData
 
 
 ## this signal is emmited when one of the slots of the invenotry been clicked.
-signal inventory_interacted (inventory_data: InventoryData, button_index: int, slot_index: int)
+signal inventory_interacted (inventory_data: InventoryData, button_index: int, slot_index: int, dialog)
 
 ## the function that called when a slot being clicked.
-func _on_slot_clicked(index: int, button_index: int):
-	inventory_interacted.emit(self, button_index, index)
+func _on_slot_clicked(index: int, button_index: int, dialog):
+	inventory_interacted.emit(self, button_index, index, dialog)
 
 ## returns slot_data from slot_datas array by a given index.
 func grab_slot_data(slot_index : int):
