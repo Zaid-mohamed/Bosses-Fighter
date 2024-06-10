@@ -6,6 +6,7 @@
 script = ExtResource("1_k66jl")
 
 [node name="Canvas" type="CanvasLayer" parent="."]
+layer = 3
 
 [node name="TransitionShape" type="ColorRect" parent="Canvas"]
 unique_name_in_owner = true
