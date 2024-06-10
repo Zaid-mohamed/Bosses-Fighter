@@ -19,6 +19,7 @@ offset_bottom = 37.0
 
 [node name="QuantityLabel" type="Label" parent="ItemTexture"]
 unique_name_in_owner = true
+self_modulate = Color(0.176471, 0.701961, 0.403922, 0.705882)
 layout_mode = 0
 offset_left = 2.0
 offset_top = 4.0

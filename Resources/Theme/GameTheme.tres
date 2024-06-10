@@ -24,6 +24,7 @@ texture_margin_left = 10.0
 texture_margin_top = 10.0
 texture_margin_right = 10.0
 texture_margin_bottom = 10.0
+modulate_color = Color(0.176471, 0.701961, 0, 0.784314)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pxpph"]
 texture = ExtResource("1_dkbav")
@@ -31,6 +32,7 @@ texture_margin_left = 7.0
 texture_margin_top = 7.0
 texture_margin_right = 7.0
 texture_margin_bottom = 10.0
+modulate_color = Color(0.176471, 0.701961, 0, 0.270588)
 
 [resource]
 Button/styles/focus = SubResource("StyleBoxTexture_7fqly")
