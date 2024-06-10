@@ -1,0 +1,241 @@
+[gd_scene load_steps=16 format=3 uid="uid://d2toj317momvs"]
+
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_54yo8"]
+[ext_resource type="Texture2D" uid="uid://18pufyc8ggqp" path="res://Assets/player/player.png" id="1_qqepf"]
+[ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="2_h4i6m"]
+[ext_resource type="Resource" uid="uid://bhb2olam8gmcc" path="res://Resources/weapons/Sword.tres" id="2_k6iir"]
+[ext_resource type="Script" path="res://scripts/player/Item.gd" id="4_2b6i5"]
+[ext_resource type="AnimationLibrary" uid="uid://d27h71h05jlr4" path="res://Resources/weapons/Sword/SwordLibrary.tres" id="6_wx25a"]
+[ext_resource type="Script" path="res://scripts/player/Inventory.gd" id="7_qtdns"]
+[ext_resource type="PackedScene" uid="uid://begv84q2lqhsc" path="res://scenes/inventory stuff/inventory_dialog.tscn" id="8_u0r8e"]
+[ext_resource type="PackedScene" uid="uid://elp8cbwwtets" path="res://scenes/inventory stuff/slot.tscn" id="9_vcfmq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_blwlu"]
+radius = 3.0
+height = 8.0
+
+[sub_resource type="Animation" id="Animation_20243"]
+resource_name = "Idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.916667), Vector2(1, 1.125), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/body:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body/body:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_k55mp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/body:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body/body:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0ig11"]
+resource_name = "Run"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body/body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1.0507), Vector2(1, 1), Vector2(1, 1.051), Vector2(1, 1), Vector2(1, 1.0507)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body/body:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.1356, 0.0, 0.136136, 0.0, -0.1356]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body/body:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-2, -4), Vector2(0, 0), Vector2(2, -4), Vector2(0, 0), Vector2(-2, -4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0txji"]
+_data = {
+"Idle": SubResource("Animation_20243"),
+"RESET": SubResource("Animation_k55mp"),
+"Run": SubResource("Animation_0ig11")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_py85h"]
+radius = 3.0
+height = 12.0
+
+[node name="player" type="CharacterBody2D"]
+script = ExtResource("1_54yo8")
+speed = 250.0
+accel = 1000.0
+decel = 1000.0
+current_item_data = ExtResource("2_k6iir")
+
+[node name="body" type="Node2D" parent="."]
+
+[node name="shadow" type="Sprite2D" parent="body"]
+unique_name_in_owner = true
+position = Vector2(-0.5, -4)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_h4i6m")
+
+[node name="body" type="Sprite2D" parent="body"]
+unique_name_in_owner = true
+texture = ExtResource("1_qqepf")
+offset = Vector2(0, -9)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -3)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_blwlu")
+
+[node name="Camera" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="Anim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_0txji")
+}
+autoplay = "Idle"
+
+[node name="Item" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "anim")]
+unique_name_in_owner = true
+position = Vector2(0, -9)
+script = ExtResource("4_2b6i5")
+sprite = NodePath("Sprite")
+anim = NodePath("AnimationPlayer")
+
+[node name="Sprite" type="Sprite2D" parent="Item"]
+position = Vector2(15, 0)
+offset = Vector2(12, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Item"]
+libraries = {
+"": ExtResource("6_wx25a")
+}
+
+[node name="ItemHitBox" type="Area2D" parent="Item"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Item/ItemHitBox"]
+position = Vector2(45, 0)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_py85h")
+disabled = true
+
+[node name="BoredTimer" type="Timer" parent="Item"]
+unique_name_in_owner = true
+wait_time = 10.0
+autostart = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Inventory" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 163.0
+offset_top = 89.0
+offset_right = 203.0
+offset_bottom = 129.0
+script = ExtResource("7_qtdns")
+
+[node name="PlayerInventoryDialog" parent="UI/Inventory" instance=ExtResource("8_u0r8e")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = -92.0
+offset_top = -74.0
+offset_right = 54.0
+offset_bottom = 31.0
+
+[node name="GrabbedSlot" parent="UI/Inventory" instance=ExtResource("9_vcfmq")]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -154.0
+offset_top = -51.0
+offset_right = -114.0
+offset_bottom = -11.0
