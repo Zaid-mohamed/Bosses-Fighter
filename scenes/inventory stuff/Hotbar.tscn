@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://u3aah08lrr2o"]
+
+[ext_resource type="Script" path="res://scripts/inventory_stuff/Hotbar.gd" id="1_0wfyf"]
+[ext_resource type="PackedScene" uid="uid://elp8cbwwtets" path="res://scenes/inventory stuff/slot.tscn" id="1_lc37n"]
+[ext_resource type="Resource" uid="uid://qdpnu6miolye" path="res://Resources/inventory stuff/PlayerHotBarInventoryData.tres" id="2_mxq2k"]
+
+[node name="Hotbar" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_0wfyf")
+inventory_data = ExtResource("2_mxq2k")
+
+[node name="SlotsContainer" type="GridContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+columns = 3
+
+[node name="Slot" parent="SlotsContainer" instance=ExtResource("1_lc37n")]
+layout_mode = 2
+
+[node name="Slot2" parent="SlotsContainer" instance=ExtResource("1_lc37n")]
+layout_mode = 2
+
+[node name="Slot3" parent="SlotsContainer" instance=ExtResource("1_lc37n")]
+layout_mode = 2

@@ -50,3 +50,4 @@ func _on_mouse_exited() -> void:
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and (event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT) and event.is_pressed():
 		slot_clicked.emit(get_index(), event.button_index)
+		print("Slot %s Got GUI Input" % name)

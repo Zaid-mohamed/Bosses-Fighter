@@ -1,10 +1,12 @@
-extends Control
+extends CanvasLayer
 
 
 ## the grabbed_slot (that is following the mouse).
 @onready var grabbed_slot: Panel = %GrabbedSlot
 ## the UI of the player inventory .
 @onready var player_inventory_dialog: PanelContainer = %PlayerInventoryDialog
+## The UI of the player Hotbar
+@onready var hotbar: PanelContainer = %Hotbar
 
 
 # the slot data of the grabbed slot (that is following the mouse).
@@ -15,20 +17,23 @@ func _ready() -> void:
 	# connect the inventory interacted signal
 	# from the inventory_data resource of the player inventory dialog.
 	player_inventory_dialog.inventory_data.inventory_interacted.connect(_inventory_interacted)
+	hotbar.inventory_data.inventory_interacted.connect(_inventory_interacted)
+	
 
 
 func _process(delta: float) -> void:
 	# make the grabbed_slot follow the mouse with lerp
-	grabbed_slot.position = lerp(grabbed_slot.position, get_local_mouse_position() + Vector2.ONE * 5, 0.5)
+	grabbed_slot.global_position = lerp(grabbed_slot.global_position, get_child(0).get_global_mouse_position() + Vector2.ONE * 5, 0.5)
 	
 	
 	# open and close inventory_dialog.
 	if Input.is_action_just_pressed("Inventory"):
-		visible = !visible
+		player_inventory_dialog.visible = !player_inventory_dialog.visible
 
 
 # this function is called when the inventory being interacted.
 func _inventory_interacted(inventory_data : InventoryData , button_index, slot_index):
+	print("Got Inventort Interacted At %s" % name)
 	# match the grabbed_slot_data, and the button index (which mouse button has been clicked).
 	match [grabbed_slot_data, button_index]:
 		# if there is no grabbed_slot_data (the player is not holding a slot by the mouse)
@@ -40,8 +45,8 @@ func _inventory_interacted(inventory_data : InventoryData , button_index, slot_i
 			grabbed_slot.set_slot_data(grabbed_slot_data) 
 			# update the inventory (to make the effect visually).
 			player_inventory_dialog.update_inventory_dialog(inventory_data)
-			# show the grabbed_slot
-			grabbed_slot.show()
+			# show the grabbed_slot if the grabbed_slot_data got a value from inventroy.grab_slot_data function above
+			if grabbed_slot_data : grabbed_slot.show()
 		# if the grabbed_slot_data has a "SlotData" (the player is holding a slot by the mosue)
 		# and the mouse index is the left mouse.
 		[_, MOUSE_BUTTON_LEFT]:
