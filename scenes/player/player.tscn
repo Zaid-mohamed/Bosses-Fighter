@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2toj317momvs"]
+[gd_scene load_steps=19 format=3 uid="uid://d2toj317momvs"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_54yo8"]
 [ext_resource type="Texture2D" uid="uid://18pufyc8ggqp" path="res://Assets/player/player.png" id="1_qqepf"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://begv84q2lqhsc" path="res://scenes/inventory stuff/inventory_dialog.tscn" id="8_u0r8e"]
 [ext_resource type="PackedScene" uid="uid://elp8cbwwtets" path="res://scenes/inventory stuff/slot.tscn" id="9_vcfmq"]
 [ext_resource type="PackedScene" uid="uid://u3aah08lrr2o" path="res://scenes/inventory stuff/Hotbar.tscn" id="10_d4b2w"]
+[ext_resource type="AudioStream" uid="uid://ct4veqgyh3ys4" path="res://Assets/sounds/running-in-grass-6237.mp3" id="11_87tps"]
+[ext_resource type="AudioStream" uid="uid://b77qda5nb7q1o" path="res://Assets/sounds/srsr1.wav" id="12_86jd3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_blwlu"]
 radius = 3.0
@@ -241,3 +243,9 @@ offset_top = 38.0
 offset_right = 49.0
 offset_bottom = 78.0
 scale = Vector2(0.7, 0.7)
+
+[node name="walk_sx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_87tps")
+
+[node name="attack_sx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_86jd3")

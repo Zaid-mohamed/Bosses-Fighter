@@ -46,20 +46,33 @@ func movement():
 		velocity = velocity.move_toward(intended_velocity, accel * get_physics_process_delta_time())
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, decel * get_physics_process_delta_time())
+		#sx
+		$walk_sx.stop()
 	move_and_slide()
 
 # handles the direction the player faces
 func handle_facing():
+	
 	if Input.is_action_just_pressed("ui_left") && !body.flip_h:
+		#sx 
+		$walk_sx.play()
 		# make the sprite look left
 		body.flip_h = true
 		# move the shadow to match the sprite (the body)
 		shadow.position.x = 0.5
 	elif Input.is_action_just_pressed("ui_right") && body.flip_h:
+		#sx 
+		$walk_sx.play()
 		# make the sprite look right
 		body.flip_h = false
 		# move the shadow to match the sprite (the body)
 		shadow.position.x = -0.5
+	elif Input.is_action_just_pressed("ui_up"):
+		#sx 
+		$walk_sx.play()
+	elif Input.is_action_just_pressed("ui_down"):
+		#sx 
+		$walk_sx.play()
 
 # the function that handles the animations
 func handle_animation():

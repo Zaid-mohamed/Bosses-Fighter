@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhpkywro7q8go"]
+[gd_scene load_steps=6 format=3 uid="uid://dhpkywro7q8go"]
 
 [ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="2_cbvs6"]
 [ext_resource type="TileSet" uid="uid://cikiihc7ie6hq" path="res://Resources/TileSets/MainTileset.tres" id="2_l3c08"]
 [ext_resource type="PackedScene" uid="uid://is7ldwe11xxy" path="res://scenes/world/Objects/bush.tscn" id="3_io0ab"]
+[ext_resource type="PackedScene" uid="uid://c8ivj233vff6l" path="res://scenes/world/Objects/tree.tscn" id="4_qmfxt"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i2v44"]
 
@@ -111,3 +112,44 @@ position = Vector2(39, 180)
 
 [node name="Bush24" parent="Bushes" instance=ExtResource("3_io0ab")]
 position = Vector2(39, 213)
+
+[node name="trees" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="tree" parent="trees" instance=ExtResource("4_qmfxt")]
+z_index = 1
+position = Vector2(-54, -28)
+
+[node name="tree3" parent="trees" instance=ExtResource("4_qmfxt")]
+z_index = 1
+position = Vector2(-129, 75)
+
+[node name="tree4" parent="trees" instance=ExtResource("4_qmfxt")]
+z_index = 1
+position = Vector2(149, 155)
+
+[node name="tree5" parent="trees" instance=ExtResource("4_qmfxt")]
+z_index = 1
+position = Vector2(154, -65)
+
+[node name="tree6" parent="trees" instance=ExtResource("4_qmfxt")]
+z_index = 1
+position = Vector2(-53, 261)
+
+[node name="tree7" parent="trees" instance=ExtResource("4_qmfxt")]
+z_index = 1
+position = Vector2(299, 264)
+
+[node name="tree8" parent="trees" instance=ExtResource("4_qmfxt")]
+z_index = 1
+position = Vector2(466, 69)
+
+[node name="tree9" parent="trees" instance=ExtResource("4_qmfxt")]
+z_index = 1
+position = Vector2(466, 69)
+
+[node name="tree2" parent="trees" instance=ExtResource("4_qmfxt")]
+position = Vector2(280, 112)
+
+[node name="tree10" parent="trees" instance=ExtResource("4_qmfxt")]
+position = Vector2(-201, 2)
