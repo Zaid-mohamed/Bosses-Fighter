@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="2_cbvs6"]
 [ext_resource type="TileSet" uid="uid://cikiihc7ie6hq" path="res://Resources/TileSets/MainTileset.tres" id="2_l3c08"]
 [ext_resource type="PackedScene" uid="uid://is7ldwe11xxy" path="res://scenes/world/Objects/bush.tscn" id="3_io0ab"]
-[ext_resource type="PackedScene" uid="uid://c8ivj233vff6l" path="res://scenes/world/Objects/tree.tscn" id="4_qmfxt"]
+[ext_resource type="PackedScene" path="res://scenes/world/Objects/tree.tscn" id="4_qmfxt"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i2v44"]
 

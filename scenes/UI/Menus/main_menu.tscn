@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://blpjs8wquhhp4" path="res://scenes/UI/OnGroundButton.tscn" id="2_0mu40"]
 [ext_resource type="TileSet" uid="uid://cikiihc7ie6hq" path="res://Resources/TileSets/MainTileset.tres" id="4_q8387"]
 [ext_resource type="PackedScene" uid="uid://is7ldwe11xxy" path="res://scenes/world/Objects/bush.tscn" id="5_ta55x"]
-[ext_resource type="PackedScene" uid="uid://c8ivj233vff6l" path="res://scenes/world/Objects/tree.tscn" id="6_6u4f8"]
+[ext_resource type="PackedScene" path="res://scenes/world/Objects/tree.tscn" id="6_6u4f8"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ixb7"]
 
