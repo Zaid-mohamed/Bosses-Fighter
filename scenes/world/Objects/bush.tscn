@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://is7ldwe11xxy"]
+
+[ext_resource type="Texture2D" uid="uid://dym5yb1b45hec" path="res://Assets/World/Objects/TX Plant.png" id="1_a12i2"]
+[ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="2_a1542"]
+[ext_resource type="Shader" path="res://scripts/World/bush.gdshader" id="2_r7udk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_webtt"]
+shader = ExtResource("2_r7udk")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1oh07"]
+atlas = ExtResource("1_a12i2")
+region = Rect2(156, 190, 38, 32)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bti0k"]
+radius = 6.0
+height = 22.0
+
+[node name="Bush" type="StaticBody2D"]
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(1, -6)
+scale = Vector2(2.3125, 1.0625)
+texture = ExtResource("2_a1542")
+
+[node name="Texture" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_webtt")
+texture = SubResource("AtlasTexture_1oh07")
+offset = Vector2(0, -16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_bti0k")
