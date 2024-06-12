@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://blpjs8wquhhp4" path="res://scenes/UI/OnGroundButton.tscn" id="2_0mu40"]
 [ext_resource type="TileSet" uid="uid://cikiihc7ie6hq" path="res://Resources/TileSets/MainTileset.tres" id="4_q8387"]
 [ext_resource type="PackedScene" uid="uid://is7ldwe11xxy" path="res://scenes/world/Objects/bush.tscn" id="5_ta55x"]
-[ext_resource type="PackedScene" path="res://scenes/world/Objects/tree.tscn" id="6_6u4f8"]
+[ext_resource type="PackedScene" uid="uid://bbalsnu08w2gr" path="res://scenes/world/Objects/tree.tscn" id="6_6u4f8"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ixb7"]
 
@@ -76,9 +76,9 @@ position = Vector2(-21, 199)
 y_sort_enabled = true
 
 [node name="tree" parent="trees" instance=ExtResource("6_6u4f8")]
-position = Vector2(40, 1)
+position = Vector2(54, 37)
 
 [node name="tree2" parent="trees" instance=ExtResource("6_6u4f8")]
-position = Vector2(277, 116)
+position = Vector2(269, 152)
 
 [connection signal="body_entered" from="Buttton" to="." method="_on_buttton_body_entered"]
