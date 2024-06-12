@@ -77,3 +77,11 @@ func handle_animation():
 	else:
 		anim.play("Idle", 0.25)
 
+
+
+# a connector connects current_slot_data changed signal from Hotbar
+func _on_hotbar_current_slot_data_changed(new_current_slot_data: SlotData) -> void:
+	# update the current_item_data if the new_current_slot is valid, else will be null
+	current_item_data = new_current_slot_data.item_data if new_current_slot_data else null
+	# update the visualls, animation,etc
+	item.update_data(current_item_data)

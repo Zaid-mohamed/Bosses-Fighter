@@ -18,6 +18,7 @@ var can_rotate : bool = true
 
 func _ready() -> void:
 	# connect the timeout signal to play animation bored 
+	
 	bored_timer.timeout.connect(func(): play_animation("Bored", get_owner().current_item_data))
 
 
@@ -32,6 +33,9 @@ func _process(delta: float) -> void:
 func update_data(data : ItemData):
 	sprite.texture = data.texture if data else null
 	update_animation(data)
+	if !data:
+		sprite.texture = null
+		update_animation(data)
 
 
 
@@ -43,16 +47,20 @@ func update_animation(data : ItemData):
 	
 	for library in anim.get_animation_library_list():
 		anim.remove_animation_library(library)
-	
-	anim.add_animation_library(data.anim_library.resource_name, data.anim_library)
+	if !data:
+		return
+	else:
+		
+		anim.add_animation_library(data.anim_library.resource_name, data.anim_library)
 	
 	
 
 
 # the function that plays the animation (instead of anim.play function)
 func play_animation(anim_name : String, data : ItemData):
-	
-	anim.play("%s/%s" % [data.anim_library.resource_name, anim_name])
+	if data:
+		
+		anim.play("%s/%s" % [data.anim_library.resource_name, anim_name])
 	
 	
 # the function that handles the rotation of the pivot
@@ -67,7 +75,7 @@ func handle_rotations():
 	
 	
 func handle_input():
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") && get_owner().current_item_data:
 		# play attack sound
 		attack_sx.play()
 		# if pressed attack play attack animation

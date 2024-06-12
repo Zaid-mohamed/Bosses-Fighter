@@ -1,9 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://d2toj317momvs"]
+[gd_scene load_steps=19 format=3 uid="uid://d2toj317momvs"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_54yo8"]
 [ext_resource type="Texture2D" uid="uid://18pufyc8ggqp" path="res://Assets/player/player.png" id="1_qqepf"]
 [ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="2_h4i6m"]
-[ext_resource type="Resource" uid="uid://bhb2olam8gmcc" path="res://Resources/weapons/Sword.tres" id="2_k6iir"]
 [ext_resource type="Script" path="res://scripts/player/Item.gd" id="4_2b6i5"]
 [ext_resource type="Script" path="res://scripts/player/PlayerCamera.gd" id="5_ttrmj"]
 [ext_resource type="AnimationLibrary" uid="uid://d27h71h05jlr4" path="res://Resources/weapons/Sword/SwordLibrary.tres" id="6_wx25a"]
@@ -155,7 +154,6 @@ script = ExtResource("1_54yo8")
 speed = 250.0
 accel = 1000.0
 decel = 1000.0
-current_item_data = ExtResource("2_k6iir")
 
 [node name="body" type="Node2D" parent="."]
 
@@ -259,3 +257,6 @@ max_distance = 640.0
 [node name="attack_sx" type="AudioStreamPlayer2D" parent="SFX"]
 unique_name_in_owner = true
 stream = ExtResource("12_86jd3")
+volume_db = -80.0
+
+[connection signal="current_slot_data_changed" from="UI/Hotbar" to="." method="_on_hotbar_current_slot_data_changed"]

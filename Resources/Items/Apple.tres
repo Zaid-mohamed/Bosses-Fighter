@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bgvii45j64jbw" path="res://Assets/Items/Apple.png" id="2_ecxtd"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5gtmo"]
+resource_name = "AppleAnimLibrary"
 
 [resource]
 script = ExtResource("1_8bi4n")

@@ -27,5 +27,5 @@ layout_mode = 2
 
 [node name="CurrentItemIndicator" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(115, 27)
+position = Vector2(27, 27)
 texture = ExtResource("4_788n3")
