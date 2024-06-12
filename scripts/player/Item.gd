@@ -6,7 +6,11 @@ class_name Item extends Node2D
 # the animation player that plays the item animations
 @export var anim : AnimationPlayer
 
+# the timer that when timeout the character is bored and plays the bored animation
 @onready var bored_timer: Timer = %BoredTimer
+
+# the attack sound player
+@onready var attack_sx: AudioStreamPlayer2D = %attack_sx
 
 # can the pivot rotate ?
 var can_rotate : bool = true
@@ -64,6 +68,8 @@ func handle_rotations():
 	
 func handle_input():
 	if Input.is_action_just_pressed("attack"):
+		# play attack sound
+		attack_sx.play()
 		# if pressed attack play attack animation
 		play_animation("Attack", get_owner().current_item_data)
 		# and restart the bored timer

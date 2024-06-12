@@ -16,10 +16,14 @@ extends CharacterBody2D
 # onready vars
 
 @onready var item: Item = %Item
-
 @onready var body: Sprite2D = %body
 @onready var anim: AnimationPlayer = %Anim
 @onready var shadow: Sprite2D = %shadow
+
+# sounds
+@onready var walk_sx: AudioStreamPlayer2D = %walk_sx
+@onready var attack_sx: AudioStreamPlayer2D = %attack_sx
+
 
 
 
@@ -44,35 +48,27 @@ func movement():
 	
 	if input_direction:
 		velocity = velocity.move_toward(intended_velocity, accel * get_physics_process_delta_time())
+		# play the walking sound if not alreadyv plaing
+		if !walk_sx.playing : walk_sx.play()
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, decel * get_physics_process_delta_time())
-		#sx
-		$walk_sx.stop()
+		# stop the walking sound
+		walk_sx.stop()
 	move_and_slide()
 
 # handles the direction the player faces
 func handle_facing():
 	
 	if Input.is_action_just_pressed("ui_left") && !body.flip_h:
-		#sx 
-		$walk_sx.play()
 		# make the sprite look left
 		body.flip_h = true
 		# move the shadow to match the sprite (the body)
 		shadow.position.x = 0.5
 	elif Input.is_action_just_pressed("ui_right") && body.flip_h:
-		#sx 
-		$walk_sx.play()
 		# make the sprite look right
 		body.flip_h = false
 		# move the shadow to match the sprite (the body)
 		shadow.position.x = -0.5
-	elif Input.is_action_just_pressed("ui_up"):
-		#sx 
-		$walk_sx.play()
-	elif Input.is_action_just_pressed("ui_down"):
-		#sx 
-		$walk_sx.play()
 
 # the function that handles the animations
 func handle_animation():
@@ -80,5 +76,4 @@ func handle_animation():
 		anim.play("Run", 0.25)
 	else:
 		anim.play("Idle", 0.25)
-
 
