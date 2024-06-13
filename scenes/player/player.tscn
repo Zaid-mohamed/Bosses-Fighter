@@ -178,7 +178,7 @@ shape = SubResource("CapsuleShape2D_blwlu")
 script = ExtResource("5_ttrmj")
 player_node = NodePath("..")
 mouse_offset = 15.0
-velocity_offset = 20.0
+velocity_offset = 15.0
 
 [node name="Anim" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
