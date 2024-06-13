@@ -89,7 +89,7 @@ radius = 3.0
 height = 12.0
 
 [sub_resource type="Animation" id="Animation_xulo7"]
-resource_name = "use"
+resource_name = "Use"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -157,5 +157,5 @@ resource_name = "SwordLibrary"
 _data = {
 "Bored": SubResource("Animation_mvelx"),
 "RESET": SubResource("Animation_rfvsf"),
-"use": SubResource("Animation_xulo7")
+"Use": SubResource("Animation_xulo7")
 }

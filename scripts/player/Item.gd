@@ -78,12 +78,11 @@ func handle_input():
 	if Input.is_action_just_pressed("use") && get_owner().current_item_data:
 		# play attack sound
 		attack_sx.play()
-		# if pressed attack play attack animation
-		play_animation("use", get_owner().current_item_data)
+		# if pressed attack play use animation
+		play_animation("Use", get_owner().current_item_data)
 		# and restart the bored timer
 		restart_bored_timer()
 	
-
 
 # restart the bored timer to prevent playing bored animation with attack animation
 func restart_bored_timer():
