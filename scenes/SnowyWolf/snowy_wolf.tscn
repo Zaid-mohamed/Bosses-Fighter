@@ -20,7 +20,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 48, 48)
 
 [node name="Shadow" type="Sprite2D" parent="Character"]
-modulate = Color(0, 0, 0, 0.239216)
+modulate = Color(0, 0, 0, 0.858824)
 show_behind_parent = true
 position = Vector2(-1, -4)
 scale = Vector2(1.625, 1)
