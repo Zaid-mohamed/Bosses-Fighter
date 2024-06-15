@@ -14,6 +14,14 @@ var current_state = States.Idle
 # Current Phase
 var current_phase = Phases.Easy
 
+# Process Function
+func _process(delta: float):
+	pass
+
+# Change Phase to Harder One
+func select_phase(next_phase: Phases):
+	pass
+
 # Change State to The Next State
 func change_state(next_state: States):
 	pass
@@ -40,4 +48,12 @@ func snowball_storm_state():
 
 # Die State
 func die_state():
+	pass
+
+# Idle Mind Timeout Function/Signal.
+func _on_idle_mind_timeout():
+	pass
+
+# Fell Down Timeout Function/Signal.
+func _on_fell_down_timeout():
 	pass

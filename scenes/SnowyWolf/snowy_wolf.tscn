@@ -3,13 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://bxlkvyq350q6w" path="res://Assets/snowyWolf/Wolf-Sheet.png" id="1_s5v2h"]
 [ext_resource type="Script" path="res://scripts/SnowyWolf/snowy_wolf.gd" id="1_sx6uh"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4e8og"]
-radius = 4.0
-height = 20.0
-
 [sub_resource type="SphereMesh" id="SphereMesh_b75no"]
 radius = 16.0
 height = 11.38
+radial_segments = 4
+rings = 16
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4e8og"]
+radius = 4.0
+height = 20.0
 
 [node name="SnowyWolf" type="CharacterBody2D"]
 script = ExtResource("1_sx6uh")
@@ -17,10 +19,33 @@ script = ExtResource("1_sx6uh")
 [node name="Character" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Character"]
-position = Vector2(0, -9)
+position = Vector2(0, -11)
 texture = ExtResource("1_s5v2h")
 region_enabled = true
 region_rect = Rect2(0, 0, 48, 48)
+
+[node name="Shadow" type="MeshInstance2D" parent="Character"]
+modulate = Color(0, 0, 0, 0.239216)
+show_behind_parent = true
+position = Vector2(-1, 1)
+mesh = SubResource("SphereMesh_b75no")
+
+[node name="Aimbot" type="Node2D" parent="."]
+position = Vector2(0, -10)
+
+[node name="Aim" type="Marker2D" parent="Aimbot"]
+position = Vector2(25, -1)
+gizmo_extents = 0.1
+
+[node name="IdleMind" type="Timer" parent="."]
+process_callback = 0
+wait_time = 2.5
+one_shot = true
+
+[node name="FellDown" type="Timer" parent="."]
+process_callback = 0
+wait_time = 2.0
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -28,10 +53,7 @@ position = Vector2(0, -4)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_4e8og")
 
-[node name="Shadow" type="MeshInstance2D" parent="."]
-modulate = Color(0, 0, 0, 0.239216)
-show_behind_parent = true
-position = Vector2(-1, 1)
-mesh = SubResource("SphereMesh_b75no")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[connection signal="timeout" from="IdleMind" to="." method="_on_idle_mind_timeout"]
+[connection signal="timeout" from="FellDown" to="." method="_on_fell_down_timeout"]
