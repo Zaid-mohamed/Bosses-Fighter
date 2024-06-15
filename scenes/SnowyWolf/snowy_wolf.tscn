@@ -2,12 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bxlkvyq350q6w" path="res://Assets/snowyWolf/Wolf-Sheet.png" id="1_s5v2h"]
 [ext_resource type="Script" path="res://scripts/SnowyWolf/snowy_wolf.gd" id="1_sx6uh"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_b75no"]
-radius = 16.0
-height = 11.38
-radial_segments = 4
-rings = 16
+[ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="3_drho7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4e8og"]
 radius = 4.0
@@ -24,11 +19,12 @@ texture = ExtResource("1_s5v2h")
 region_enabled = true
 region_rect = Rect2(0, 0, 48, 48)
 
-[node name="Shadow" type="MeshInstance2D" parent="Character"]
+[node name="Shadow" type="Sprite2D" parent="Character"]
 modulate = Color(0, 0, 0, 0.239216)
 show_behind_parent = true
-position = Vector2(-1, 1)
-mesh = SubResource("SphereMesh_b75no")
+position = Vector2(-1, -4)
+scale = Vector2(1.625, 1)
+texture = ExtResource("3_drho7")
 
 [node name="Aimbot" type="Node2D" parent="."]
 position = Vector2(0, -10)
