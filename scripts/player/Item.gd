@@ -16,6 +16,8 @@ class_name Item extends Node2D
 var can_rotate : bool = true
 
 
+const ARROW_SCENE = preload("res://scenes/weapons/arrow.tscn")
+
 func _ready() -> void:
 	# connect the timeout signal to play animation bored 
 	
@@ -88,3 +90,14 @@ func handle_input():
 func restart_bored_timer():
 	bored_timer.stop()
 	bored_timer.start()
+
+
+
+
+func bow_shoot():
+	var shoot_direction = (get_global_mouse_position() - global_position).normalized()
+	var arrow = ARROW_SCENE.instantiate()
+	var shoot_velocity = shoot_direction * arrow.speed
+	arrow.global_position = sprite.global_position
+	get_tree().root.add_child(arrow)
+	arrow.velocity = shoot_velocity

@@ -1,12 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://d2toj317momvs"]
+[gd_scene load_steps=21 format=3 uid="uid://d2toj317momvs"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_54yo8"]
 [ext_resource type="Texture2D" uid="uid://18pufyc8ggqp" path="res://Assets/player/player.png" id="1_qqepf"]
 [ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="2_h4i6m"]
 [ext_resource type="Script" path="res://scripts/player/Item.gd" id="4_2b6i5"]
 [ext_resource type="Script" path="res://scripts/player/PlayerCamera.gd" id="5_ttrmj"]
+[ext_resource type="Texture2D" uid="uid://bm8hhqgauixcd" path="res://Assets/weapons/bow.png" id="6_qobi4"]
 [ext_resource type="AnimationLibrary" uid="uid://d27h71h05jlr4" path="res://Resources/weapons/Sword/SwordLibrary.tres" id="6_wx25a"]
 [ext_resource type="Script" path="res://scripts/player/Inventory.gd" id="7_qtdns"]
+[ext_resource type="AnimationLibrary" uid="uid://dd2fdasoaxuc7" path="res://Resources/weapons/Sword/BowLibrary.res" id="8_5yq2k"]
 [ext_resource type="PackedScene" uid="uid://begv84q2lqhsc" path="res://scenes/inventory stuff/inventory_dialog.tscn" id="8_u0r8e"]
 [ext_resource type="PackedScene" uid="uid://elp8cbwwtets" path="res://scenes/inventory stuff/slot.tscn" id="9_vcfmq"]
 [ext_resource type="PackedScene" uid="uid://u3aah08lrr2o" path="res://scenes/inventory stuff/Hotbar.tscn" id="10_d4b2w"]
@@ -197,11 +199,13 @@ item_anim = NodePath("ItemAnim")
 [node name="Sprite" type="Sprite2D" parent="Item"]
 z_index = 1
 position = Vector2(15, 0)
-offset = Vector2(12, 0)
+texture = ExtResource("6_qobi4")
+offset = Vector2(6, 0)
 
 [node name="ItemAnim" type="AnimationPlayer" parent="Item"]
 libraries = {
-"": ExtResource("6_wx25a")
+"": ExtResource("6_wx25a"),
+"BowLibrary": ExtResource("8_5yq2k")
 }
 
 [node name="ItemHitBox" type="Area2D" parent="Item"]
