@@ -1,11 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5pofl2bgap2g"]
+[gd_scene load_steps=6 format=3 uid="uid://c5pofl2bgap2g"]
 
 [ext_resource type="TileSet" uid="uid://cikiihc7ie6hq" path="res://Resources/TileSets/MainTileset.tres" id="1_13va7"]
 [ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="2_jslbc"]
 [ext_resource type="PackedScene" uid="uid://is7ldwe11xxy" path="res://scenes/world/Objects/bush.tscn" id="3_1d0et"]
-[ext_resource type="PackedScene" uid="uid://bsp2o2omsc1ao" path="res://scenes/SnowyWolf/snowy_wolf.tscn" id="3_88fue"]
+[ext_resource type="PackedScene" uid="uid://bmgdd1or3bt1y" path="res://scenes/SnowyWolf/snowy_wolf_minion.tscn" id="4_u314b"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_0om01"]
+vertices = PackedVector2Array(1046, 790, 562, 790, 562, 482, 1046, 482)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(552, 472, 1056, 472, 1056, 800, 552, 800)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="WolfArena" type="Node2D"]
+y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -19,9 +26,6 @@ layer_1/tile_data = PackedInt32Array(1638434, 720897, 2, 1703970, 720897, 3, 176
 
 [node name="player" parent="." instance=ExtResource("2_jslbc")]
 position = Vector2(709, 700)
-
-[node name="SnowyWolf" parent="." instance=ExtResource("3_88fue")]
-position = Vector2(812, 606)
 
 [node name="CenterLocation" type="Marker2D" parent="."]
 unique_name_in_owner = true
@@ -41,3 +45,18 @@ position = Vector2(975, 652)
 
 [node name="Bush4" parent="Bushes" instance=ExtResource("3_1d0et")]
 position = Vector2(970, 581)
+
+[node name="Min" type="Marker2D" parent="."]
+position = Vector2(568, 496)
+
+[node name="Max" type="Marker2D" parent="."]
+position = Vector2(1024, 768)
+
+[node name="SnowyWolfMinion" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(808, 560)
+min = NodePath("../Min")
+max = NodePath("../Max")
+locations_radius = 50.0
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_0om01")

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="2_h4i6m"]
 [ext_resource type="Script" path="res://scripts/player/Item.gd" id="4_2b6i5"]
 [ext_resource type="Script" path="res://scripts/player/PlayerCamera.gd" id="5_ttrmj"]
-[ext_resource type="Texture2D" path="res://Assets/weapons/bow.png" id="6_qobi4"]
+[ext_resource type="Texture2D" uid="uid://bm8hhqgauixcd" path="res://Assets/weapons/bow.png" id="6_qobi4"]
 [ext_resource type="AnimationLibrary" uid="uid://d27h71h05jlr4" path="res://Resources/weapons/Sword/SwordLibrary.tres" id="6_wx25a"]
 [ext_resource type="Script" path="res://scripts/player/Inventory.gd" id="7_qtdns"]
 [ext_resource type="AnimationLibrary" uid="uid://bam808cwt3cvy" path="res://Resources/weapons/Sword/BowLibrary.res" id="8_5yq2k"]
@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://ct4veqgyh3ys4" path="res://Assets/sounds/running-in-grass-6237.mp3" id="11_87tps"]
 [ext_resource type="Script" path="res://scripts/resources scripts/inventory_data.gd" id="11_d5fe2"]
 [ext_resource type="AudioStream" uid="uid://b77qda5nb7q1o" path="res://Assets/sounds/srsr1.wav" id="12_86jd3"]
-[ext_resource type="Resource" path="res://Resources/weapons/Sword/Sword.tres" id="12_jiv8t"]
+[ext_resource type="Resource" uid="uid://bhb2olam8gmcc" path="res://Resources/weapons/Sword/Sword.tres" id="12_jiv8t"]
 [ext_resource type="Script" path="res://scripts/resources scripts/slot_data.gd" id="13_26wra"]
 [ext_resource type="Resource" uid="uid://cwwrvnw2hd3uh" path="res://Resources/weapons/Bow/Bow.tres" id="14_d4fri"]
 
@@ -169,7 +169,7 @@ quantity = 1
 script = ExtResource("11_d5fe2")
 slot_datas = Array[ExtResource("13_26wra")]([SubResource("Resource_y7yuu"), SubResource("Resource_cu3d1"), null, null, null, null, null, null, null, null, null, null])
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_54yo8")
 speed = 250.0
 accel = 1000.0
@@ -189,7 +189,6 @@ texture = ExtResource("1_qqepf")
 offset = Vector2(0, -9)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -3)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_blwlu")
@@ -280,5 +279,8 @@ max_distance = 640.0
 unique_name_in_owner = true
 stream = ExtResource("12_86jd3")
 volume_db = -80.0
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+position = Vector2(0, -3)
 
 [connection signal="current_slot_data_changed" from="UI/Hotbar" to="." method="_on_hotbar_current_slot_data_changed"]

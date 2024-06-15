@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/resources scripts/item_data.gd" id="1_f05pa"]
 [ext_resource type="AnimationLibrary" uid="uid://bam808cwt3cvy" path="res://Resources/weapons/Sword/BowLibrary.res" id="1_n0r2b"]
-[ext_resource type="Texture2D" path="res://Assets/weapons/bow.png" id="2_wmj0w"]
+[ext_resource type="Texture2D" uid="uid://bm8hhqgauixcd" path="res://Assets/weapons/bow.png" id="2_wmj0w"]
 
 [resource]
 script = ExtResource("1_f05pa")

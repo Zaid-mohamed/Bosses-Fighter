@@ -13,6 +13,8 @@ height = 22.0
 
 [node name="SnowyWolfMinion" type="CharacterBody2D"]
 script = ExtResource("1_ybpq6")
+speed = 100.0
+locations_radius = 300.0
 
 [node name="Texture" type="Sprite2D" parent="."]
 position = Vector2(0, -13)
@@ -25,10 +27,20 @@ shape = SubResource("CapsuleShape2D_1jwiq")
 
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 unique_name_in_owner = true
+avoidance_enabled = true
+radius = 32.0
+debug_enabled = true
 
 [node name="NavTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 0.2
+autostart = true
+
+[node name="ChooseLocationTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0
+autostart = true
 
 [connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]
 [connection signal="timeout" from="NavTimer" to="." method="_on_nav_timer_timeout"]
+[connection signal="timeout" from="ChooseLocationTimer" to="." method="_on_choose_location_timer_timeout"]
