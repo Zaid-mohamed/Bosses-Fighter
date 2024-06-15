@@ -9,7 +9,8 @@ extends CharacterBody2D
 @onready var nav_timer: Timer = %NavTimer
 # the timer that chooses a new wanted location
 @onready var choose_location_timer: Timer = %ChooseLocationTimer
-
+# the animation player
+@onready var anim: AnimationPlayer = %Anim
 
 # the min and max node positions of the wante locations
 # thier positions only is used
@@ -91,3 +92,5 @@ func _on_nav_timer_timeout() -> void:
 
 func _on_choose_location_timer_timeout() -> void:
 	wanted_location = get_next_chosen_location()
+func handle_animation():
+	anim.play("Idle")
