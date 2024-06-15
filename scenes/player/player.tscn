@@ -1,17 +1,23 @@
-[gd_scene load_steps=19 format=3 uid="uid://d2toj317momvs"]
+[gd_scene load_steps=28 format=3 uid="uid://d2toj317momvs"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_54yo8"]
 [ext_resource type="Texture2D" uid="uid://18pufyc8ggqp" path="res://Assets/player/player.png" id="1_qqepf"]
 [ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="2_h4i6m"]
 [ext_resource type="Script" path="res://scripts/player/Item.gd" id="4_2b6i5"]
 [ext_resource type="Script" path="res://scripts/player/PlayerCamera.gd" id="5_ttrmj"]
+[ext_resource type="Texture2D" path="res://Assets/weapons/bow.png" id="6_qobi4"]
 [ext_resource type="AnimationLibrary" uid="uid://d27h71h05jlr4" path="res://Resources/weapons/Sword/SwordLibrary.tres" id="6_wx25a"]
 [ext_resource type="Script" path="res://scripts/player/Inventory.gd" id="7_qtdns"]
+[ext_resource type="AnimationLibrary" uid="uid://bam808cwt3cvy" path="res://Resources/weapons/Sword/BowLibrary.res" id="8_5yq2k"]
 [ext_resource type="PackedScene" uid="uid://begv84q2lqhsc" path="res://scenes/inventory stuff/inventory_dialog.tscn" id="8_u0r8e"]
 [ext_resource type="PackedScene" uid="uid://elp8cbwwtets" path="res://scenes/inventory stuff/slot.tscn" id="9_vcfmq"]
 [ext_resource type="PackedScene" uid="uid://u3aah08lrr2o" path="res://scenes/inventory stuff/Hotbar.tscn" id="10_d4b2w"]
 [ext_resource type="AudioStream" uid="uid://ct4veqgyh3ys4" path="res://Assets/sounds/running-in-grass-6237.mp3" id="11_87tps"]
+[ext_resource type="Script" path="res://scripts/resources scripts/inventory_data.gd" id="11_d5fe2"]
 [ext_resource type="AudioStream" uid="uid://b77qda5nb7q1o" path="res://Assets/sounds/srsr1.wav" id="12_86jd3"]
+[ext_resource type="Resource" path="res://Resources/weapons/Sword/Sword.tres" id="12_jiv8t"]
+[ext_resource type="Script" path="res://scripts/resources scripts/slot_data.gd" id="13_26wra"]
+[ext_resource type="Resource" uid="uid://cwwrvnw2hd3uh" path="res://Resources/weapons/Bow/Bow.tres" id="14_d4fri"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_blwlu"]
 radius = 3.0
@@ -149,6 +155,20 @@ _data = {
 radius = 3.0
 height = 12.0
 
+[sub_resource type="Resource" id="Resource_y7yuu"]
+script = ExtResource("13_26wra")
+item_data = ExtResource("12_jiv8t")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_cu3d1"]
+script = ExtResource("13_26wra")
+item_data = ExtResource("14_d4fri")
+quantity = 1
+
+[sub_resource type="Resource" id="Resource_5c3kc"]
+script = ExtResource("11_d5fe2")
+slot_datas = Array[ExtResource("13_26wra")]([SubResource("Resource_y7yuu"), SubResource("Resource_cu3d1"), null, null, null, null, null, null, null, null, null, null])
+
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_54yo8")
 speed = 250.0
@@ -187,21 +207,23 @@ libraries = {
 }
 autoplay = "Idle"
 
-[node name="Item" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "anim")]
+[node name="Item" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "item_anim")]
 unique_name_in_owner = true
 position = Vector2(0, -9)
 script = ExtResource("4_2b6i5")
 sprite = NodePath("Sprite")
-anim = NodePath("AnimationPlayer")
+item_anim = NodePath("ItemAnim")
 
 [node name="Sprite" type="Sprite2D" parent="Item"]
 z_index = 1
 position = Vector2(15, 0)
-offset = Vector2(12, 0)
+texture = ExtResource("6_qobi4")
+offset = Vector2(6, 0)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Item"]
+[node name="ItemAnim" type="AnimationPlayer" parent="Item"]
 libraries = {
-"": ExtResource("6_wx25a")
+"": ExtResource("6_wx25a"),
+"BowLibrary": ExtResource("8_5yq2k")
 }
 
 [node name="ItemHitBox" type="Area2D" parent="Item"]
@@ -222,12 +244,12 @@ script = ExtResource("7_qtdns")
 
 [node name="PlayerInventoryDialog" parent="UI" instance=ExtResource("8_u0r8e")]
 unique_name_in_owner = true
-visible = false
 offset_left = 190.0
 offset_top = 1.19209e-07
 offset_right = 56.0
 offset_bottom = -35.0
 scale = Vector2(0.7, 0.7)
+inventory_data = SubResource("Resource_5c3kc")
 
 [node name="Hotbar" parent="UI" instance=ExtResource("10_d4b2w")]
 unique_name_in_owner = true

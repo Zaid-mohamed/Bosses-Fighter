@@ -4,7 +4,7 @@ class_name Item extends Node2D
 @export var sprite : Sprite2D
 
 # the animation player that plays the item animations
-@export var anim : AnimationPlayer
+@export var item_anim : AnimationPlayer
 
 # the timer that when timeout the character is bored and plays the bored animation
 @onready var bored_timer: Timer = %BoredTimer
@@ -15,6 +15,8 @@ class_name Item extends Node2D
 # can the pivot rotate ?
 var can_rotate : bool = true
 
+
+const ARROW_SCENE = preload("res://scenes/weapons/arrow.tscn")
 
 func _ready() -> void:
 	# connect the timeout signal to play animation bored 
@@ -41,17 +43,17 @@ func update_data(data : ItemData):
 
 # update the animation library of anim player according to an item data
 func update_animation(data : ItemData):
-	anim.play("RESET")
-	anim.stop()
+	play_animation("RESET", data)
+	item_anim.stop()
 	
 	
-	for library in anim.get_animation_library_list():
-		anim.remove_animation_library(library)
+	for library in item_anim.get_animation_library_list():
+		item_anim.remove_animation_library(library)
 	if !data:
 		return
 	else:
 		
-		anim.add_animation_library(data.anim_library.resource_name, data.anim_library)
+		item_anim.add_animation_library(data.anim_library.resource_name, data.anim_library)
 	
 	
 
@@ -60,7 +62,7 @@ func update_animation(data : ItemData):
 func play_animation(anim_name : String, data : ItemData):
 	if data:
 		
-		anim.play("%s/%s" % [data.anim_library.resource_name, anim_name])
+		item_anim.play("%s/%s" % [data.anim_library.resource_name, anim_name])
 	
 	
 # the function that handles the rotation of the pivot
@@ -88,3 +90,14 @@ func handle_input():
 func restart_bored_timer():
 	bored_timer.stop()
 	bored_timer.start()
+
+
+
+
+func bow_shoot():
+	var shoot_direction = (get_global_mouse_position() - global_position).normalized()
+	var arrow = ARROW_SCENE.instantiate()
+	var shoot_velocity = shoot_direction * arrow.speed
+	arrow.global_position = sprite.global_position
+	get_tree().root.add_child(arrow)
+	arrow.velocity = shoot_velocity
