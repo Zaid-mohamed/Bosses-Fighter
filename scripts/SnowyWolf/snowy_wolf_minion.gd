@@ -41,7 +41,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	navigation()
-	
+	handle_animation()
 # choose a location around the player with a given raduis
 func get_next_chosen_location() -> Vector2:
 	var rng = RandomNumberGenerator.new()
