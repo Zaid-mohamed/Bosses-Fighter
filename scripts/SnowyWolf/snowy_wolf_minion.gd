@@ -16,7 +16,9 @@ extends CharacterBody2D
 # thier positions only is used
 @export var min: Marker2D
 @export var max: Marker2D
-###
+#////////////////////////#
+
+
 # the speed of the minion
 @export var speed : float
 # the raduis of the locations chosen around the player
@@ -30,67 +32,75 @@ enum states {
 	AttackingPlayer
 }
 
+
+# the current state of the minion
 var current_state : states = states.AroundPlayer
 
 
 func _ready() -> void:
+	# choose the initail wanted location
 	wanted_location = get_next_chosen_location()
+	# set the target position to this initial wanted location
 	nav_agent.set_deferred("target_position", wanted_location)
-	print(nav_agent.target_position)
 
 
 func _physics_process(delta: float) -> void:
+	# handles the navigation
 	navigation()
+	# handles the animations
 	handle_animation()
+
+
 # choose a location around the player with a given raduis
 func get_next_chosen_location() -> Vector2:
+	# the random generator
 	var rng = RandomNumberGenerator.new()
+	# the randomized chosen location
 	var chosen_location = player.global_position + Vector2(rng.randf_range(-locations_radius, locations_radius),
 	rng.randf_range(-locations_radius, locations_radius))
+	# clamp the chosen location to avoid choosing a position outside the map 
 	chosen_location = clamp(chosen_location, min.global_position, max.global_position)
-	
+	# return this randomized chosen location
 	return chosen_location
+	
+	
 
-func navigation():
+func navigation() -> void:
+	# the minion reached the wanted position, stop
 	if nav_agent.is_navigation_finished():
-		if current_state == states.AttackingPlayer:
+		# if the state is around player 
+		if current_state == states.AroundPlayer:
 			nav_agent.target_position = get_next_chosen_location()
 		return
-	
-	
+	# the direction of the walking
 	var walk_direction = (nav_agent.get_next_path_position() - global_position).normalized()
-	
+	# the velocity of the walking
 	var walk_velocity = walk_direction * speed
 	
-	
-	print("")
-	print("global_position : ", global_position)
-	print("")
-	print("target_position : ", nav_agent.target_position)
-	print("")
-	print("next_path_position : ", nav_agent.get_next_path_position())
-	print("")
-	print("walk_direction : " , walk_direction)
-	print("")
-	print("walk_velocity : ", walk_velocity)
-	print("")
-	print("wanted_location : ", wanted_location)
-	
-	
+	# set the agent velocity (to handle the avoidance)
 	nav_agent.set_velocity(walk_velocity)
+	
+	
 	
 
 
 func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
+	# the agent computed the velocity to avoid stucking on things
 	velocity = safe_velocity
+	# move and slide
 	move_and_slide()
 
 
 func _on_nav_timer_timeout() -> void:
+	# update the target position
 	nav_agent.target_position = wanted_location
 
 
 func _on_choose_location_timer_timeout() -> void:
+	# choose new wanted location
 	wanted_location = get_next_chosen_location()
-func handle_animation():
+# handles the animations (not finished)
+
+func handle_animation() -> void:
+	# play the idle animation
 	anim.play("Idle")
