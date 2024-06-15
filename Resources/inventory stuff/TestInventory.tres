@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="InventoryData" load_steps=7 format=3 uid="uid://d17cmx1vld47j"]
 
 [ext_resource type="Script" path="res://scripts/resources scripts/inventory_data.gd" id="1_8bpxc"]
-[ext_resource type="Resource" path="res://Resources/weapons/Sword.tres" id="2_4caau"]
+[ext_resource type="Resource" uid="uid://bhb2olam8gmcc" path="res://Resources/weapons/Sword.tres" id="2_4caau"]
 [ext_resource type="Resource" uid="uid://x5c6x4yt2stu" path="res://Resources/Items/Apple.tres" id="2_k4168"]
 [ext_resource type="Script" path="res://scripts/resources scripts/slot_data.gd" id="2_qsn48"]
 
