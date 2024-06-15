@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsp2o2omsc1ao"]
+
+[ext_resource type="Texture2D" uid="uid://bxlkvyq350q6w" path="res://Assets/snowyWolf/Wolf-Sheet.png" id="1_s5v2h"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4e8og"]
+radius = 4.0
+height = 20.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_b75no"]
+radius = 16.0
+height = 11.38
+
+[node name="SnowyWolf" type="CharacterBody2D"]
+
+[node name="Character" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Character"]
+position = Vector2(0, -9)
+texture = ExtResource("1_s5v2h")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 48)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -4)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4e8og")
+
+[node name="Shadow" type="MeshInstance2D" parent="."]
+modulate = Color(0, 0, 0, 0.239216)
+show_behind_parent = true
+position = Vector2(-1, 1)
+mesh = SubResource("SphereMesh_b75no")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
