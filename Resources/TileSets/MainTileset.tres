@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=5 format=3 uid="uid://cikiihc7ie6hq"]
 
 [ext_resource type="Texture2D" uid="uid://duv1hm5fiqdev" path="res://Assets/World/TileSets/TX Tileset Grass.png" id="1_670sc"]
-[ext_resource type="Texture2D" path="res://Assets/World/TileSets/WallsTileset.png" id="2_aotih"]
+[ext_resource type="Texture2D" uid="uid://buvxxfm6bb5vg" path="res://Assets/World/TileSets/WallsTileset.png" id="2_aotih"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ohcg4"]
 resource_name = "Grass"
