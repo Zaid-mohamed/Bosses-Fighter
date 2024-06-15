@@ -20,7 +20,9 @@ func _process(delta: float) -> void:
 		change_offset_according_to_mouse_position() 
 	else: # if it is moving
 		change_offset_according_to_player_velocity()
-		
+
+
+
 func change_offset_according_to_player_velocity():
 	offset = offset.lerp(player_node.velocity.normalized() * velocity_offset, 0.07)
 func change_offset_according_to_mouse_position():
