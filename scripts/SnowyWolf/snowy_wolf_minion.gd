@@ -11,7 +11,8 @@ extends CharacterBody2D
 @onready var choose_location_timer: Timer = %ChooseLocationTimer
 # the animation player
 @onready var anim: AnimationPlayer = %Anim
-
+# the texture of the wolf
+@onready var texture: Sprite2D = %Texture
 
 # the min and max node positions of the wante locations
 # thier positions only is used
@@ -49,7 +50,7 @@ func _physics_process(delta: float) -> void:
 	# handles the navigation
 	navigation()
 	# handles the animations
-	handle_animation()
+	handle_animation_and_facing()
 
 
 # choose a location around the player with a given raduis
@@ -100,7 +101,20 @@ func _on_choose_location_timer_timeout() -> void:
 	print("choose_location_timer timeout")
 # handles the animations (not finished)
 
-func handle_animation() -> void:
-	# play the idle animation
-	anim.play("Idle")
-
+func handle_animation_and_facing() -> void:
+	# Animations
+	
+	# play the Idle animation if static, Run if Moving
+	if velocity:
+		anim.play("Run", 0.2)
+	else:
+		anim.play("Idle", 0.2)
+	
+	
+	# Facing
+	
+	
+	# if going right make it look right, if left make it look left
+	
+	if velocity.x > 0 : texture.flip_h = false
+	if velocity.x < 0 : texture.flip_h = true

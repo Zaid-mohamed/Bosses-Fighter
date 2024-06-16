@@ -33,6 +33,7 @@ position = Vector2(812, 606)
 gizmo_extents = 0.0
 
 [node name="Bushes" type="Node2D" parent="."]
+y_sort_enabled = true
 
 [node name="Bush" parent="Bushes" instance=ExtResource("3_1d0et")]
 position = Vector2(594, 539)
@@ -54,6 +55,36 @@ position = Vector2(1024, 768)
 
 [node name="SnowyWolfMinion" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
 position = Vector2(808, 560)
+min = NodePath("../Min")
+max = NodePath("../Max")
+locations_radius = 50.0
+
+[node name="SnowyWolfMinion2" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(704, 552)
+min = NodePath("../Min")
+max = NodePath("../Max")
+locations_radius = 50.0
+
+[node name="SnowyWolfMinion3" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(792, 648)
+min = NodePath("../Min")
+max = NodePath("../Max")
+locations_radius = 50.0
+
+[node name="SnowyWolfMinion4" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(872, 616)
+min = NodePath("../Min")
+max = NodePath("../Max")
+locations_radius = 50.0
+
+[node name="SnowyWolfMinion5" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(656, 752)
+min = NodePath("../Min")
+max = NodePath("../Max")
+locations_radius = 50.0
+
+[node name="SnowyWolfMinion6" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(616, 608)
 min = NodePath("../Min")
 max = NodePath("../Max")
 locations_radius = 50.0
