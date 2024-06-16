@@ -76,7 +76,7 @@ _data = {
 
 [node name="SnowyWolfMinion" type="CharacterBody2D"]
 script = ExtResource("1_ybpq6")
-speed = 100.0
+speed = 50.0
 locations_radius = 300.0
 
 [node name="Texture" type="Sprite2D" parent="."]
@@ -92,8 +92,7 @@ shape = SubResource("CapsuleShape2D_1jwiq")
 [node name="NavAgent" type="NavigationAgent2D" parent="."]
 unique_name_in_owner = true
 avoidance_enabled = true
-radius = 32.0
-debug_enabled = true
+radius = 16.0
 
 [node name="NavTimer" type="Timer" parent="."]
 unique_name_in_owner = true
@@ -102,7 +101,7 @@ autostart = true
 
 [node name="ChooseLocationTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 5.0
+wait_time = 2.0
 autostart = true
 
 [node name="Anim" type="AnimationPlayer" parent="."]

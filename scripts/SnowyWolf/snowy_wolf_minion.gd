@@ -12,6 +12,7 @@ extends CharacterBody2D
 # the animation player
 @onready var anim: AnimationPlayer = %Anim
 
+
 # the min and max node positions of the wante locations
 # thier positions only is used
 @export var min: Marker2D
@@ -68,9 +69,6 @@ func get_next_chosen_location() -> Vector2:
 func navigation() -> void:
 	# the minion reached the wanted position, stop
 	if nav_agent.is_navigation_finished():
-		# if the state is around player 
-		if current_state == states.AroundPlayer:
-			nav_agent.target_position = get_next_chosen_location()
 		return
 	# the direction of the walking
 	var walk_direction = (nav_agent.get_next_path_position() - global_position).normalized()
@@ -94,13 +92,15 @@ func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
 func _on_nav_timer_timeout() -> void:
 	# update the target position
 	nav_agent.target_position = wanted_location
-
+	print("nav_timer timeout")
 
 func _on_choose_location_timer_timeout() -> void:
 	# choose new wanted location
 	wanted_location = get_next_chosen_location()
+	print("choose_location_timer timeout")
 # handles the animations (not finished)
 
 func handle_animation() -> void:
 	# play the idle animation
 	anim.play("Idle")
+
