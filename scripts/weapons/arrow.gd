@@ -17,3 +17,19 @@ func _physics_process(delta: float) -> void:
 	# make the arrow look to the direction where he goes
 	move_and_slide()
 	rotation = velocity.angle()
+
+
+
+
+# when hitbox leave the target
+func _on_hitbox_area_exited(area: Area2D) -> void:
+	# turn off the hitbox
+	hitbox.get_child(0).set_deferred("disabled", true)
+	# create the tween that will free the arrow
+	var free_tween = create_tween()
+	# make it parralel
+	free_tween.parallel()
+	# tween the scale to zero in 0.2 secs
+	free_tween.tween_property(self, "scale", Vector2.ZERO, 0.2)
+	# tween the color to transparent in 0.2 secs
+	free_tween.tween_property(self, "modulate", Color.TRANSPARENT, 0.2)

@@ -29,3 +29,5 @@ damage_amount = 10
 position = Vector2(9, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_r4bbu")
+
+[connection signal="area_exited" from="Hitbox" to="." method="_on_hitbox_area_exited"]
