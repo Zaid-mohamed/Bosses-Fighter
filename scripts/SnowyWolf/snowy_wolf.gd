@@ -14,11 +14,6 @@ var current_state = States.Idle
 # Current Phase
 var current_phase = Phases.Easy
 
-# Health Section
-const max_health = 350
-
-var health = max_health
-
 # Center Location Of The Arena.
 var center_location = Vector2(812, 606)
 
