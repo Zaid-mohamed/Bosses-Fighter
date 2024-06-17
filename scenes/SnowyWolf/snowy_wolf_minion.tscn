@@ -213,9 +213,8 @@ _data = {
 radius = 8.0
 height = 26.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gsydp"]
-radius = 6.0
-height = 24.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_kkp03"]
+radius = 16.0
 
 [node name="SnowyWolfMinion" type="CharacterBody2D"]
 script = ExtResource("1_ybpq6")
@@ -280,8 +279,8 @@ knock_back_force = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 self_modulate = Color(1, 1, 1, 0.466667)
-position = Vector2(10, -12)
-shape = SubResource("CapsuleShape2D_gsydp")
+position = Vector2(17, -12)
+shape = SubResource("CircleShape2D_kkp03")
 disabled = true
 debug_color = Color(1, 0, 0, 0.419608)
 
