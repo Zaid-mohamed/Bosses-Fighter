@@ -108,9 +108,12 @@ func add_item(item_data : ItemData):
 			
 	
 	
-	
+	# a varibale that stores the index of the slot in iterations in for loop
+	var index = -1
 	# move in each slot data in slot datas in inventory
 	for slot in slot_datas:
+		# increase the index (because we moved an iteration)
+		index += 1
 		# if found empty slot
 		if !slot:
 			# create a new slot to add it there
@@ -119,10 +122,8 @@ func add_item(item_data : ItemData):
 			new_slot_data.item_data = item_data
 			# make the quantity one
 			new_slot_data.quantity = 1
-			# erase the old slot
-			slot_datas.erase(slot)
-			# add the new slot
-			slot_datas.append(new_slot_data)
+			# add the new slot in the correct index
+			slot_datas[index] = new_slot_data
 			# and stop
 			break
 

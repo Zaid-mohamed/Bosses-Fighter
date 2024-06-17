@@ -45,6 +45,8 @@ _data = {
 
 [node name="PickUpItem" type="Area2D"]
 script = ExtResource("1_7710q")
+move_distance = 50.0
+speed_scale = 1.5
 
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
@@ -54,7 +56,8 @@ texture = ExtResource("2_13jgh")
 unique_name_in_owner = true
 position = Vector2(0, -20)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
 shape = SubResource("CircleShape2D_eltfw")
 
 [node name="Anim" type="AnimationPlayer" parent="."]

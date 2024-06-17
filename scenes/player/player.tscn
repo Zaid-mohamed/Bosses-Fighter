@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d2toj317momvs"]
+[gd_scene load_steps=27 format=3 uid="uid://d2toj317momvs"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_54yo8"]
 [ext_resource type="Texture2D" uid="uid://18pufyc8ggqp" path="res://Assets/player/player.png" id="1_qqepf"]
@@ -16,9 +16,6 @@
 [ext_resource type="AudioStream" uid="uid://ct4veqgyh3ys4" path="res://Assets/sounds/running-in-grass-6237.mp3" id="11_87tps"]
 [ext_resource type="Script" path="res://scripts/resources scripts/inventory_data.gd" id="11_d5fe2"]
 [ext_resource type="AudioStream" uid="uid://b77qda5nb7q1o" path="res://Assets/sounds/srsr1.wav" id="12_86jd3"]
-[ext_resource type="Resource" uid="uid://bhb2olam8gmcc" path="res://Resources/weapons/Sword/Sword.tres" id="12_jiv8t"]
-[ext_resource type="Script" path="res://scripts/resources scripts/slot_data.gd" id="13_26wra"]
-[ext_resource type="Resource" uid="uid://cwwrvnw2hd3uh" path="res://Resources/weapons/Bow/Bow.tres" id="14_d4fri"]
 [ext_resource type="Script" path="res://scripts/health_component/health_component.gd" id="19_34i6c"]
 [ext_resource type="PackedScene" uid="uid://bow3opjc4bcwh" path="res://scenes/hit & hurtboxes/hurtbox.tscn" id="21_2x0n3"]
 
@@ -158,19 +155,9 @@ _data = {
 radius = 5.0
 height = 16.0
 
-[sub_resource type="Resource" id="Resource_y7yuu"]
-script = ExtResource("13_26wra")
-item_data = ExtResource("12_jiv8t")
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_cu3d1"]
-script = ExtResource("13_26wra")
-item_data = ExtResource("14_d4fri")
-quantity = 1
-
 [sub_resource type="Resource" id="Resource_5c3kc"]
 script = ExtResource("11_d5fe2")
-slot_datas = Array[ExtResource("13_26wra")]([SubResource("Resource_y7yuu"), SubResource("Resource_cu3d1"), null, null, null, null, null, null, null, null, null, null])
+slot_datas = Array[Resource("res://scripts/resources scripts/slot_data.gd")]([null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_smvg8"]
 radius = 3.5
