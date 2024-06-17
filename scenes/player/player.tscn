@@ -255,6 +255,7 @@ script = ExtResource("7_qtdns")
 
 [node name="PlayerInventoryDialog" parent="UI" instance=ExtResource("8_u0r8e")]
 unique_name_in_owner = true
+visible = false
 offset_left = 190.0
 offset_top = 1.19209e-07
 offset_right = 56.0

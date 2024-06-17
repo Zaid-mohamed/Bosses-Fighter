@@ -20,7 +20,8 @@ func _ready() -> void:
 	# connect the inventory interacted signal
 	# from the inventory_data resource of the player hotbar dialog.
 	hotbar.inventory_data.inventory_interacted.connect(_inventory_interacted)
-	
+	# when ready change the visibility of the inventory according to the player manager
+	player_inventory_dialog.visible = PlayerManager.inventory_visibility
 
 
 func _process(delta: float) -> void:
@@ -31,7 +32,7 @@ func _process(delta: float) -> void:
 	# open and close inventory_dialog.
 	if Input.is_action_just_pressed("Inventory"):
 		player_inventory_dialog.visible = !player_inventory_dialog.visible
-
+		PlayerManager.inventory_visibility = player_inventory_dialog.visible
 
 # this function is called when the inventory being interacted.
 func _inventory_interacted(inventory_data : InventoryData , button_index, slot_index, dialog):
