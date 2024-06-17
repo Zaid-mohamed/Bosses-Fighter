@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="2_h4i6m"]
 [ext_resource type="Script" path="res://scripts/player/Item.gd" id="4_2b6i5"]
 [ext_resource type="Script" path="res://scripts/player/PlayerCamera.gd" id="5_ttrmj"]
-[ext_resource type="Texture2D" uid="uid://bm8hhqgauixcd" path="res://Assets/weapons/bow.png" id="6_qobi4"]
+[ext_resource type="Texture2D" uid="uid://7uamcbjpw4fy" path="res://Assets/weapons/sword.png" id="6_d35jo"]
 [ext_resource type="AnimationLibrary" uid="uid://d27h71h05jlr4" path="res://Resources/weapons/Sword/SwordLibrary.tres" id="6_wx25a"]
 [ext_resource type="Script" path="res://scripts/player/Inventory.gd" id="7_qtdns"]
 [ext_resource type="AnimationLibrary" uid="uid://bam808cwt3cvy" path="res://Resources/weapons/Sword/BowLibrary.res" id="8_5yq2k"]
@@ -155,8 +155,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_py85h"]
-radius = 3.0
-height = 12.0
+radius = 5.0
+height = 16.0
 
 [sub_resource type="Resource" id="Resource_y7yuu"]
 script = ExtResource("13_26wra")
@@ -223,7 +223,7 @@ item_anim = NodePath("ItemAnim")
 [node name="Sprite" type="Sprite2D" parent="Item"]
 z_index = 1
 position = Vector2(15, 0)
-texture = ExtResource("6_qobi4")
+texture = ExtResource("6_d35jo")
 offset = Vector2(12, 0)
 
 [node name="ItemAnim" type="AnimationPlayer" parent="Item"]
