@@ -53,11 +53,14 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	
 	# handles the navigation
 	navigation()
 	# handles the animations
 	handle_animation_and_facing()
-
+	
+	# clamp the global_position between the min and max
+	clamp_global_position(min.global_position, max.global_position)
 
 # choose a location around the player with a given raduis
 func get_next_chosen_location() -> Vector2:
@@ -165,3 +168,7 @@ func _on_hurtbox_area_entered(hit_box: HitBox) -> void:
 	var knock_back_tween = create_tween()
 	# tween the position towards direction_to_hit_box, in 0.5 secs
 	knock_back_tween.tween_property(self, "position", position + direction_to_hit_box * hit_box.knock_back_force, 0.2)
+
+# clamps the global_position between two vectors (to avoid going after the borders)
+func clamp_global_position(min : Vector2, max : Vector2) -> void:
+	global_position = global_position.clamp(min, max)

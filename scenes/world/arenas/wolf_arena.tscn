@@ -48,10 +48,10 @@ position = Vector2(975, 652)
 position = Vector2(970, 581)
 
 [node name="Min" type="Marker2D" parent="."]
-position = Vector2(568, 496)
+position = Vector2(544, 464)
 
 [node name="Max" type="Marker2D" parent="."]
-position = Vector2(1024, 768)
+position = Vector2(1072, 800)
 
 [node name="SnowyWolfMinion" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
 position = Vector2(808, 560)
