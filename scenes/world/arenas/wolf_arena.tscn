@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bmgdd1or3bt1y" path="res://scenes/SnowyWolf/snowy_wolf_minion.tscn" id="4_u314b"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_0om01"]
-vertices = PackedVector2Array(1070, 789, 546, 782, 546, 450, 1070, 450)
+vertices = PackedVector2Array(1070, 798, 546, 798, 546, 450, 1070, 450)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(536, 440, 1080, 440, 1080, 800, 536, 792)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(536, 440, 1080, 440, 1080, 808, 536, 808)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="WolfArena" type="Node2D"]
