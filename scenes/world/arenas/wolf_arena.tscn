@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bmgdd1or3bt1y" path="res://scenes/SnowyWolf/snowy_wolf_minion.tscn" id="4_u314b"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_0om01"]
-vertices = PackedVector2Array(1046, 790, 562, 790, 562, 482, 1046, 482)
+vertices = PackedVector2Array(1070, 789, 546, 782, 546, 450, 1070, 450)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(552, 472, 1056, 472, 1056, 800, 552, 800)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(536, 440, 1080, 440, 1080, 800, 536, 792)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="WolfArena" type="Node2D"]
@@ -57,13 +57,46 @@ position = Vector2(1024, 768)
 position = Vector2(808, 560)
 min = NodePath("../Min")
 max = NodePath("../Max")
-locations_radius = 50.0
+
+[node name="SnowyWolfMinion3" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(824, 640)
+min = NodePath("../Min")
+max = NodePath("../Max")
+
+[node name="SnowyWolfMinion4" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(704, 624)
+min = NodePath("../Min")
+max = NodePath("../Max")
+
+[node name="SnowyWolfMinion5" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(864, 600)
+min = NodePath("../Min")
+max = NodePath("../Max")
+
+[node name="SnowyWolfMinion6" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(904, 696)
+min = NodePath("../Min")
+max = NodePath("../Max")
+
+[node name="SnowyWolfMinion7" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(912, 536)
+min = NodePath("../Min")
+max = NodePath("../Max")
+
+[node name="SnowyWolfMinion8" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(608, 608)
+min = NodePath("../Min")
+max = NodePath("../Max")
+
+[node name="SnowyWolfMinion9" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
+position = Vector2(648, 744)
+min = NodePath("../Min")
+max = NodePath("../Max")
 
 [node name="SnowyWolfMinion2" parent="." node_paths=PackedStringArray("min", "max") instance=ExtResource("4_u314b")]
 position = Vector2(704, 552)
 min = NodePath("../Min")
 max = NodePath("../Max")
-locations_radius = 50.0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_0om01")

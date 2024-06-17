@@ -32,3 +32,6 @@ offset = Vector2(0, -16)
 position = Vector2(3, -6)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_bti0k")
+
+[node name="NavObstacle" type="NavigationObstacle2D" parent="."]
+radius = 2.0

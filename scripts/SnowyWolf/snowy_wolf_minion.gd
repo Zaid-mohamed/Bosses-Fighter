@@ -22,12 +22,16 @@ extends CharacterBody2D
 
 
 # the speed of the minion
-@export var speed : float
+@export var speed: float
 # the raduis of the locations chosen around the player
-@export var locations_radius : float
+@export var locations_radius: float
 
 # the location the minion going to currently
 var wanted_location : Vector2
+
+
+# is the minion can navigate?
+var can_navigate : bool = true
 # the states according to its distance from player.
 enum states {
 	AroundPlayer,
@@ -40,6 +44,8 @@ var current_state : states = states.AroundPlayer
 
 
 func _ready() -> void:
+	#apply randomizing
+	randomize()
 	# choose the initail wanted location
 	wanted_location = get_next_chosen_location()
 	# set the target position to this initial wanted location
@@ -60,16 +66,29 @@ func get_next_chosen_location() -> Vector2:
 	# the randomized chosen location
 	var chosen_location = player.global_position + Vector2(rng.randf_range(-locations_radius, locations_radius),
 	rng.randf_range(-locations_radius, locations_radius))
-	# clamp the chosen location to avoid choosing a position outside the map 
-	chosen_location = clamp(chosen_location, min.global_position, max.global_position)
-	# return this randomized chosen location
-	return chosen_location
+	# if the chosen location outside the borders
+	if chosen_location > max.global_position || chosen_location < min.global_position:
+		# run the function again and return the result
+		return get_next_chosen_location() 
+	else:
+		# return this randomized chosen location
+		return chosen_location
+		
+		#give the choose new location timer new randomized wait time
+		choose_location_timer.wait_time = randf_range(3, 10)
 	
 	
 
 func navigation() -> void:
+	# if can not navigate, don't continue the "navigation" funciton
+	if !can_navigate: return
 	# the minion reached the wanted position, stop
 	if nav_agent.is_navigation_finished():
+		# start the choose location timer
+		# (like the minion take time to choose a new location)
+		choose_location_timer.start()
+		# stop navigating 
+		can_navigate = false
 		return
 	# the direction of the walking
 	var walk_direction = (nav_agent.get_next_path_position() - global_position).normalized()
@@ -97,6 +116,8 @@ func _on_nav_timer_timeout() -> void:
 func _on_choose_location_timer_timeout() -> void:
 	# choose new wanted location
 	wanted_location = get_next_chosen_location()
+	# the minion can navigate 
+	can_navigate = true
 # handles the animations (not finished)
 
 func handle_animation_and_facing() -> void:
