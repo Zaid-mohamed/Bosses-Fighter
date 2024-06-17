@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://d2toj317momvs"]
+[gd_scene load_steps=29 format=3 uid="uid://d2toj317momvs"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_54yo8"]
 [ext_resource type="Texture2D" uid="uid://18pufyc8ggqp" path="res://Assets/player/player.png" id="1_qqepf"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://ct4veqgyh3ys4" path="res://Assets/sounds/running-in-grass-6237.mp3" id="11_87tps"]
 [ext_resource type="Script" path="res://scripts/resources scripts/inventory_data.gd" id="11_d5fe2"]
 [ext_resource type="AudioStream" uid="uid://b77qda5nb7q1o" path="res://Assets/sounds/srsr1.wav" id="12_86jd3"]
+[ext_resource type="Shader" path="res://scripts/player/vignette_shader.gdshader" id="15_uemwk"]
 [ext_resource type="Script" path="res://scripts/health_component/health_component.gd" id="19_34i6c"]
 [ext_resource type="PackedScene" uid="uid://bow3opjc4bcwh" path="res://scenes/hit & hurtboxes/hurtbox.tscn" id="21_2x0n3"]
 
@@ -155,6 +156,12 @@ _data = {
 radius = 5.0
 height = 16.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jobtv"]
+shader = ExtResource("15_uemwk")
+shader_parameter/alpha = 0.65
+shader_parameter/inner_radius = 0.0
+shader_parameter/outer_radius = 2.0
+
 [sub_resource type="Resource" id="Resource_5c3kc"]
 script = ExtResource("11_d5fe2")
 slot_datas = Array[Resource("res://scripts/resources scripts/slot_data.gd")]([null, null, null, null, null, null, null, null, null, null, null, null])
@@ -239,6 +246,15 @@ autostart = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("7_qtdns")
+
+[node name="Vignette" type="ColorRect" parent="UI"]
+z_index = 10
+material = SubResource("ShaderMaterial_jobtv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="PlayerInventoryDialog" parent="UI" instance=ExtResource("8_u0r8e")]
 unique_name_in_owner = true
