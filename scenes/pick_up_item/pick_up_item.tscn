@@ -45,7 +45,7 @@ _data = {
 
 [node name="PickUpItem" type="Area2D"]
 script = ExtResource("1_7710q")
-move_distance = 50.0
+move_distance = 35.0
 speed_scale = 1.5
 
 [node name="Shadow" type="Sprite2D" parent="."]
