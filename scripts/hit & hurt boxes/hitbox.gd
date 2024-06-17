@@ -6,3 +6,6 @@ class_name HitBox
 
 ## the knock back force applied to the actor of the hurtbox
 @export var knock_back_force : float
+
+## this is used by some hurtboxes
+@export var special_name : String

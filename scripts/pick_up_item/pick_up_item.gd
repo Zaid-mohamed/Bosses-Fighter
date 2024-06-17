@@ -36,7 +36,7 @@ func _on_body_entered(body: Node2D) -> void:
 		# create the tween that will be used to scale down node
 		var scale_down_tween = create_tween()
 		# scale down the node to zero, in 0.1 secs
-		scale_down_tween.tween_property(self, "scale", Vector2.ZERO, 0.1)
+		scale_down_tween.tween_property(self, "scale", Vector2.ZERO, 0.3)
 		# wait until the tween finishes
 		await scale_down_tween.finished
 		# add the item to the player inventory

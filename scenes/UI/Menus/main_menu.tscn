@@ -60,9 +60,6 @@ position = Vector2(84, 83)
 [node name="Bush6" parent="Bushes" instance=ExtResource("5_ta55x")]
 position = Vector2(217, 83)
 
-[node name="Bush7" parent="Bushes" instance=ExtResource("5_ta55x")]
-position = Vector2(217, 83)
-
 [node name="Bush2" parent="Bushes" instance=ExtResource("5_ta55x")]
 position = Vector2(343, 205)
 
