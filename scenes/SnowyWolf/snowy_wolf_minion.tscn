@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmgdd1or3bt1y"]
+[gd_scene load_steps=16 format=3 uid="uid://bmgdd1or3bt1y"]
 
 [ext_resource type="Texture2D" uid="uid://bxlkvyq350q6w" path="res://Assets/snowyWolf/Wolf-Sheet.png" id="1_03bxa"]
 [ext_resource type="Script" path="res://scripts/SnowyWolf/snowy_wolf_minion.gd" id="1_ybpq6"]
 [ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="2_kk6rb"]
 [ext_resource type="PackedScene" uid="uid://bow3opjc4bcwh" path="res://scenes/hit & hurtboxes/hurtbox.tscn" id="4_31qmp"]
 [ext_resource type="Script" path="res://scripts/health_component/health_component.gd" id="5_wb4md"]
+[ext_resource type="PackedScene" uid="uid://cryan1we0ryco" path="res://scenes/hit & hurtboxes/hitbox.tscn" id="6_fc4qn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r244a"]
 atlas = ExtResource("1_03bxa")
@@ -106,6 +107,18 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_ooo11"]
 resource_name = "Run"
@@ -148,8 +161,49 @@ tracks/2/keys = {
 "values": [Vector2(1, 1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_40ulr"]
+resource_name = "Attack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Texture:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.766667, 1), Vector2(1.133, 1), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Texture:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -13), Vector2(-3.5, -13), Vector2(2, -13), Vector2(0, -13)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nrtdb"]
 _data = {
+"Attack": SubResource("Animation_40ulr"),
 "Idle": SubResource("Animation_66hlm"),
 "RESET": SubResource("Animation_hiihx"),
 "Run": SubResource("Animation_ooo11")
@@ -158,6 +212,10 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_656l4"]
 radius = 8.0
 height = 26.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gsydp"]
+radius = 6.0
+height = 24.0
 
 [node name="SnowyWolfMinion" type="CharacterBody2D"]
 script = ExtResource("1_ybpq6")
@@ -215,6 +273,17 @@ health = NodePath("../Health")
 position = Vector2(0, -8)
 rotation = 1.57079
 shape = SubResource("CapsuleShape2D_656l4")
+
+[node name="Hitbox" parent="." instance=ExtResource("6_fc4qn")]
+damage_amount = 8
+knock_back_force = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+self_modulate = Color(1, 1, 1, 0.466667)
+position = Vector2(10, -12)
+shape = SubResource("CapsuleShape2D_gsydp")
+disabled = true
+debug_color = Color(1, 0, 0, 0.419608)
 
 [connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]
 [connection signal="timeout" from="NavTimer" to="." method="_on_nav_timer_timeout"]
