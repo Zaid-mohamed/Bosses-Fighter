@@ -15,6 +15,8 @@ extends PanelContainer
 
 @export var inventory_data : InventoryData
 
+# the initial indicator x position (left)
+@export var initial_indicator_pos = 27
 
 # a constant holds the scene of slot scene
 const SLOT_SCENE := preload("res://scenes/inventory stuff/slot.tscn")
@@ -27,6 +29,7 @@ var current_slot_data : SlotData
 var current_slot_index : int :
 	set(value):
 		current_slot_index = clampi(value, 0, 2)
+		PlayerManager.selected_slot_index = current_slot_index
 
 # signals
 
@@ -39,6 +42,20 @@ signal current_slot_data_changed (new_current_slot_data)
 
 
 func _ready() -> void:
+	# set the current_slot_index to the player manager one
+	# (because player manager saves the correct one)
+	current_slot_index = PlayerManager.selected_slot_index
+	# set the to left (to easy relocate it)
+	current_item_indicator.position.x = initial_indicator_pos
+	# change the indicator according to the current_slot_index
+	current_item_indicator.position.x += current_slot_index * 44
+	# update the current_slot_data according to the current_slot_index
+	current_slot_data = get_slot_data(current_slot_index)
+	# emit the current_slot_data_changed and pass the current_slot_data
+	current_slot_data_changed.emit(current_slot_data)
+	# clamp the indicator pos to prevent it from going too far
+	clamp_indicator_pos()
+	
 	
 	update_inventory_dialog(inventory_data)
 
@@ -82,6 +99,8 @@ func handle_changing_selected_slot():
 	if Input.is_action_just_pressed("hotbar_right"):
 		# increase the current_slot_index
 		current_slot_index += 1
+		# update the selected slot index of player manager
+		PlayerManager.selected_slot_index = current_slot_index
 		# update the current_slot_data according to the current_slot_index
 		current_slot_data = get_slot_data(current_slot_index)
 		# emit the current_slot_data_changed and pass the current_slot_data
@@ -94,6 +113,8 @@ func handle_changing_selected_slot():
 	elif Input.is_action_just_pressed("hotbar_left"):
 		# decrease the current_slot_index		
 		current_slot_index -= 1
+		# update the selected slot index of player manager
+		PlayerManager.selected_slot_index = current_slot_index
 		# update the current_slot_data according to the current_slot_index		
 		current_slot_data = get_slot_data(current_slot_index)
 		# emit the current_slot_data_changed and pass the current_slot_data

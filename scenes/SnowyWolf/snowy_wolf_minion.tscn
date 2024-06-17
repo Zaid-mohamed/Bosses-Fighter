@@ -144,7 +144,7 @@ _data = {
 [node name="SnowyWolfMinion" type="CharacterBody2D"]
 script = ExtResource("1_ybpq6")
 speed = 50.0
-locations_radius = 300.0
+locations_radius = 600.0
 
 [node name="Shadow" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
