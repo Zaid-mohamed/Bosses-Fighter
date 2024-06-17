@@ -8,6 +8,7 @@
 script = ExtResource("1_oqfgn")
 Name = "Sword"
 Description = "You can hurt someone with this"
+damage_amount = 3
 texture = ExtResource("3_j5xdn")
 anim_library = ExtResource("1_wi5kj")
 stackable = false

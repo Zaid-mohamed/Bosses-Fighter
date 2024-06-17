@@ -95,9 +95,8 @@ use={
 
 [layer_names]
 
-2d_physics/layer_1="world"
-2d_physics/layer_2="player"
-2d_physics/layer_3="wolfBoss"
+2d_physics/layer_2="HitBoxes"
+2d_physics/layer_3="HurtBoxes"
 
 [rendering]
 

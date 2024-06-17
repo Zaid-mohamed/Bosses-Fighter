@@ -8,6 +8,7 @@
 script = ExtResource("1_f05pa")
 Name = "Bow"
 Description = "This is A Ranged Weapons"
+damage_amount = 6
 texture = ExtResource("2_wmj0w")
 anim_library = ExtResource("1_n0r2b")
 stackable = false

@@ -93,12 +93,10 @@ func _on_nav_agent_velocity_computed(safe_velocity: Vector2) -> void:
 func _on_nav_timer_timeout() -> void:
 	# update the target position
 	nav_agent.target_position = wanted_location
-	print("nav_timer timeout")
 
 func _on_choose_location_timer_timeout() -> void:
 	# choose new wanted location
 	wanted_location = get_next_chosen_location()
-	print("choose_location_timer timeout")
 # handles the animations (not finished)
 
 func handle_animation_and_facing() -> void:
@@ -118,3 +116,23 @@ func handle_animation_and_facing() -> void:
 	
 	if velocity.x > 0 : texture.flip_h = false
 	if velocity.x < 0 : texture.flip_h = true
+
+
+# the connector of the took_damage signal from health
+func _on_health_took_damage(damage: Damage) -> void:
+	# create a damage tween, to inform the player that the minion took damage
+	
+	var damage_tween = create_tween()
+	
+	damage_tween.tween_property(texture, "modulate", Color.RED, 0.2)
+	damage_tween.tween_property(texture, "modulate", Color.WHITE, 0.2)
+
+# the connector of the died signal from health
+func _on_health_died() -> void:
+	# create a tween for dying
+	var die_tween = create_tween()
+	die_tween.tween_property(self, "scale", Vector2.ZERO, 0.4)
+	# wait until the tween finish and then
+	await die_tween.finished
+	# free your self
+	queue_free()

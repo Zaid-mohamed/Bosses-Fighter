@@ -6,6 +6,9 @@ class_name Item extends Node2D
 # the animation player that plays the item animations
 @export var item_anim : AnimationPlayer
 
+# the hitbox of the item if it is melee
+@onready var item_hit_box: HitBox = %ItemHitBox
+
 # the timer that when timeout the character is bored and plays the bored animation
 @onready var bored_timer: Timer = %BoredTimer
 
@@ -34,6 +37,7 @@ func _process(delta: float) -> void:
 
 func update_data(data : ItemData):
 	sprite.texture = data.texture if data else null
+	item_hit_box.damage_amount = data.damage_amount if data else 0
 	update_animation(data)
 	if !data:
 		sprite.texture = null

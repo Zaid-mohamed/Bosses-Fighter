@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmgdd1or3bt1y"]
+[gd_scene load_steps=13 format=3 uid="uid://bmgdd1or3bt1y"]
 
 [ext_resource type="Texture2D" uid="uid://bxlkvyq350q6w" path="res://Assets/snowyWolf/Wolf-Sheet.png" id="1_03bxa"]
 [ext_resource type="Script" path="res://scripts/SnowyWolf/snowy_wolf_minion.gd" id="1_ybpq6"]
 [ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="2_kk6rb"]
+[ext_resource type="PackedScene" uid="uid://bow3opjc4bcwh" path="res://scenes/hit & hurtboxes/hurtbox.tscn" id="4_31qmp"]
+[ext_resource type="Script" path="res://scripts/health_component/health_component.gd" id="5_wb4md"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r244a"]
 atlas = ExtResource("1_03bxa")
@@ -92,6 +94,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Texture:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ooo11"]
 resource_name = "Run"
@@ -141,6 +155,10 @@ _data = {
 "Run": SubResource("Animation_ooo11")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_656l4"]
+radius = 6.0
+height = 20.0
+
 [node name="SnowyWolfMinion" type="CharacterBody2D"]
 script = ExtResource("1_ybpq6")
 speed = 50.0
@@ -182,6 +200,22 @@ libraries = {
 "": SubResource("AnimationLibrary_nrtdb")
 }
 
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("actor", "health") instance=ExtResource("4_31qmp")]
+actor = NodePath("..")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -6)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_656l4")
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("5_wb4md")
+max_health = 30
+actor = NodePath("..")
+
 [connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]
 [connection signal="timeout" from="NavTimer" to="." method="_on_nav_timer_timeout"]
 [connection signal="timeout" from="ChooseLocationTimer" to="." method="_on_choose_location_timer_timeout"]
+[connection signal="died" from="Health" to="." method="_on_health_died"]
+[connection signal="took_damage" from="Health" to="." method="_on_health_took_damage"]

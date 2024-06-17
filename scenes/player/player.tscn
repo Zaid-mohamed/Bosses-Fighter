@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d2toj317momvs"]
+[gd_scene load_steps=32 format=3 uid="uid://d2toj317momvs"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_54yo8"]
 [ext_resource type="Texture2D" uid="uid://18pufyc8ggqp" path="res://Assets/player/player.png" id="1_qqepf"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/player/Inventory.gd" id="7_qtdns"]
 [ext_resource type="AnimationLibrary" uid="uid://bam808cwt3cvy" path="res://Resources/weapons/Sword/BowLibrary.res" id="8_5yq2k"]
 [ext_resource type="PackedScene" uid="uid://begv84q2lqhsc" path="res://scenes/inventory stuff/inventory_dialog.tscn" id="8_u0r8e"]
+[ext_resource type="Script" path="res://scripts/hit & hurt boxes/hitbox.gd" id="9_c7qkp"]
 [ext_resource type="PackedScene" uid="uid://elp8cbwwtets" path="res://scenes/inventory stuff/slot.tscn" id="9_vcfmq"]
 [ext_resource type="PackedScene" uid="uid://u3aah08lrr2o" path="res://scenes/inventory stuff/Hotbar.tscn" id="10_d4b2w"]
 [ext_resource type="AudioStream" uid="uid://ct4veqgyh3ys4" path="res://Assets/sounds/running-in-grass-6237.mp3" id="11_87tps"]
@@ -18,6 +19,8 @@
 [ext_resource type="Resource" uid="uid://bhb2olam8gmcc" path="res://Resources/weapons/Sword/Sword.tres" id="12_jiv8t"]
 [ext_resource type="Script" path="res://scripts/resources scripts/slot_data.gd" id="13_26wra"]
 [ext_resource type="Resource" uid="uid://cwwrvnw2hd3uh" path="res://Resources/weapons/Bow/Bow.tres" id="14_d4fri"]
+[ext_resource type="Script" path="res://scripts/health_component/health_component.gd" id="19_34i6c"]
+[ext_resource type="PackedScene" uid="uid://bow3opjc4bcwh" path="res://scenes/hit & hurtboxes/hurtbox.tscn" id="21_2x0n3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_blwlu"]
 radius = 3.0
@@ -169,6 +172,10 @@ quantity = 1
 script = ExtResource("11_d5fe2")
 slot_datas = Array[ExtResource("13_26wra")]([SubResource("Resource_y7yuu"), SubResource("Resource_cu3d1"), null, null, null, null, null, null, null, null, null, null])
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_smvg8"]
+radius = 3.5
+height = 8.5
+
 [node name="player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_54yo8")
 speed = 250.0
@@ -226,6 +233,11 @@ libraries = {
 }
 
 [node name="ItemHitBox" type="Area2D" parent="Item"]
+unique_name_in_owner = true
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("9_c7qkp")
+damage_amount = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Item/ItemHitBox"]
 position = Vector2(45, 0)
@@ -282,5 +294,19 @@ volume_db = -80.0
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
 position = Vector2(0, -3)
+
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("19_34i6c")
+max_health = 50
+actor = NodePath("..")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("actor", "health") instance=ExtResource("21_2x0n3")]
+actor = NodePath("..")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -3)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_smvg8")
 
 [connection signal="current_slot_data_changed" from="UI/Hotbar" to="." method="_on_hotbar_current_slot_data_changed"]

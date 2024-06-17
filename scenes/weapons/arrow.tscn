@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c63valr56vrce"]
+[gd_scene load_steps=5 format=3 uid="uid://c63valr56vrce"]
 
 [ext_resource type="Script" path="res://scripts/weapons/arrow.gd" id="1_lt1yc"]
 [ext_resource type="Texture2D" uid="uid://byoyl5wjwwvq" path="res://Assets/weapons/arrow.png" id="1_xwx86"]
+[ext_resource type="Script" path="res://scripts/hit & hurt boxes/hitbox.gd" id="3_vswqu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r4bbu"]
 radius = 2.0
@@ -16,6 +17,10 @@ speed = 750.0
 texture = ExtResource("1_xwx86")
 
 [node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("3_vswqu")
+damage_amount = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(9, 0)

@@ -7,6 +7,8 @@ class_name ItemData
 @export var Name : String
 ## A Description
 @export_multiline var Description : String
+## The Amount Of Damage The Item Make
+@export var damage_amount : int
 ## The Graphics That Will Be Showed In The Game
 @export var texture : Texture2D
 ## The AnimationLibrary Of This Item (All Animations of the item like "Use", "Bored")
