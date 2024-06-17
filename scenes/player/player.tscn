@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d2toj317momvs"]
+[gd_scene load_steps=33 format=3 uid="uid://d2toj317momvs"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_54yo8"]
 [ext_resource type="Texture2D" uid="uid://18pufyc8ggqp" path="res://Assets/player/player.png" id="1_qqepf"]
@@ -168,9 +168,13 @@ script = ExtResource("13_26wra")
 item_data = ExtResource("14_d4fri")
 quantity = 1
 
+[sub_resource type="Resource" id="Resource_k0jvn"]
+script = ExtResource("13_26wra")
+quantity = 0
+
 [sub_resource type="Resource" id="Resource_5c3kc"]
 script = ExtResource("11_d5fe2")
-slot_datas = Array[ExtResource("13_26wra")]([SubResource("Resource_y7yuu"), SubResource("Resource_cu3d1"), null, null, null, null, null, null, null, null, null, null])
+slot_datas = Array[ExtResource("13_26wra")]([SubResource("Resource_y7yuu"), SubResource("Resource_cu3d1"), SubResource("Resource_k0jvn"), null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_smvg8"]
 radius = 3.5
@@ -301,7 +305,9 @@ script = ExtResource("19_34i6c")
 max_health = 50
 actor = NodePath("..")
 
-[node name="Hurtbox" parent="." instance=ExtResource("21_2x0n3")]
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("actor", "health") instance=ExtResource("21_2x0n3")]
+actor = NodePath("..")
+health = NodePath("../Health")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -3)

@@ -92,6 +92,37 @@ func put_slot_data(slot_index : int , new_slot_data : SlotData):
 		# return true
 		return true
 
-	
 
+
+# add an item to the inventory
+func add_item(item_data : ItemData):
+	
+	## this section is not completed and will completed later
+	
+	## this section should add items on top of each other like 20 apples and 3 one 
+	#for slot in slot_datas:
+		#if slot.item_data == item_data:
+			#slot.quantity += 1
+			#break
+			#return
+			
+	
+	
+	
+	# move in each slot data in slot datas in inventory
+	for slot in slot_datas:
+		# if found empty slot
+		if !slot:
+			# create a new slot to add it there
+			var new_slot_data = SlotData.new()
+			# assign the item data of the new slot to the given item data
+			new_slot_data.item_data = item_data
+			# make the quantity one
+			new_slot_data.quantity = 1
+			# erase the old slot
+			slot_datas.erase(slot)
+			# add the new slot
+			slot_datas.append(new_slot_data)
+			# and stop
+			break
 
