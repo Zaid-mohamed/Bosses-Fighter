@@ -52,8 +52,10 @@ shape = SubResource("CapsuleShape2D_4e8og")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="Health" type="Node" parent="."]
+[node name="Health" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("4_51l1g")
+max_health = 150
+actor = NodePath("..")
 
 [connection signal="timeout" from="IdleMind" to="." method="_on_idle_mind_timeout"]
 [connection signal="timeout" from="FellDown" to="." method="_on_fell_down_timeout"]
