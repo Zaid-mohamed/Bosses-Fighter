@@ -119,7 +119,7 @@ func handle_animation_and_facing() -> void:
 
 
 # the connector of the took_damage signal from health
-func _on_health_took_damage(damage: Damage) -> void:
+func _on_health_took_damage(amount: int) -> void:
 	# create a damage tween, to inform the player that the minion took damage
 	
 	var damage_tween = create_tween()
@@ -136,3 +136,11 @@ func _on_health_died() -> void:
 	await die_tween.finished
 	# free your self
 	queue_free()
+
+# when a hitbox enters the hurtbox, (this function is made to add speciallity to the minion)
+func _on_hurtbox_area_entered(hit_box: HitBox) -> void:
+	var direction_to_hit_box = hit_box.global_position.direction_to(global_position)
+	# create a tween for the knockback
+	var knock_back_tween = create_tween()
+	# tween the position towards direction_to_hit_box, in 0.5 secs
+	knock_back_tween.tween_property(self, "position", position + direction_to_hit_box * hit_box.knock_back_force, 0.2)

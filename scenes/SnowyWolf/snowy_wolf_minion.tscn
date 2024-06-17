@@ -200,22 +200,23 @@ libraries = {
 "": SubResource("AnimationLibrary_nrtdb")
 }
 
-[node name="Hurtbox" parent="." node_paths=PackedStringArray("actor", "health") instance=ExtResource("4_31qmp")]
-actor = NodePath("..")
-health = NodePath("../Health")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -8)
-rotation = 1.57079
-shape = SubResource("CapsuleShape2D_656l4")
-
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("5_wb4md")
 max_health = 30
 actor = NodePath("..")
+
+[node name="Hurtbox" parent="." node_paths=PackedStringArray("actor", "health") instance=ExtResource("4_31qmp")]
+actor = NodePath("..")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -8)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_656l4")
 
 [connection signal="velocity_computed" from="NavAgent" to="." method="_on_nav_agent_velocity_computed"]
 [connection signal="timeout" from="NavTimer" to="." method="_on_nav_timer_timeout"]
 [connection signal="timeout" from="ChooseLocationTimer" to="." method="_on_choose_location_timer_timeout"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]
 [connection signal="took_damage" from="Health" to="." method="_on_health_took_damage"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

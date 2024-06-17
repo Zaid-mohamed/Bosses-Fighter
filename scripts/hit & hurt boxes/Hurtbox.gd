@@ -9,5 +9,6 @@ class_name HurtBox
 
 # when a hit box enters
 func _on_area_entered(hit_box: HitBox) -> void:
-	# make the given health take given damage (of the hitbox)
-	health.take_damage(hit_box.damage)
+	# make the given health take given damage amount (of the hitbox)
+	health.take_damage(hit_box.damage_amount)
+	

@@ -38,6 +38,7 @@ func _process(delta: float) -> void:
 func update_data(data : ItemData):
 	sprite.texture = data.texture if data else null
 	item_hit_box.damage_amount = data.damage_amount if data else 0
+	item_hit_box.knock_back_force = data.knock_back_force if data else 0.0
 	update_animation(data)
 	if !data:
 		sprite.texture = null

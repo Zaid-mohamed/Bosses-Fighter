@@ -301,8 +301,8 @@ max_health = 50
 actor = NodePath("..")
 
 [node name="Hurtbox" parent="." node_paths=PackedStringArray("actor", "health") instance=ExtResource("21_2x0n3")]
-actor = NodePath("..")
-health = NodePath("../Health")
+actor = NodePath("")
+health = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2(0, -3)

@@ -9,6 +9,8 @@ class_name ItemData
 @export_multiline var Description : String
 ## The Amount Of Damage The Item Make
 @export var damage_amount : int
+## the amount of knock back will the enemy took when damaged
+@export var knock_back_force : float
 ## The Graphics That Will Be Showed In The Game
 @export var texture : Texture2D
 ## The AnimationLibrary Of This Item (All Animations of the item like "Use", "Bored")

@@ -18,7 +18,7 @@ var health : int :
 
 
 # emited when taking damage
-signal took_damage (damage : Damage)
+signal took_damage (amount : int)
 # emited when healed
 signal healed (amount : int)
 # emited when health = 0
@@ -30,13 +30,11 @@ func _ready() -> void:
 
 
 
-func take_damage(damage : Damage):
+func take_damage(amount : int):
 	# decrease the health by the given damage amount
-	health -= damage.amount
+	health -= amount
 	# emit the tool_damage signal passing the damage
-	took_damage.emit(damage)
-	# change the velocity of the actor (Not Completed and not working)
-	actor.velocity += damage.knock_back_vector
+	took_damage.emit(amount)
 
 
 func heal(amount : int):
