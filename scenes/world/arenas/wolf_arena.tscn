@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://c5pofl2bgap2g"]
 
-[ext_resource type="TileSet" uid="uid://cikiihc7ie6hq" path="res://Resources/TileSets/MainTileset.tres" id="1_13va7"]
+[ext_resource type="TileSet" uid="uid://b4mfm31bqvcha" path="res://Resources/TileSets/MainTileset.tres" id="1_13va7"]
 [ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="2_jslbc"]
 [ext_resource type="PackedScene" uid="uid://is7ldwe11xxy" path="res://scenes/world/Objects/bush.tscn" id="3_1d0et"]
 [ext_resource type="PackedScene" uid="uid://bsp2o2omsc1ao" path="res://scenes/SnowyWolf/snowy_wolf.tscn" id="5_s1cpw"]

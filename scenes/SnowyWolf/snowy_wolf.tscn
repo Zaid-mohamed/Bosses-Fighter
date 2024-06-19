@@ -7,6 +7,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4e8og"]
 radius = 5.0
+height = 20.0
 
 [node name="SnowyWolf" type="CharacterBody2D"]
 script = ExtResource("1_sx6uh")
