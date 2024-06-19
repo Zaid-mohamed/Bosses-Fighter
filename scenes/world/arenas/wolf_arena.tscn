@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5pofl2bgap2g"]
+[gd_scene load_steps=7 format=3 uid="uid://c5pofl2bgap2g"]
 
 [ext_resource type="TileSet" uid="uid://cikiihc7ie6hq" path="res://Resources/TileSets/MainTileset.tres" id="1_13va7"]
 [ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="2_jslbc"]
 [ext_resource type="PackedScene" uid="uid://is7ldwe11xxy" path="res://scenes/world/Objects/bush.tscn" id="3_1d0et"]
 [ext_resource type="PackedScene" uid="uid://bmgdd1or3bt1y" path="res://scenes/SnowyWolf/snowy_wolf_minion.tscn" id="4_u314b"]
+[ext_resource type="PackedScene" uid="uid://bsp2o2omsc1ao" path="res://scenes/SnowyWolf/snowy_wolf.tscn" id="5_s1cpw"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_0om01"]
 vertices = PackedVector2Array(1070, 798, 546, 798, 546, 450, 1070, 450)
@@ -100,3 +101,6 @@ max = NodePath("../Max")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_0om01")
+
+[node name="SnowyWolf" parent="." instance=ExtResource("5_s1cpw")]
+position = Vector2(860, 786)

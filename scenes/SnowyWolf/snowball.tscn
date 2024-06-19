@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://da346ey7x7u6f"]
+
+[ext_resource type="Script" path="res://scripts/SnowyWolf/snowball.gd" id="1_oggek"]
+[ext_resource type="Texture2D" uid="uid://bxlkvyq350q6w" path="res://Assets/snowyWolf/Wolf-Sheet.png" id="2_daid3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_02jgq"]
+radius = 5.38516
+
+[node name="Snowball" type="CharacterBody2D"]
+script = ExtResource("1_oggek")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_daid3")
+region_enabled = true
+region_rect = Rect2(114, 18, 11, 11)
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_02jgq")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
