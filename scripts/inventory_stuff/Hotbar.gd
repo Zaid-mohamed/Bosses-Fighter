@@ -65,7 +65,7 @@ func _process(delta: float) -> void:
 	
 	handle_changing_selected_slot()
 	
-func update_inventory_dialog(inventory_data : InventoryData):
+func update_inventory_dialog(inventory_data : InventoryData = inventory_data):
 	# remove the old slots
 	for slot in slots_container.get_children():
 		slot.queue_free()

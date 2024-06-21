@@ -44,12 +44,12 @@ func _on_body_entered(body: Node2D) -> void:
 		if player.hotbar.inventory_data.is_full():
 			player.inventory_dialog.inventory_data.add_item(item_data)
 			# update the UI
-			player.inventory_dialog.update_inventory_dialog(player.inventory_dialog.inventory_data)
+			player.inventory_dialog.update_inventory_dialog()
 		else:
 			# add the item to the hotbar
 			player.hotbar.inventory_data.add_item(item_data)
 			# update the hotbat UI
-			player.hotbar.update_inventory_dialog(player.hotbar.inventory_data)
+			player.hotbar.update_inventory_dialog()
 		
 		# free the pick up item
 		queue_free()
