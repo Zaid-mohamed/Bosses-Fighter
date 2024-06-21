@@ -127,3 +127,24 @@ func add_item(item_data : ItemData):
 			# and stop
 			break
 
+# returns is the inventory full or not
+func is_full() -> bool:
+	# the variable that stores the state of full or not
+	var is_inventory_full = true
+	
+	
+	# move across slots
+	for slot in slot_datas:
+		# if one of them is empty
+		if !slot:
+			# so the inventory is not full
+			is_inventory_full = false
+			# and stop here
+			break
+	
+	# return the result
+	return is_inventory_full
+	
+	
+	# note : if no slot is empty the variable will
+	# continue as true so the function will return true

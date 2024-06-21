@@ -39,9 +39,17 @@ func _on_body_entered(body: Node2D) -> void:
 		scale_down_tween.tween_property(self, "scale", Vector2.ZERO, 0.3)
 		# wait until the tween finishes
 		await scale_down_tween.finished
-		# add the item to the player inventory
-		player.inventory_dialog.inventory_data.add_item(item_data)
-		# update the UI
-		player.inventory_dialog.update_inventory_dialog(body.inventory_dialog.inventory_data)
+		# add the item to the player inventory if the hotbar is full,
+		# else add item to the horbar
+		if player.hotbar.inventory_data.is_full():
+			player.inventory_dialog.inventory_data.add_item(item_data)
+			# update the UI
+			player.inventory_dialog.update_inventory_dialog(player.inventory_dialog.inventory_data)
+		else:
+			# add the item to the hotbar
+			player.hotbar.inventory_data.add_item(item_data)
+			# update the hotbat UI
+			player.hotbar.update_inventory_dialog(player.hotbar.inventory_data)
+		
 		# free the pick up item
 		queue_free()

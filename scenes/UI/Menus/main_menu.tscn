@@ -85,6 +85,18 @@ position = Vector2(269, 152)
 position = Vector2(81, 99)
 item_data = ExtResource("8_po0op")
 
+[node name="SwordPickup2" parent="." instance=ExtResource("7_hwfdt")]
+position = Vector2(128, 129)
+item_data = ExtResource("8_po0op")
+
+[node name="SwordPickup3" parent="." instance=ExtResource("7_hwfdt")]
+position = Vector2(183, 143)
+item_data = ExtResource("9_fe8r4")
+
+[node name="SwordPickup4" parent="." instance=ExtResource("7_hwfdt")]
+position = Vector2(213, 141)
+item_data = ExtResource("8_po0op")
+
 [node name="BowPickup2" parent="." instance=ExtResource("7_hwfdt")]
 position = Vector2(218, 98)
 item_data = ExtResource("9_fe8r4")

@@ -20,6 +20,7 @@ extends CharacterBody2D
 @onready var anim: AnimationPlayer = %Anim
 @onready var shadow: Sprite2D = %shadow
 @onready var inventory_dialog : PanelContainer = %PlayerInventoryDialog
+@onready var hotbar: PanelContainer = %Hotbar
 # sounds
 @onready var walk_sx: AudioStreamPlayer2D = %walk_sx
 @onready var attack_sx: AudioStreamPlayer2D = %attack_sx
