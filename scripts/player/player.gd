@@ -19,7 +19,7 @@ class_name Player
 @onready var body: Sprite2D = %body
 @onready var anim: AnimationPlayer = %Anim
 @onready var shadow: Sprite2D = %shadow
-@onready var inventory_dialog : Inventory = %PlayerInventoryDialog
+@onready var inventory_dialog: Inventory = %PlayerInventoryDialog
 @onready var hotbar: Hotbar = %Hotbar
 @onready var item_info: ItemInfo = %ItemInfo
 # sounds
