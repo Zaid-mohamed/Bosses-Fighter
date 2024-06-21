@@ -90,6 +90,7 @@ func add_item(item_data : ItemData, amount : int = 1):
 		if slot.item_data == item_data:
 			slot.quantity += amount
 			inventory_updated.emit(self)
+			item_data.got_before = true
 			return
 			break
 			
@@ -116,7 +117,7 @@ func add_item(item_data : ItemData, amount : int = 1):
 			
 			# and emit the inventory updated signal
 			inventory_updated.emit(self)
-			
+			item_data.got_before = true
 			# and stop
 			break
 

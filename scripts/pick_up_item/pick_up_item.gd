@@ -62,10 +62,19 @@ func _on_body_entered(body: Node2D) -> void:
 		# add the item to the player inventory if the hotbar is full,
 		# else add item to the horbar
 		if player.hotbar.inventory_data.is_full():
+			# teach the player about the item if it is new to him
+			if !item_data.got_before:
+				player.item_info.set_item_data(item_data)
+				player.item_info.open()
+				
 			player.inventory_dialog.inventory_data.add_item(item_data, amount)
 			# update the UI
 			player.inventory_dialog.update_inventory_dialog()
 		else:
+			# teach the player about the item if it is new to him
+			if !item_data.got_before:
+				player.item_info.set_item_data(item_data)
+				player.item_info.open()
 			# add the item to the hotbar
 			player.hotbar.inventory_data.add_item(item_data, amount)
 			# update the hotbat UI

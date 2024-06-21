@@ -18,3 +18,5 @@ class_name ItemData
 ## Is This Item Stackable In The Inventory
 @export var stackable : bool
 
+## Is this item has got by the player before
+var got_before : bool = false

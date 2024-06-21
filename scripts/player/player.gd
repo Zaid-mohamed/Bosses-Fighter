@@ -21,6 +21,7 @@ class_name Player
 @onready var shadow: Sprite2D = %shadow
 @onready var inventory_dialog : Inventory = %PlayerInventoryDialog
 @onready var hotbar: Hotbar = %Hotbar
+@onready var item_info: ItemInfo = %ItemInfo
 # sounds
 @onready var walk_sx: AudioStreamPlayer2D = %walk_sx
 @onready var attack_sx: AudioStreamPlayer2D = %attack_sx
