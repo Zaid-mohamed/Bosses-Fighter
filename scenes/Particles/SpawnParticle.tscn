@@ -1,0 +1,116 @@
+[gd_scene load_steps=14 format=3]
+
+[ext_resource type="Texture2D" uid="uid://cuy4peypgfvmb" path="res://Assets/Particles/DustParticle.png" id="1"]
+[ext_resource type="Script" path="res://Scenes/Particles/SpawnParticle.gd" id="2"]
+[ext_resource type="AudioStream" uid="uid://b0lyttyvk1ecp" path="res://Assets/Sounds/HurtPlayer.wav" id="3"]
+
+[sub_resource type="Curve" id="1"]
+_data = [Vector2(0, 0), 0.0, 6.0, 0, 0, Vector2(0.1, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.5, 0.0, 0, 0]
+point_count = 3
+script = null
+
+[sub_resource type="CurveTexture" id="2"]
+curve = SubResource("1")
+script = null
+
+[sub_resource type="Gradient" id="3"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+script = null
+
+[sub_resource type="GradientTexture1D" id="4"]
+gradient = SubResource("3")
+script = null
+
+[sub_resource type="ParticleProcessMaterial" id="5"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 16.0
+emission_ring_radius = 16.0
+emission_ring_inner_radius = 16.0
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+orbit_velocity_min = -0.5
+orbit_velocity_max = 0.5
+orbit_velocity_curve = null
+radial_accel_min = -320.0
+radial_accel_max = -320.0
+angle_max = 360.0
+scale_min = 0.75
+scale_curve = SubResource("2")
+color_ramp = SubResource("4")
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 1
+script = null
+
+[sub_resource type="Curve" id="6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.5, 0.0, 0, 0]
+point_count = 2
+script = null
+
+[sub_resource type="CurveTexture" id="7"]
+curve = SubResource("6")
+script = null
+
+[sub_resource type="Gradient" id="8"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+script = null
+
+[sub_resource type="GradientTexture1D" id="9"]
+gradient = SubResource("8")
+script = null
+
+[sub_resource type="ParticleProcessMaterial" id="10"]
+emission_shape = 1
+emission_sphere_radius = 4.0
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 32.0
+initial_velocity_max = 128.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+orbit_velocity_curve = null
+angle_max = 360.0
+scale_min = 0.75
+scale_curve = SubResource("7")
+color_ramp = SubResource("9")
+script = null
+
+[node name="SpawnParticle" type="GPUParticles2D" groups=[
+"SpawnParticle",
+"WavesCount",
+]]
+self_modulate = Color(0.364706, 0.364706, 0.364706, 1)
+z_index = 2
+emitting = false
+amount = 32
+sub_emitter = NodePath("EndParticle")
+process_material = SubResource("5")
+texture = ExtResource("1")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.75
+randomness = 1.0
+script = ExtResource("2")
+
+[node name="EndParticle" type="GPUParticles2D" parent="."]
+self_modulate = Color(0.364706, 0.364706, 0.364706, 1)
+emitting = false
+amount = 32
+process_material = SubResource("10")
+texture = ExtResource("1")
+lifetime = 0.5
+explosiveness = 0.75
+
+[node name="1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3")
+pitch_scale = 0.8
+bus = &"Sounds"
