@@ -1,5 +1,7 @@
 class_name Item extends Node2D
 
+# the player node
+@export var player : Player
 # the sprite of the item
 @export var sprite : Sprite2D
 
@@ -20,6 +22,7 @@ var can_rotate : bool = true
 
 
 const ARROW_SCENE = preload("res://scenes/weapons/arrow.tscn")
+const ARROW_RESOURCE = preload("res://Resources/weapons/Bow/Arrow.tres")
 
 func _ready() -> void:
 	# connect the timeout signal to play animation bored 
@@ -100,6 +103,18 @@ func restart_bored_timer():
 
 
 func bow_shoot():
+	if player.hotbar.inventory_data.has_item(ARROW_RESOURCE):
+		player.hotbar.inventory_data.remove_item(ARROW_RESOURCE)
+		player.hotbar.update_inventory_dialog()
+	else:
+		if player.inventory_dialog.inventory_data.has_item(ARROW_RESOURCE):
+			player.inventory_dialog.inventory_data.remove_item(ARROW_RESOURCE)
+			player.inventory_dialog.update_inventory_dialog()
+		else:
+			return
+	
+	
+	
 	var shoot_direction = (get_global_mouse_position() - global_position).normalized()
 	var arrow = ARROW_SCENE.instantiate()
 	var shoot_velocity = shoot_direction * arrow.speed

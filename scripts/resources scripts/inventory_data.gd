@@ -139,3 +139,42 @@ func is_full() -> bool:
 	
 	# note : if no slot is empty the variable will
 	# continue as true so the function will return true
+
+
+# removes an item from the inventory by a certain amount
+func remove_item(item_data : ItemData, amount : int = 1) -> void:
+	# a variable that stores if the requested item data if found or not
+	var found_requested_item_data = false
+	# move in each slot in slots datas
+	for slot in slot_datas:
+		# if there is no slot in this place, go to the next iterate
+		if !slot:
+			continue
+		# if the slot have the same item as the requested one
+		if slot.item_data == item_data:
+			# the function found the requested item
+			found_requested_item_data = true
+			# if the quanitity is more than requested amount of erasing
+			if slot.quantity > amount:
+				slot.quantity -= amount
+			else:
+				# else erase the hole slot
+				#slot_datas.erase(slot)
+				slot_datas[slot_datas.find(slot)] = null
+			break
+			return
+
+
+# is the inventory have this item in one of the slots?
+func has_item(item_data : ItemData) -> bool:
+	# move in each slot in slot datas
+	for slot in slot_datas:
+		# if the slot have the same item as the requested one
+		if !slot: continue
+		# if one of these slot have the requested item
+		if slot.item_data == item_data:
+			return true
+			# and stop
+			break
+	# if not return false 
+	return false
