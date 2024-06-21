@@ -15,7 +15,7 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 @export var target : Node2D
 
 # Phases and Attack Types
-var used_attacks : Dictionary = first_phase
+var used_attacks : Dictionary = third_phase
 
 var first_phase : Dictionary  = {
 	0 : [States.SHOOT,4]
@@ -58,15 +58,8 @@ func _physics_process(delta):
 	
 	if current_state == States.MOVE_ATTACK:
 		$MoveAttackArea/CollisionShape2D.set_deferred("disabled",false)
-		##$Squish/Sprite2D/SandParticle.emitting = true
 	else:
 		$MoveAttackArea/CollisionShape2D.set_deferred("disabled",true)
-		##$Squish/Sprite2D/SandParticle.emitting = false
-	
-	##if current_state == States.MOVE_ATTACK_STUN:
-		##$Squish/Sprite2D/StunParticle.emitting = true
-	##else:
-		##$Squish/Sprite2D/StunParticle.emitting = false
 	
 	##########################################
 	## IF PLAYER DIED, STATE WILL BE DECIDE ##
@@ -96,14 +89,20 @@ func _physics_process(delta):
 				
 				# Set the state to the wanted ATTACK !
 				set_state(used_attacks[current_attack][0])
-		
+				
 		States.SHOOT:
 			# Set the Velocity of the Boss to ZERO
 			velocity_to_zero()
+			if $ShootTimer.is_stopped():
+				$AnimationPlayer.speed_scale = 0.3 / $ShootTimer.wait_time
+				$AnimationPlayer.play("shoot")
 		
 		States.TORNADO:
 			# Set the Velocity of the Boss to ZERO
 			velocity_to_zero()
+			if $ShootTimer.is_stopped():
+				$AnimationPlayer.speed_scale = 0.3 / $ShootTimer.wait_time
+				$AnimationPlayer.play("shoot")
 		
 		States.MOVE_ATTACK_CHARGE:
 			# Set the Velocity of the Boss to ZERO
@@ -136,8 +135,7 @@ func set_state(new_state : States):
 			$DecideTimer.start()
 		
 		States.MOVE_ATTACK_CHARGE:
-			##$AnimationPlayer.play("charge_move")
-			pass
+			$AnimationPlayer.play("charge_move")
 		
 		States.MOVE_ATTACK:
 			attackTween()
@@ -171,8 +169,6 @@ func Shoot():
 					get_parent().add_child(Snowball)
 				tornado_rotation += deg_to_rad(60)
 				$ShootTimer.start()
-	
-	$Shoot.play()
 	
 	manage_attack_times()
 
@@ -266,9 +262,6 @@ func normalTween():
 func _on_move_attack_area_body_entered(body):
 	if !$MoveAttackDelayTimer.is_stopped() or current_state == States.DEAD:
 		return
-	
-	if body.is_in_group("Player"):
-		body.damage(3,3,(position - body.position).angle())
 	
 	set_state(States.MOVE_ATTACK_STUN)
 

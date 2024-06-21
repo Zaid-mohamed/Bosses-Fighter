@@ -178,7 +178,7 @@ slot_datas = Array[ExtResource("15_vwvli")]([null, SubResource("Resource_nwjf0")
 radius = 3.5
 height = 8.5
 
-[node name="player" type="CharacterBody2D" groups=["player"]]
+[node name="player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_54yo8")
 speed = 250.0
 accel = 1000.0
