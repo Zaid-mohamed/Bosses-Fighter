@@ -4,7 +4,9 @@ extends CharacterBody2D
 @export var speed : int = 200
 @export var accel : int = 28
 @export var decel : int = 35
-@export_range(0, 250, 3) var health : int
+
+# the health component
+@onready var health: Health = %Health
 
 # State Machine Enums
 enum States {DECIDE, SHOOT, TORNADO, MOVE_ATTACK_CHARGE, MOVE_ATTACK, MOVE_ATTACK_STUN, DAMAGED, DEAD}
@@ -77,9 +79,9 @@ func _physics_process(delta):
 			
 			# Configure the Phases using the Health value.
 			if $SpawnTimer.is_stopped() && $DecideTimer.is_stopped():
-				if health > 54:
+				if health.health > 54:
 					used_attacks = first_phase
-				elif health <= 54 && health > 27:
+				elif health.health <= 54 && health.health > 27:
 					used_attacks = second_phase
 				else:
 					used_attacks = third_phase
@@ -190,11 +192,14 @@ func _on_damage_timer_timeout():
 	
 	current_state = States.DECIDE
 
+
+func _on_hurtbox_area_entered(hit_box : HitBox) -> void:
+	pass # Replace with function body.
 func damage(value : int = 1,knock : int = 1,angle : float = 0):
 	if [States.MOVE_ATTACK_CHARGE,States.DEAD].has(current_state):
 		return
 	
-	health -= value
+	health.take_damage(value)
 	velocity = Vector2(55 * knock,0).rotated(angle)
 	
 	damageTween()
@@ -204,7 +209,7 @@ func damage(value : int = 1,knock : int = 1,angle : float = 0):
 		$ShootTimer.stop()
 		$DamageTimer.start()
 	
-	if health <= 0:
+	if health.health <= 0:
 		current_state = States.DEAD
 		
 		remove_from_group("Dramatic")
@@ -276,3 +281,4 @@ func _on_stun_timer_timeout():
 	if current_state == States.DEAD:
 		return
 	set_state(States.DECIDE)
+
