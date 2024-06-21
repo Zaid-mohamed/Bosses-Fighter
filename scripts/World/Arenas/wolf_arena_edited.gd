@@ -29,7 +29,7 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "anim":
 		$player.set_physics_process(true)
 		await get_tree().create_timer(1).timeout
-		var Boss_instance = preload("res://scenes/SnowyWolf/SnowyBoss.tscn").instantiate()
+		var Boss_instance = preload("res://scenes/SnowyBoss/SnowyBoss.tscn").instantiate()
 		Boss_instance.target = $player
 		Boss_instance.position = $Center.position
 		add_child(Boss_instance)

@@ -152,7 +152,7 @@ func Shoot():
 	match current_state:
 		States.SHOOT:
 			if $ShootTimer.is_stopped():
-				var Snowball = preload("res://scenes/SnowyWolf/SnowBall.tscn").instantiate()
+				var Snowball = preload("res://scenes/SnowyBoss/SnowBall.tscn").instantiate()
 				Snowball.position = $Squish/Sprite2D/Aim.global_position
 				Snowball.shooter = self
 				Snowball.speed += 1
@@ -162,7 +162,7 @@ func Shoot():
 		States.TORNADO:
 			if $ShootTimer.is_stopped():
 				for i in tornado_snowball:
-					var Snowball = preload("res://scenes/SnowyWolf/SnowBall.tscn").instantiate()
+					var Snowball = preload("res://scenes/SnowyBoss/SnowBall.tscn").instantiate()
 					Snowball.position = position
 					Snowball.shooter = self
 					Snowball.rotation = (i + 1) * deg_to_rad(360 / tornado_snowball) + tornado_rotation

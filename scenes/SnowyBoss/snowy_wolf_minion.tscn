@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://bmgdd1or3bt1y"]
 
 [ext_resource type="Texture2D" uid="uid://bxlkvyq350q6w" path="res://Assets/snowyWolf/Wolf-Sheet.png" id="1_03bxa"]
-[ext_resource type="Script" path="res://scripts/SnowyWolf/snowy_wolf_minion.gd" id="1_ybpq6"]
+[ext_resource type="Script" path="res://scripts/SnowyBoss/snowy_wolf_minion.gd" id="1_ybpq6"]
 [ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="2_kk6rb"]
 [ext_resource type="PackedScene" uid="uid://bow3opjc4bcwh" path="res://scenes/hit & hurtboxes/hurtbox.tscn" id="4_31qmp"]
 [ext_resource type="Script" path="res://scripts/health_component/health_component.gd" id="5_wb4md"]

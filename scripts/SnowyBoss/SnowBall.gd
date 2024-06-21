@@ -13,7 +13,7 @@ func _on_body_entered(body):
 	if body == shooter:
 		return
 	
-	if body.is_in_group("Player") && body.is_in_group("Damageable"):
+	if body.is_in_group("Player"):
 		# body.damage(damage_strength,knock_strength,(body.position - position).angle())
 		break_snowball()
 	else:

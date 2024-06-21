@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=3 uid="uid://bsp2o2omsc1ao"]
 
-[ext_resource type="Texture2D" uid="uid://bxlkvyq350q6w" path="res://Assets/snowyWolf/Wolf-Sheet.png" id="1_s5v2h"]
-[ext_resource type="Script" path="res://scripts/SnowyWolf/SnowyBoss.gd" id="1_sx6uh"]
-[ext_resource type="Shader" path="res://Resources/shaders/DamageFlash.gdshader" id="2_hvkno"]
-[ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="3_drho7"]
+[ext_resource type="Script" path="res://scripts/SnowyBoss/SnowyBoss.gd" id="1_o5ung"]
+[ext_resource type="Shader" path="res://Resources/shaders/DamageFlash.gdshader" id="2_1iqoe"]
+[ext_resource type="Texture2D" uid="uid://bxlkvyq350q6w" path="res://Assets/snowyWolf/Wolf-Sheet.png" id="3_12fkh"]
+[ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="4_3rhyw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_37av3"]
-shader = ExtResource("2_hvkno")
+shader = ExtResource("2_1iqoe")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_range = 0.0
 
@@ -16,6 +16,10 @@ height = 28.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f6q6g"]
 size = Vector2(28, 20)
+
+[sub_resource type="Animation" id="Animation_xf5y8"]
+resource_name = "charge_move"
+length = 2.0
 
 [sub_resource type="Animation" id="Animation_gyx3h"]
 resource_name = "shoot"
@@ -34,10 +38,6 @@ tracks/0/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_xf5y8"]
-resource_name = "charge_move"
-length = 2.0
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5e7bt"]
 _data = {
 "charge_move": SubResource("Animation_xf5y8"),
@@ -45,7 +45,7 @@ _data = {
 }
 
 [node name="SnowyBoss" type="CharacterBody2D"]
-script = ExtResource("1_sx6uh")
+script = ExtResource("1_o5ung")
 health = 81
 
 [node name="Squish" type="Node2D" parent="."]
@@ -54,7 +54,7 @@ scale = Vector2(1.5, 1.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Squish"]
 position = Vector2(0, -11)
-texture = ExtResource("1_s5v2h")
+texture = ExtResource("3_12fkh")
 region_enabled = true
 region_rect = Rect2(0, 0, 48, 48)
 
@@ -72,7 +72,7 @@ modulate = Color(0, 0, 0, 0.858824)
 show_behind_parent = true
 position = Vector2(-1.5, -6)
 scale = Vector2(2.4375, 1.5)
-texture = ExtResource("3_drho7")
+texture = ExtResource("4_3rhyw")
 
 [node name="MoveAttackArea" type="Area2D" parent="."]
 position = Vector2(0, -10)
