@@ -19,7 +19,7 @@ y_sort_enabled = true
 script = ExtResource("1_jrqra")
 
 [node name="player" parent="." instance=ExtResource("1_es006")]
-position = Vector2(385, 151)
+position = Vector2(154, 142)
 
 [node name="Buttton" parent="." instance=ExtResource("2_0mu40")]
 position = Vector2(151, 68)
@@ -85,20 +85,8 @@ position = Vector2(269, 152)
 position = Vector2(81, 99)
 item_data = ExtResource("8_po0op")
 
-[node name="SwordPickup2" parent="." instance=ExtResource("7_hwfdt")]
-position = Vector2(128, 129)
-item_data = ExtResource("8_po0op")
-
-[node name="SwordPickup3" parent="." instance=ExtResource("7_hwfdt")]
-position = Vector2(183, 143)
-item_data = ExtResource("9_fe8r4")
-
-[node name="SwordPickup4" parent="." instance=ExtResource("7_hwfdt")]
-position = Vector2(213, 141)
-item_data = ExtResource("8_po0op")
-
-[node name="BowPickup2" parent="." instance=ExtResource("7_hwfdt")]
-position = Vector2(218, 98)
+[node name="BowPickup" parent="." instance=ExtResource("7_hwfdt")]
+position = Vector2(224, 98)
 item_data = ExtResource("9_fe8r4")
 
 [connection signal="body_entered" from="Buttton" to="." method="_on_buttton_body_entered"]

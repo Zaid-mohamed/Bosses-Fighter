@@ -3,7 +3,16 @@ extends Area2D
 
 
 # the item in the ground
-@export var item_data : ItemData
+@export var item_data : ItemData :
+	set(value):
+		# when setting a value to the variable
+		item_data = value
+		# update the texture of the item sprite if it is ready (not null), to show the player the item that he will get
+		if item_sprite:
+			item_sprite.texture = item_data.texture
+
+
+
 # the distance when the item moves towards the player
 @export var move_distance : float
 
