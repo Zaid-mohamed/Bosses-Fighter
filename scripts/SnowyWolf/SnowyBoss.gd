@@ -129,8 +129,6 @@ func _physics_process(delta):
 	move_and_slide()
 
 func set_state(new_state : States):
-	##if ![States.MOVE_ATTACK,States.MOVE_ATTACK_CHARGE].has(new_state):
-		##RemovePalmTrees()
 	
 	match new_state:
 		
@@ -139,7 +137,6 @@ func set_state(new_state : States):
 		
 		States.MOVE_ATTACK_CHARGE:
 			##$AnimationPlayer.play("charge_move")
-			##SpawnPalmTrees()
 			pass
 		
 		States.MOVE_ATTACK:
@@ -163,7 +160,6 @@ func Shoot():
 				Snowball.speed += 1
 				Snowball.rotation = $"Squish/Sprite2D/Aim".global_position.angle_to_point(target.get_node("CollisionShape2D").global_position)
 				get_parent().add_child(Snowball)
-##				Screen.shake()
 				$ShootTimer.start()
 		States.TORNADO:
 			if $ShootTimer.is_stopped():
@@ -173,7 +169,6 @@ func Shoot():
 					Snowball.shooter = self
 					Snowball.rotation = (i + 1) * deg_to_rad(360 / tornado_snowball) + tornado_rotation
 					get_parent().add_child(Snowball)
-##				Screen.shake()
 				tornado_rotation += deg_to_rad(60)
 				$ShootTimer.start()
 	
@@ -208,17 +203,8 @@ func damage(value : int = 1,knock : int = 1,angle : float = 0):
 	
 	damageTween()
 	
-##	var damage_particle = preload("res://Scenes/Particles/DamageParticle.tscn").instantiate()
-##	damage_particle.position = position
-##	damage_particle.rotation_degrees = rad_to_deg(angle) + 180
-##	get_parent().add_child(damage_particle)
-
-##	Screen.shake()
-##	$Hurt.play()
-	
 	if current_state != States.MOVE_ATTACK_STUN:
 		current_state = States.DAMAGED
-##		$AnimationPlayer.play("damaged")
 		$ShootTimer.stop()
 		$DamageTimer.start()
 	
@@ -226,11 +212,6 @@ func damage(value : int = 1,knock : int = 1,angle : float = 0):
 		current_state = States.DEAD
 		
 		remove_from_group("Dramatic")
-		
-##		$AnimationPlayer.play("damaged")
-		
-##		Screen.slow_time()
-##		Screen.shake(4,0.1,45)
 		
 		var flash_tween = create_tween().set_trans(Tween.TRANS_CUBIC)
 		flash_tween.tween_property($Squish.material,"shader_parameter/flash_range",1.0,5)
@@ -255,12 +236,6 @@ func damage(value : int = 1,knock : int = 1,angle : float = 0):
 		emit_signal("dying")
 		
 		await flash_tween.finished
-		
-##		Screen.shake(16,0.02)
-		
-##		var blood = preload("res://Scenes/Particles/BossBlood.tscn").instantiate()
-##		blood.position = position
-##		get_parent().add_child(blood)
 		
 		emit_signal("dead",position)
 		
@@ -292,12 +267,9 @@ func _on_move_attack_area_body_entered(body):
 	if !$MoveAttackDelayTimer.is_stopped() or current_state == States.DEAD:
 		return
 	
-	if body.is_in_group("Damageable"):
+	if body.is_in_group("Player"):
 		body.damage(3,3,(position - body.position).angle())
 	
-	if !body.is_in_group("Player"):
-#		Screen.shake()
-		pass
 	set_state(States.MOVE_ATTACK_STUN)
 
 func _on_animation_player_animation_finished(anim_name):
