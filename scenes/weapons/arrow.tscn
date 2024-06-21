@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/weapons/arrow.gd" id="1_lt1yc"]
 [ext_resource type="Texture2D" uid="uid://byoyl5wjwwvq" path="res://Assets/weapons/arrow.png" id="1_xwx86"]
-[ext_resource type="Resource" uid="uid://cwwrvnw2hd3uh" path="res://Resources/weapons/Bow/Bow.tres" id="2_c20mi"]
+[ext_resource type="Resource" uid="uid://c7nouyp16p3ts" path="res://Resources/weapons/Bow/Arrow.tres" id="2_ir41n"]
 [ext_resource type="Script" path="res://scripts/hit & hurt boxes/hitbox.gd" id="3_vswqu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r4bbu"]
@@ -13,7 +13,7 @@ height = 6.0
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_lt1yc")
 speed = 750.0
-item_data = ExtResource("2_c20mi")
+item_data = ExtResource("2_ir41n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_xwx86")

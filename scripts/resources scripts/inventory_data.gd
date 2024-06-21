@@ -82,18 +82,19 @@ func put_slot_data(slot_index : int , new_slot_data : SlotData):
 
 
 # add an item to the inventory
-func add_item(item_data : ItemData):
-	
-	## this section is not completed and will completed later
+func add_item(item_data : ItemData, amount : int = 1):
 	
 	## this section should add items on top of each other like 20 apples and 3 one 
-	#for slot in slot_datas:
-		#if slot.item_data == item_data:
-			#slot.quantity += 1
-			#break
-			#return
+	for slot in slot_datas:
+		if !slot: continue
+		if slot.item_data == item_data:
+			slot.quantity += amount
+			inventory_updated.emit(self)
+			return
+			break
 			
 	
+	## if there is no item like this in the inventory this section will run (as I expect)
 	
 	# a varibale that stores the index of the slot in iterations in for loop
 	var index = -1
@@ -103,12 +104,13 @@ func add_item(item_data : ItemData):
 		index += 1
 		# if found empty slot
 		if !slot:
+			
 			# create a new slot to add it there
 			var new_slot_data = SlotData.new()
 			# assign the item data of the new slot to the given item data
 			new_slot_data.item_data = item_data
 			# make the quantity one
-			new_slot_data.quantity = 1
+			new_slot_data.quantity = amount
 			# add the new slot in the correct index
 			slot_datas[index] = new_slot_data
 			

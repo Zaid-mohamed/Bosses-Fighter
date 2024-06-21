@@ -1,6 +1,6 @@
 @tool
 extends Area2D
-
+class_name ItemPickup
 
 # the item in the ground
 @export var item_data : ItemData :
@@ -8,10 +8,15 @@ extends Area2D
 		# when setting a value to the variable
 		item_data = value
 		# update the texture of the item sprite if it is ready (not null), to show the player the item that he will get
-		if item_sprite:
+		if amount_label:
+			
 			item_sprite.texture = item_data.texture
-
-
+			if amount > 1 :
+				amount_label.show()
+				amount_label.text = str(amount)
+			
+# the amount of this item on the ground (used for stackable items!!)
+@export_range(0, 48, .99) var amount : int = 1
 
 # the distance when the item moves towards the player
 @export var move_distance : float
@@ -23,13 +28,19 @@ extends Area2D
 @onready var player: Player = get_tree().get_first_node_in_group("player")
 # the collision of the pick up item area2d
 @onready var collision: CollisionShape2D = %Collision
-
+# the label that displays the amount of the item on ground
+@onready var amount_label: Label = %AmountLabel
 
 func _ready() -> void:
 	#when ready set the item_sprite texture to the item texture that this node carries
 	item_sprite.texture = item_data.texture
-
-
+	
+	# when ready set the visibility of the amount label to true if 
+	# the amount of the item on ground is more than 1 (and also show the correct amount)
+	
+	if amount > 1:
+		amount_label.show()
+		amount_label.text = str(amount)
 
 func _process(delta: float) -> void:
 	# if the distance the between the pick up and the player is less than the move distance
@@ -51,12 +62,12 @@ func _on_body_entered(body: Node2D) -> void:
 		# add the item to the player inventory if the hotbar is full,
 		# else add item to the horbar
 		if player.hotbar.inventory_data.is_full():
-			player.inventory_dialog.inventory_data.add_item(item_data)
+			player.inventory_dialog.inventory_data.add_item(item_data, amount)
 			# update the UI
 			player.inventory_dialog.update_inventory_dialog()
 		else:
 			# add the item to the hotbar
-			player.hotbar.inventory_data.add_item(item_data)
+			player.hotbar.inventory_data.add_item(item_data, amount)
 			# update the hotbat UI
 			player.hotbar.update_inventory_dialog()
 		

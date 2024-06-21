@@ -9,8 +9,8 @@
 script = ExtResource("1_ytem2")
 Name = "Arrow"
 Description = "Used By The Bow"
-damage_amount = 0
-knock_back_force = 0.0
+damage_amount = 6
+knock_back_force = 30.0
 texture = ExtResource("2_fdbqx")
 anim_library = SubResource("AnimationLibrary_pk4nt")
 stackable = true
