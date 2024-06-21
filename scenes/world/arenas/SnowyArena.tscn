@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://culbfmwgy2otm"]
 
 [ext_resource type="TileSet" uid="uid://b4mfm31bqvcha" path="res://Resources/TileSets/MainTileset.tres" id="1_s6nfe"]
-[ext_resource type="Script" path="res://scripts/World/Arenas/wolf_arena_edited.gd" id="1_scpyu"]
+[ext_resource type="Script" path="res://scripts/World/Arenas/WolfArena.gd" id="1_scpyu"]
 [ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="2_7t3sp"]
 
 [sub_resource type="Animation" id="Animation_llbtu"]
