@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Player
 
 # a group of exported variables for motion quantaties
 @export_group("movement stats")
@@ -19,8 +19,8 @@ extends CharacterBody2D
 @onready var body: Sprite2D = %body
 @onready var anim: AnimationPlayer = %Anim
 @onready var shadow: Sprite2D = %shadow
-@onready var inventory_dialog : PanelContainer = %PlayerInventoryDialog
-@onready var hotbar: PanelContainer = %Hotbar
+@onready var inventory_dialog : Inventory = %PlayerInventoryDialog
+@onready var hotbar: Hotbar = %Hotbar
 # sounds
 @onready var walk_sx: AudioStreamPlayer2D = %walk_sx
 @onready var attack_sx: AudioStreamPlayer2D = %attack_sx
@@ -84,6 +84,9 @@ func handle_animation():
 func _on_hotbar_current_slot_data_changed(new_current_slot_data: SlotData) -> void:
 	# update the current_item_data if the new_current_slot is valid, else will be null
 	current_item_data = new_current_slot_data.item_data if new_current_slot_data else null
+	# if the new_current_slot_data is null, push an error
+	if !new_current_slot_data:
+		push_error("new_current_slot_data is null")
 	# update the visualls, animation,etc
 	await get_tree().physics_frame
 	item.update_data(current_item_data)

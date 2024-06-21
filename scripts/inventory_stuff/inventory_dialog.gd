@@ -1,5 +1,5 @@
 extends PanelContainer
-
+class_name Inventory
 @onready var slots_container: GridContainer = %SlotsContainer
 
 

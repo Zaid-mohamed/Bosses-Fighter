@@ -1,6 +1,6 @@
 extends PanelContainer
 
-
+class_name Hotbar
 
 # onready vars
 
@@ -26,7 +26,7 @@ var current_slot_data : SlotData
 # the index of the selected slot
 
 # the index of the selected slot
-var current_slot_index : int :
+var current_slot_index : int = 0:
 	set(value):
 		current_slot_index = clampi(value, 0, 2)
 		PlayerManager.selected_slot_index = current_slot_index
@@ -35,13 +35,16 @@ var current_slot_index : int :
 
 
 ## emitted when current_slot_data changed
-signal current_slot_data_changed (new_current_slot_data)
+signal current_slot_data_changed (new_current_slot_data : SlotData)
 
 
 
 
 
 func _ready() -> void:
+	
+	inventory_data.inventory_updated.connect(update_inventory_dialog)
+	
 	# set the current_slot_index to the player manager one
 	# (because player manager saves the correct one)
 	current_slot_index = PlayerManager.selected_slot_index
@@ -56,7 +59,7 @@ func _ready() -> void:
 	# clamp the indicator pos to prevent it from going too far
 	clamp_indicator_pos()
 	
-	
+	# update the hotbar dialog when ready
 	update_inventory_dialog(inventory_data)
 
 
@@ -66,6 +69,7 @@ func _process(delta: float) -> void:
 	handle_changing_selected_slot()
 	
 func update_inventory_dialog(inventory_data : InventoryData = inventory_data):
+	
 	# remove the old slots
 	for slot in slots_container.get_children():
 		slot.queue_free()
@@ -82,11 +86,17 @@ func update_inventory_dialog(inventory_data : InventoryData = inventory_data):
 		if !slot_data: SlotInstance.quantity_label.hide()
 		# the slot clicked signal to the inventory data
 		SlotInstance.slot_clicked.connect(inventory_data._on_slot_clicked)	
+	
+	current_slot_data = get_slot_data(current_slot_index)
+	current_slot_data_changed.emit(current_slot_data)
+
+
 
 # get the slot_data from a slot using its index
-func get_slot_data(indx : int):
-	# get the slot_data from the slot that the have the given index
-	var slot_data = slots_container.get_children()[indx].slot_data
+func get_slot_data(indx : int, inv_data : InventoryData = inventory_data):
+	# get the slot_data from the slot that the have the given index in the slots of the given inventory data
+	var slot_data = inv_data.slot_datas[indx]
+	print_debug(slot_data)
 	# if couldn't find one, push an error and return null
 	if !slot_data: push_error("Couldn't Find Slot Data"); return null
 	# if found return it

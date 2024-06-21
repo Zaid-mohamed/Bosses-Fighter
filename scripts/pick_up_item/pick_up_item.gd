@@ -11,7 +11,7 @@ extends Area2D
 @export_range(0.0, 2.0)var speed_scale : float = 1.0
 @onready var item_sprite: Sprite2D = %ItemSprite
 
-@onready var player := get_tree().get_first_node_in_group("player")
+@onready var player: Player = get_tree().get_first_node_in_group("player")
 # the collision of the pick up item area2d
 @onready var collision: CollisionShape2D = %Collision
 
