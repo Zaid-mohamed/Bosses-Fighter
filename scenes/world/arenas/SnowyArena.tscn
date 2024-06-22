@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://culbfmwgy2otm"]
+[gd_scene load_steps=5 format=3 uid="uid://culbfmwgy2otm"]
 
-[ext_resource type="TileSet" uid="uid://b4mfm31bqvcha" path="res://Resources/TileSets/MainTileset.tres" id="1_s6nfe"]
-[ext_resource type="Script" path="res://scripts/World/Arenas/WolfArena.gd" id="1_scpyu"]
+[ext_resource type="TileSet" uid="uid://cikiihc7ie6hq" path="res://Resources/TileSets/MainTileset.tres" id="1_s6nfe"]
 [ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="2_7t3sp"]
 
 [sub_resource type="Animation" id="Animation_llbtu"]
@@ -14,7 +13,6 @@ _data = {
 
 [node name="WolfArena" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_scpyu")
 metadata/_edit_horizontal_guides_ = [623.0]
 metadata/_edit_vertical_guides_ = [806.0]
 
