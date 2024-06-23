@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://b14tu61wo85g4"]
+
+[ext_resource type="Shader" path="res://Resources/shaders/DamageFlash.gdshader" id="1_1xecw"]
+[ext_resource type="Texture2D" uid="uid://bxlkvyq350q6w" path="res://Assets/snowyWolf/Wolf-Sheet.png" id="2_6gymj"]
+[ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="3_jj2u3"]
+[ext_resource type="Script" path="res://scenes/SnowyBoss/TheRealWork/Scripts/Frostbite.gd" id="7_lws8r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hkt0b"]
+shader = ExtResource("1_1xecw")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_range = 0.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ncpm1"]
+radius = 6.45
+height = 28.0
+
+[node name="Frostbite" type="CharacterBody2D"]
+script = ExtResource("7_lws8r")
+
+[node name="Character" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_hkt0b")
+scale = Vector2(1.5, 1.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="Character"]
+position = Vector2(0, -11)
+texture = ExtResource("2_6gymj")
+region_enabled = true
+region_rect = Rect2(0, 0, 48, 48)
+
+[node name="Aim" type="Marker2D" parent="Character/Sprite2D"]
+position = Vector2(10, -3.66667)
+gizmo_extents = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ncpm1")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.858824)
+show_behind_parent = true
+position = Vector2(-1.5, -6)
+scale = Vector2(2.4375, 1.5)
+texture = ExtResource("3_jj2u3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="DecideTimer" type="Timer" parent="."]
+
+[node name="StunTimer" type="Timer" parent="."]
+
+[node name="DamageTimer" type="Timer" parent="."]
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

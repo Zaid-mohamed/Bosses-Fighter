@@ -35,6 +35,7 @@ func take_damage(amount : int):
 	health -= amount
 	# emit the tool_damage signal passing the damage
 	took_damage.emit(amount)
+	$"../Controls".health_edited.emit(health)
 
 
 func heal(amount : int):
