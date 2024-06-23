@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://csuvqr8e4v6i" path="res://scenes/pick_up_item/pick_up_item.tscn" id="7_hwfdt"]
 [ext_resource type="Resource" uid="uid://bhb2olam8gmcc" path="res://Resources/weapons/Sword/Sword.tres" id="8_po0op"]
 [ext_resource type="Resource" uid="uid://cwwrvnw2hd3uh" path="res://Resources/weapons/Bow/Bow.tres" id="9_fe8r4"]
-[ext_resource type="Resource" path="res://Resources/weapons/Bow/Arrow.tres" id="10_sm57w"]
+[ext_resource type="Resource" uid="uid://c7nouyp16p3ts" path="res://Resources/weapons/Bow/Arrow.tres" id="10_sm57w"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ixb7"]
 
@@ -85,10 +85,12 @@ position = Vector2(269, 152)
 [node name="SwordPickup" parent="." instance=ExtResource("7_hwfdt")]
 position = Vector2(81, 99)
 item_data = ExtResource("8_po0op")
+amount = 1
 
 [node name="BowPickup" parent="." instance=ExtResource("7_hwfdt")]
 position = Vector2(224, 98)
 item_data = ExtResource("9_fe8r4")
+amount = 1
 
 [node name="ArrowPickup" parent="." instance=ExtResource("7_hwfdt")]
 position = Vector2(148, 42)

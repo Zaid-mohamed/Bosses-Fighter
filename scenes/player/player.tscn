@@ -16,10 +16,10 @@
 [ext_resource type="AudioStream" uid="uid://ct4veqgyh3ys4" path="res://Assets/sounds/running-in-grass-6237.mp3" id="11_87tps"]
 [ext_resource type="Script" path="res://scripts/resources scripts/inventory_data.gd" id="11_d5fe2"]
 [ext_resource type="AudioStream" uid="uid://b77qda5nb7q1o" path="res://Assets/sounds/srsr1.wav" id="12_86jd3"]
-[ext_resource type="Resource" path="res://Resources/weapons/Bow/Arrow.tres" id="14_gjq7d"]
+[ext_resource type="Resource" uid="uid://c7nouyp16p3ts" path="res://Resources/weapons/Bow/Arrow.tres" id="14_gjq7d"]
 [ext_resource type="Shader" path="res://scripts/player/vignette_shader.gdshader" id="15_uemwk"]
 [ext_resource type="Script" path="res://scripts/resources scripts/slot_data.gd" id="15_vwvli"]
-[ext_resource type="PackedScene" path="res://scenes/UI/item_info.tscn" id="18_vld3w"]
+[ext_resource type="PackedScene" uid="uid://drr2t8xomgkra" path="res://scenes/UI/item_info.tscn" id="18_vld3w"]
 [ext_resource type="Script" path="res://scripts/health_component/health_component.gd" id="19_34i6c"]
 [ext_resource type="PackedScene" uid="uid://bow3opjc4bcwh" path="res://scenes/hit & hurtboxes/hurtbox.tscn" id="21_2x0n3"]
 
@@ -203,6 +203,7 @@ rotation = -1.5708
 shape = SubResource("CapsuleShape2D_blwlu")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("player_node")]
+ignore_rotation = false
 script = ExtResource("5_ttrmj")
 player_node = NodePath("..")
 mouse_offset = 15.0
@@ -215,10 +216,11 @@ libraries = {
 }
 autoplay = "Idle"
 
-[node name="Item" type="Node2D" parent="." node_paths=PackedStringArray("sprite", "item_anim")]
+[node name="Item" type="Node2D" parent="." node_paths=PackedStringArray("player", "sprite", "item_anim")]
 unique_name_in_owner = true
 position = Vector2(0, -9)
 script = ExtResource("4_2b6i5")
+player = NodePath("..")
 sprite = NodePath("Sprite")
 item_anim = NodePath("ItemAnim")
 
@@ -312,6 +314,7 @@ volume_db = -80.0
 position = Vector2(0, -3)
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("actor")]
+unique_name_in_owner = true
 script = ExtResource("19_34i6c")
 max_health = 50
 actor = NodePath("..")
@@ -326,3 +329,5 @@ rotation = 1.57079
 shape = SubResource("CapsuleShape2D_smvg8")
 
 [connection signal="current_slot_data_changed" from="UI/Hotbar" to="." method="_on_hotbar_current_slot_data_changed"]
+[connection signal="died" from="Health" to="." method="_on_health_died"]
+[connection signal="took_damage" from="Health" to="." method="_on_health_took_damage"]

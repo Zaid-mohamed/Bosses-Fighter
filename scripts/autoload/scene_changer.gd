@@ -5,7 +5,8 @@ extends Node2D
 # the shape that will pass through the camera, and will hide
 # every thing and then go away showing the new scene
 @onready var transition_shape: ColorRect = %TransitionShape
-
+# the animation player
+@onready var anim = %Anim
 
 
 func _ready() -> void:
@@ -30,6 +31,8 @@ func close() -> Tween:
 	
 	# move the transition_shape to hide the screen
 	close_tween.tween_property(transition_shape, "position:x", 0.0, 0.5)
+	# reset the position of the transition shape
+	anim.play("RESET")
 	# it returns the tween
 	return close_tween
 

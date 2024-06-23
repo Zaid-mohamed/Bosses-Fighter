@@ -22,6 +22,7 @@ class_name Player
 @onready var inventory_dialog: Inventory = %PlayerInventoryDialog
 @onready var hotbar: Hotbar = %Hotbar
 @onready var item_info: ItemInfo = %ItemInfo
+@onready var health = %Health
 # sounds
 @onready var walk_sx: AudioStreamPlayer2D = %walk_sx
 @onready var attack_sx: AudioStreamPlayer2D = %attack_sx
@@ -91,3 +92,49 @@ func _on_hotbar_current_slot_data_changed(new_current_slot_data: SlotData) -> vo
 	# update the visualls, animation,etc
 	await get_tree().physics_frame
 	item.update_data(current_item_data)
+
+
+func _on_health_took_damage(amount):
+	if health.health == 0: return # if it died, don't do the effects
+	#region adding tweens
+	var time_scale_tween = create_tween()
+	var camera_zoom_tween = create_tween()
+	var camera_offset_tween = create_tween()
+	var camera_rotation_tween = create_tween()
+	var walk_sx_tween = create_tween()
+	#endregions
+	
+	#region setting the tweens trans to cubic
+	camera_zoom_tween.set_trans(Tween.TRANS_CUBIC)
+	time_scale_tween.set_trans(Tween.TRANS_CUBIC)
+	camera_offset_tween.set_trans(Tween.TRANS_CUBIC)
+	camera_rotation_tween.set_trans(Tween.TRANS_CUBIC)
+	walk_sx_tween.set_trans(Tween.TRANS_CUBIC)
+	#endregion
+	
+	
+	#region apply tweens (zahab)
+	
+	# decreasing time scale
+	time_scale_tween.tween_property(Engine, "time_scale", 0.1, 0.2)
+	# zooming in a bit
+	camera_zoom_tween.tween_property($Camera, "zoom", Vector2(1.5, 1.5), 0.2)
+	# making the camera in  center
+	camera_offset_tween.tween_property($Camera, "offset", Vector2.ZERO, 0.2)
+	# change the rotation of camera accoring player movement
+	camera_rotation_tween.tween_property($Camera, "rotation", deg_to_rad(20.0 * -sign(velocity.x)), 0.2)
+	# decreasing the pitch scale of the walking sound effects
+	walk_sx_tween.tween_property(walk_sx, "pitch_scale", 0.2, 0.2)
+	#endregion
+	
+	# region back to normal
+	
+	time_scale_tween.tween_property(Engine, "time_scale", 1.0, 0.1)
+	camera_zoom_tween.tween_property($Camera, "zoom", Vector2.ONE, 0.1)
+	camera_rotation_tween.tween_property($Camera, "rotation", 0.0, 0.1)
+	walk_sx_tween.tween_property(walk_sx, "pitch_scale", 1, 0.2)
+	#endregion
+	
+
+func _on_health_died():
+	SceneChanger.change_scene("res://scenes/UI/Menus/die_screen.tscn")
