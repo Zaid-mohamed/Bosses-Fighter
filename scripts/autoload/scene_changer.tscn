@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://btnuy480quv5x"]
+[gd_scene load_steps=6 format=3 uid="uid://btnuy480quv5x"]
 
 [ext_resource type="Script" path="res://scripts/autoload/scene_changer.gd" id="1_k66jl"]
 
@@ -18,8 +18,42 @@ tracks/0/keys = {
 "values": [Vector2(-960, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_loig6"]
+resource_name = "Close"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%TransitionShape:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-640, 0), Vector2(-320, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_uyx52"]
+resource_name = "Open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%TransitionShape:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(320, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_375xm"]
 _data = {
+"Close": SubResource("Animation_loig6"),
+"Open": SubResource("Animation_uyx52"),
 "RESET": SubResource("Animation_frd2d")
 }
 
@@ -35,7 +69,8 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -960.0
-offset_bottom = 540.0
+offset_right = -640.0
+offset_bottom = 180.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.101961, 0.0705882, 0.0431373, 1)
