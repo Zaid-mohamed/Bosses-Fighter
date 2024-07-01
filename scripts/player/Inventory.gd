@@ -25,8 +25,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# make the grabbed_slot follow the mouse with lerp
-	grabbed_slot.global_position = lerp(grabbed_slot.global_position, get_child(0).get_global_mouse_position(), 0.5)
+	# make the grabbed_slot follow the mouse with lerp, and center it (the center of the slot is on the mouse position)
+	grabbed_slot.global_position = lerp(grabbed_slot.global_position, get_child(0).get_global_mouse_position() - grabbed_slot.size / 2, 0.5)
 	
 	
 	# open and close inventory_dialog.

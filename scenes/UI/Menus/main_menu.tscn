@@ -85,12 +85,10 @@ position = Vector2(269, 152)
 [node name="SwordPickup" parent="." instance=ExtResource("7_hwfdt")]
 position = Vector2(81, 99)
 item_data = ExtResource("8_po0op")
-amount = 1
 
 [node name="BowPickup" parent="." instance=ExtResource("7_hwfdt")]
 position = Vector2(224, 98)
 item_data = ExtResource("9_fe8r4")
-amount = 1
 
 [node name="ArrowPickup" parent="." instance=ExtResource("7_hwfdt")]
 position = Vector2(148, 42)
