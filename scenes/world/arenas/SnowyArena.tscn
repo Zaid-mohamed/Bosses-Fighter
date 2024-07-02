@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://culbfmwgy2otm"]
+[gd_scene load_steps=7 format=3 uid="uid://culbfmwgy2otm"]
 
 [ext_resource type="TileSet" uid="uid://cikiihc7ie6hq" path="res://Resources/TileSets/MainTileset.tres" id="1_s6nfe"]
+[ext_resource type="PackedScene" uid="uid://bqx1nnid8ahtk" path="res://scenes/UI/Menus/pause_menu.tscn" id="1_utjco"]
+[ext_resource type="Script" path="res://scripts/World/SnowyArena.gd" id="1_vixxe"]
 [ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="2_7t3sp"]
 
 [sub_resource type="Animation" id="Animation_llbtu"]
@@ -13,12 +15,14 @@ _data = {
 
 [node name="WolfArena" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_vixxe")
 metadata/_edit_horizontal_guides_ = [623.0]
 metadata/_edit_vertical_guides_ = [806.0]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Background" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -27,6 +31,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.32549)
 
 [node name="PressAnyKey" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
 offset_left = -61.0
 offset_top = -140.0
 offset_right = 393.0
@@ -73,6 +78,12 @@ wait_time = 15.0
 libraries = {
 "": SubResource("AnimationLibrary_ub16g")
 }
+
+[node name="Pause_Menu" type="CanvasLayer" parent="."]
+process_mode = 2
+
+[node name="Pause_menu" parent="Pause_Menu" instance=ExtResource("1_utjco")]
+visible = false
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
