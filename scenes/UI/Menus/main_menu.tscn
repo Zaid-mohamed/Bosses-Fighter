@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c05qes2hc0hoo"]
+[gd_scene load_steps=14 format=3 uid="uid://c05qes2hc0hoo"]
 
 [ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="1_es006"]
 [ext_resource type="Script" path="res://scripts/UI/main_menu.gd" id="1_jrqra"]
@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://bhb2olam8gmcc" path="res://Resources/weapons/Sword/Sword.tres" id="8_po0op"]
 [ext_resource type="Resource" uid="uid://cwwrvnw2hd3uh" path="res://Resources/weapons/Bow/Bow.tres" id="9_fe8r4"]
 [ext_resource type="Resource" uid="uid://c7nouyp16p3ts" path="res://Resources/weapons/Bow/Arrow.tres" id="10_sm57w"]
+[ext_resource type="PackedScene" uid="uid://cq8gyigjnq6bx" path="res://scenes/Flamingo/flamingo.tscn" id="11_qil60"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ixb7"]
 
@@ -99,5 +100,8 @@ amount = 32
 position = Vector2(209, 43)
 item_data = ExtResource("10_sm57w")
 amount = 32
+
+[node name="Flamingo" parent="." instance=ExtResource("11_qil60")]
+position = Vector2(116, 128)
 
 [connection signal="body_entered" from="Buttton" to="." method="_on_buttton_body_entered"]
