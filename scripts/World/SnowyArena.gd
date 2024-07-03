@@ -6,3 +6,4 @@ func _process(delta):
 	if Input.is_action_pressed("Pause"):
 		get_tree().paused = true
 		pause_menu.show()
+		

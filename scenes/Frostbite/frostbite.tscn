@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://ds55qbojh1umy"]
+
+[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/SnowyStateMachine.gd" id="1_6m6hg"]
+[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/Frostbite.gd" id="1_b10px"]
+[ext_resource type="Texture2D" uid="uid://cpqe7w3sn50wr" path="res://Assets/Bosses/Bosses.png" id="2_cfbux"]
+[ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="3_5b6dh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ei6b2"]
+size = Vector2(21, 9)
+
+[sub_resource type="Animation" id="Animation_sjls6"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.85), Vector2(1, 1), Vector2(1, 1.2)]
+}
+
+[sub_resource type="Animation" id="Animation_ma8dg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qgpac"]
+resource_name = "ShortAttack"
+length = 2.0
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ch5xy"]
+_data = {
+"Idle": SubResource("Animation_sjls6"),
+"RESET": SubResource("Animation_ma8dg"),
+"ShortAttack": SubResource("Animation_qgpac")
+}
+
+[node name="Frostbite" type="CharacterBody2D"]
+script = ExtResource("1_b10px")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.580392)
+position = Vector2(0, -8)
+scale = Vector2(1.815, 1.815)
+texture = ExtResource("3_5b6dh")
+
+[node name="Character" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Character"]
+position = Vector2(0, -13)
+texture = ExtResource("2_cfbux")
+region_enabled = true
+region_rect = Rect2(141, 12, 30, 26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, -4.542)
+shape = SubResource("RectangleShape2D_ei6b2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ch5xy")
+}
+
+[node name="Spawncooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Statemachine" type="Node" parent="."]
+script = ExtResource("1_6m6hg")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="timeout" from="Spawncooldown" to="." method="_on_spawncooldown_timeout"]
