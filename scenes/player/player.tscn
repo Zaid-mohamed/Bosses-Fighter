@@ -294,9 +294,6 @@ offset_bottom = 78.0
 scale = Vector2(0.7, 0.7)
 mouse_filter = 2
 
-[node name="ItemTexture" parent="UI/GrabbedSlot" index="0"]
-mouse_filter = 2
-
 [node name="ItemInfo" parent="UI" instance=ExtResource("18_vld3w")]
 unique_name_in_owner = true
 visible = false
