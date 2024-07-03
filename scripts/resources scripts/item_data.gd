@@ -17,6 +17,8 @@ class_name ItemData
 @export var anim_library : AnimationLibrary
 ## Is This Item Stackable In The Inventory
 @export var stackable : bool
+## The Size Of The Stack Of This Item
+@export var stack_size: int = 16
 
 ## Is this item has got by the player before
 var got_before : bool = false
