@@ -2,8 +2,8 @@ extends Control
 class_name  PauseMenu
 
 #region buttons
-@onready var resume_button: Button = $MarginContainer/VBoxContainer/Resume_button
-@onready var quit_button: Button = $MarginContainer/VBoxContainer/Quit_button
+@onready var resume_button: Button = %Resume_button
+@onready var quit_button: Button = %Quit_button
 #endregion
 
 @onready var pause_menu: Control = $"."

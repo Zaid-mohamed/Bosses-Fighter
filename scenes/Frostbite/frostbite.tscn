@@ -16,7 +16,7 @@ shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_range = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iw6ve"]
-size = Vector2(12, 12)
+size = Vector2(16, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ei6b2"]
 size = Vector2(21, 9)
@@ -171,15 +171,16 @@ position = Vector2(0, -10)
 
 [node name="FrostbiteAttack" type="Sprite2D" parent="AttackRegion"]
 position = Vector2(22, 0)
+scale = Vector2(2, 2)
 texture = ExtResource("5_qjyfy")
 region_enabled = true
 region_rect = Rect2(8, 21, 0, 0)
 
 [node name="AttackRegion" type="Area2D" parent="AttackRegion"]
-position = Vector2(24, 0)
+visible = false
+position = Vector2(26, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackRegion/AttackRegion"]
-visible = false
 shape = SubResource("RectangleShape2D_iw6ve")
 disabled = true
 

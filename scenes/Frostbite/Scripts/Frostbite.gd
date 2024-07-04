@@ -6,6 +6,8 @@ class_name Frostbite extends CharacterBody2D
 @onready var state_machine = $Statemachine
 @onready var health_component = $Healthcomponent
 @onready var hurtbox = $Hurtbox
+@onready var wave_slash = preload("res://scenes/Frostbite/wave.tscn")
+@onready var center_position = get_parent().get_node("Center").global_position
 
 ## Settings.
 @export_category("Settings")
@@ -15,6 +17,8 @@ class_name Frostbite extends CharacterBody2D
 
 var health : int 
 
+var direction : Vector2
+
 ## Player Node.
 @export var player : Player
 
@@ -22,6 +26,8 @@ var health : int
 var phase_index : int = 0
 var current_phase : Dictionary
 var current_attack
+
+var launched_wave_attack = false
 
 ## Phase Machine.
 var Phases : Array = [
@@ -94,8 +100,10 @@ func _process(delta: float) -> void:
 			_dying_state(delta)
 
 func _physics_process(delta: float) -> void:
+	$AttackRegion.look_at(player.global_position)
+	direction = global_position.direction_to(player.global_position)
 	move_and_slide()
-
+	
 func _set_phase_index(index: int):
 	if phase_index != index:
 		phase_index = index
@@ -123,30 +131,31 @@ func _manage_phases() -> void:
 ## Decide State.
 func _decide_state(delta):
 	if player:
-		var avilable_attacks = current_phase.values()
+		if global_position != center_position:
+			global_position = center_position
 		
-		var randomization = randi() % avilable_attacks.size()
-		
-		current_attack = avilable_attacks[randomization]
-		
-		_manage_phases()
-		
-		state_machine.change_state(current_attack)
+		else:
+			var avilable_attacks = current_phase.values()
+			
+			var randomization = randi() % avilable_attacks.size()
+			
+			current_attack = avilable_attacks[randomization]
+			
+			_manage_phases()
+			
+			state_machine.change_state(current_attack)
 
 ## Run Toward Player State.
 func _running_to_player_state(delta):
 	if player:
-		var direction = (player.global_position - global_position).normalized()
-		
 		velocity = direction * max_speed
 		
-		if global_position.distance_to(player.global_position) < 50:
+		if global_position.distance_to(player.global_position) < 25:
 			state_machine.change_state(SnowyStateMachine.State.SHORT_ATTACKING)
 			velocity = Vector2.ZERO
 
 ## Short Attack State.
 func _short_attacking_state(delta):
-	$AttackRegion.look_at(player.global_position)
 	animation_player.play("ShortAttack")
 
 func _on_attack_region_body_entered(body: Node2D) -> void:
@@ -154,7 +163,16 @@ func _on_attack_region_body_entered(body: Node2D) -> void:
 		pass
 
 func _wave_attack_state(delta):
-	pass
+	if !launched_wave_attack:
+		launched_wave_attack = true
+		var wave_slash_instance = wave_slash.instantiate()
+		
+		wave_slash_instance.global_position = $AttackRegion/FrostbiteAttack.global_position
+		get_parent().add_child(wave_slash_instance)
+		wave_slash_instance.look_at(player.global_position)
+		wave_slash_instance.direction = direction
+			
+	state_machine.change_state(SnowyStateMachine.State.DECIDE)
 
 func _super_wave_attack_state(delta):
 	pass
