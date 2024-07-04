@@ -8,9 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://bbalsnu08w2gr" path="res://scenes/world/Objects/tree.tscn" id="6_6u4f8"]
 [ext_resource type="PackedScene" uid="uid://csuvqr8e4v6i" path="res://scenes/pick_up_item/pick_up_item.tscn" id="7_hwfdt"]
 [ext_resource type="Resource" uid="uid://bhb2olam8gmcc" path="res://Resources/weapons/Sword/Sword.tres" id="8_po0op"]
-[ext_resource type="Resource" uid="uid://dnux0gt1ae7rg" path="res://Resources/weapons/Shield/Shield.tres" id="9_c01wv"]
 [ext_resource type="Resource" uid="uid://cwwrvnw2hd3uh" path="res://Resources/weapons/Bow/Bow.tres" id="9_fe8r4"]
 [ext_resource type="Resource" uid="uid://c7nouyp16p3ts" path="res://Resources/weapons/Bow/Arrow.tres" id="10_sm57w"]
+[ext_resource type="PackedScene" uid="uid://cq8gyigjnq6bx" path="res://scenes/Flamingo/flamingo.tscn" id="11_qil60"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7ixb7"]
 
@@ -87,10 +87,6 @@ position = Vector2(269, 152)
 position = Vector2(81, 99)
 item_data = ExtResource("8_po0op")
 
-[node name="ShieldPickup" parent="." instance=ExtResource("7_hwfdt")]
-position = Vector2(233, 159)
-item_data = ExtResource("9_c01wv")
-
 [node name="BowPickup" parent="." instance=ExtResource("7_hwfdt")]
 position = Vector2(224, 98)
 item_data = ExtResource("9_fe8r4")
@@ -104,5 +100,8 @@ amount = 32
 position = Vector2(209, 43)
 item_data = ExtResource("10_sm57w")
 amount = 32
+
+[node name="Flamingo" parent="." instance=ExtResource("11_qil60")]
+position = Vector2(205, 152)
 
 [connection signal="body_entered" from="Buttton" to="." method="_on_buttton_body_entered"]

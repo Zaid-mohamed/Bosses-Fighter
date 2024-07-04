@@ -294,6 +294,7 @@ offset_top = 38.0
 offset_right = 49.0
 offset_bottom = 78.0
 scale = Vector2(0.7, 0.7)
+mouse_filter = 2
 
 [node name="ItemInfo" parent="UI" instance=ExtResource("18_vld3w")]
 unique_name_in_owner = true
@@ -333,3 +334,5 @@ shape = SubResource("CapsuleShape2D_smvg8")
 [connection signal="current_slot_data_changed" from="UI/Hotbar" to="." method="_on_hotbar_current_slot_data_changed"]
 [connection signal="died" from="Health" to="." method="_on_health_died"]
 [connection signal="took_damage" from="Health" to="." method="_on_health_took_damage"]
+
+[editable path="UI/GrabbedSlot"]

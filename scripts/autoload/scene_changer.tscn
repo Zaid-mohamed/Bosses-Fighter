@@ -1,6 +1,62 @@
-[gd_scene load_steps=4 format=3 uid="uid://btnuy480quv5x"]
+[gd_scene load_steps=6 format=3 uid="uid://btnuy480quv5x"]
 
 [ext_resource type="Script" path="res://scripts/autoload/scene_changer.gd" id="1_k66jl"]
+
+[sub_resource type="Animation" id="Animation_loig6"]
+resource_name = "Close"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%TransitionShape:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-320, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%TransitionShape:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(320, 180)]
+}
+
+[sub_resource type="Animation" id="Animation_uyx52"]
+resource_name = "Open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%TransitionShape:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(320, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%TransitionShape:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(320, 180)]
+}
 
 [sub_resource type="Animation" id="Animation_frd2d"]
 resource_name = "RESET"
@@ -20,6 +76,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_375xm"]
 _data = {
+"Close": SubResource("Animation_loig6"),
+"Open": SubResource("Animation_uyx52"),
 "RESET": SubResource("Animation_frd2d")
 }
 
