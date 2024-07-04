@@ -13,7 +13,7 @@ class_name Frostbite extends CharacterBody2D
 @export var decel : int = 35
 @export var max_speed : int = 120
 
-var health : int = health_component.current_health
+var health : int 
 
 ## Player Node.
 @export var player : Player
@@ -59,6 +59,8 @@ var Phases : Array = [
 func _ready() -> void:
 	## Randomization.
 	randomize()
+	
+	health = health_component.current_health
 	
 	## Initialize Current Phase.
 	_initialize_phase()
@@ -140,6 +142,7 @@ func _running_to_player_state(delta):
 		
 		if global_position.distance_to(player.global_position) < 50:
 			state_machine.change_state(SnowyStateMachine.State.SHORT_ATTACKING)
+			velocity = Vector2.ZERO
 
 ## Short Attack State.
 func _short_attacking_state(delta):
