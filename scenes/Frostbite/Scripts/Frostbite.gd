@@ -168,7 +168,7 @@ func _spawning_enemies_state(delta):
 
 ## I am Waiting to finish the Spawning Mecanic <<Minions>>
 func _on_spawncooldown_timeout() -> void:
-	state_machine.change_state(SnowyStateMachine.State.SPAWNING_ENEMIES)
+	pass
 
 ## the End of fight.
 func _dying_state(delta):

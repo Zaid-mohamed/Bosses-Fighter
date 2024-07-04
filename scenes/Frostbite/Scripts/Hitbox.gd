@@ -8,7 +8,4 @@ extends Area2D
 func get_damage_amount() -> int:
 	return damage
 
-
-
-
 ## THIS IS A TEMP CODE, I'LL DELETE IT IN THE MAIN BRANCH
