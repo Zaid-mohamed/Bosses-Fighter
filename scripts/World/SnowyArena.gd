@@ -1,9 +1,6 @@
 extends Node2D
 
-@onready var pause_menu: PauseMenu = $Pause_Menu/Pause_menu
+## This is the code of SnowyArena, i will optimize it to make spawn animation on start, and click any Key to start.
+## Smooth Camera Moves and Dramitic Camera, ETC.......................
 
-func _process(delta):
-	if Input.is_action_pressed("Pause"):
-		get_tree().paused = true
-		pause_menu.show()
-		
+## DON'T TOUCH IT PLEASE. 
