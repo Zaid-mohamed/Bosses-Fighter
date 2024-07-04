@@ -40,16 +40,31 @@ func grab_slot_data(slot_index : int):
 
 
 
-## Put a slot_data in slot_datas in a certain given index in slot_datas (returbs true if succefull, false if not)
+## Put a slot_data in slot_datas in a certain given index in slot_datas (returns true if succefull, false if not)
 func put_slot_data(slot_index : int , new_slot_data : SlotData):
 	# if there is a slot in this index.
 	if slot_datas[slot_index]:
 		# and have the item of the slot_data that should be put.
 		if slot_datas[slot_index].item_data == new_slot_data.item_data:
+			# if the amount of the slot the player want to put there is equal to the stack size of this item,
+			# don't continue
+			if slot_datas[slot_index].quantity == slot_datas[slot_index].item_data.stack_size: return
 			# and both of them is stackable.
 			if slot_datas[slot_index].item_data.stackable:
+				# store the amount needed to fill up 
+				var needed_amount = slot_datas[slot_index].item_data.stack_size - slot_datas[slot_index].quantity
 				#increase the quantity of the slot
-				slot_datas[slot_index].quantity += new_slot_data.quantity
+				if needed_amount > new_slot_data.quantity: 
+					slot_datas[slot_index].quantity += new_slot_data.quantity
+					slot_datas[slot_index].quantity = 0
+					inventory_updated.emit(self)
+					return false
+				else:
+					slot_datas[slot_index].quantity += needed_amount
+					new_slot_data.quantity -= needed_amount
+				if new_slot_data.quantity > 0:
+					inventory_updated.emit(self)
+					return false
 				# and emit the inventory updated signal
 				inventory_updated.emit(self)
 				# return true
@@ -93,11 +108,18 @@ func add_item(item_data : ItemData, amount : int = 1):
 		# if the slot item is the needed item
 		if slot.item_data == item_data:
 			# create a variable storing the needed amount to fill the slot
-			var needed_amount = slot.item_data.stack_size - slot.quantity
+			var needed_amount = clamp(slot.item_data.stack_size - slot.quantity, 0, slot.item_data.stack_size)
+			print("Needed Amount : %s" % needed_amount)
 			# add the needed amount to the quantity
-			slot.quantity += needed_amount
+			if amount >= needed_amount:
+				slot.quantity += needed_amount
+				amount -= needed_amount
+			else:
+				slot.quantity += amount
+				amount = 0
 			# decrease the amount by the needed amount, (because they are added to the slot)
-			amount -= needed_amount
+			print_debug("amount before : %s , needed amount before : %s" % [amount, needed_amount])
+			print("amount after : %s , needed amount after : %s" % [amount, needed_amount])
 			# emit the inventory_updated
 			inventory_updated.emit(self)
 			# this item is got, so it is got before

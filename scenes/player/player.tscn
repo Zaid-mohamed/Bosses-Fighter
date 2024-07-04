@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://u3aah08lrr2o" path="res://scenes/inventory stuff/Hotbar.tscn" id="10_d4b2w"]
 [ext_resource type="AudioStream" uid="uid://ct4veqgyh3ys4" path="res://Assets/sounds/running-in-grass-6237.mp3" id="11_87tps"]
 [ext_resource type="AudioStream" uid="uid://b77qda5nb7q1o" path="res://Assets/sounds/srsr1.wav" id="12_86jd3"]
-[ext_resource type="Resource" uid="uid://cu63k5qyi14l6" path="res://Resources/inventory stuff/PlayerInventory.tres" id="13_0mf4f"]
+[ext_resource type="Resource" uid="uid://dxp8uagt2wdqe" path="res://Resources/inventory stuff/PlayerInventory.tres" id="13_0mf4f"]
 [ext_resource type="Shader" path="res://scripts/player/vignette_shader.gdshader" id="15_uemwk"]
 [ext_resource type="PackedScene" uid="uid://drr2t8xomgkra" path="res://scenes/UI/item_info.tscn" id="18_vld3w"]
 [ext_resource type="Script" path="res://scripts/health_component/health_component.gd" id="19_34i6c"]

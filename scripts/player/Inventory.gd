@@ -56,7 +56,9 @@ func _inventory_interacted(inventory_data : InventoryData , button_index, slot_i
 			#check if we can not put the data we have to the a slot with the given index.
 			if !inventory_data.put_slot_data(slot_index, grabbed_slot.slot_data):
 				# if so update the inventory or hotbar and return (dont continue).
-				dialog.update_inventory_dialog(inventory_data)		
+				dialog.update_inventory_dialog(inventory_data)
+				# update the grabbed_slot (because the although the function failed, it may put some items, if the grabbed slot have some items from the same typ)
+				grabbed_slot.set_slot_data(grabbed_slot.slot_data)
 				return
 			# if yes :
 			

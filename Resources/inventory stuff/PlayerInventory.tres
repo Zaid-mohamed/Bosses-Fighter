@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InventoryData" load_steps=2 format=3 uid="uid://cu63k5qyi14l6"]
+[gd_resource type="Resource" script_class="InventoryData" load_steps=2 format=3 uid="uid://dxp8uagt2wdqe"]
 
 [ext_resource type="Script" path="res://scripts/resources scripts/inventory_data.gd" id="1_mkkqn"]
 

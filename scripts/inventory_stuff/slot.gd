@@ -10,26 +10,40 @@ extends Panel
 
 signal slot_clicked (index, mouse_index, dialog)
 
+func _process(delta: float) -> void:
+	if slot_data:
+		
+		if slot_data.quantity <= 0 && slot_data:
+			set_slot_data_to_null()
+		if slot_data:
+			if !slot_data.item_data:
+				set_slot_data(null)
 
+func set_slot_data_to_null():
+	item_texture.texture = null
+	quantity_label.hide()
+	slot_data = null
 func set_slot_data(new_slot_data : SlotData):
-	# if there is no slot_data, stop!
-	
+	# if there is no new slot data return
 	if !new_slot_data: return
 	#  the slot data will be equal to the new slot data
 	slot_data = new_slot_data
 	
 	# update texture
 	
-	item_texture.texture = slot_data.item_data.texture
+	item_texture.texture = slot_data.item_data.texture if slot_data else null
 	
 	
-	
+		
 	if slot_data.item_data.stackable:
 		
 		quantity_label.text = "%s" % slot_data.quantity
+		quantity_label.show()
 	else:
 		quantity_label.hide()
 
+
+	
 
 #region tween
 func _on_mouse_entered() -> void:
