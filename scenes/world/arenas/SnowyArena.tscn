@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://culbfmwgy2otm"]
+[gd_scene load_steps=7 format=3 uid="uid://culbfmwgy2otm"]
 
 [ext_resource type="TileSet" uid="uid://cikiihc7ie6hq" path="res://Resources/TileSets/MainTileset.tres" id="1_s6nfe"]
 [ext_resource type="PackedScene" uid="uid://bqx1nnid8ahtk" path="res://scenes/UI/Menus/pause_menu.tscn" id="1_utjco"]
 [ext_resource type="Script" path="res://scripts/World/SnowyArena.gd" id="1_vixxe"]
 [ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="2_7t3sp"]
 [ext_resource type="PackedScene" uid="uid://ds55qbojh1umy" path="res://scenes/Frostbite/frostbite.tscn" id="3_0fcfp"]
+[ext_resource type="PackedScene" uid="uid://tjaql10xbp70" path="res://scenes/Frostbite/minions/frostbite_minion.tscn" id="6_7jla8"]
 
 [node name="WolfArena" type="Node2D"]
 y_sort_enabled = true
@@ -35,3 +36,7 @@ position = Vector2(308, 597)
 
 [node name="Pause_menu" parent="." instance=ExtResource("1_utjco")]
 process_mode = 3
+
+[node name="Frostbite_minion" parent="." instance=ExtResource("6_7jla8")]
+position = Vector2(347, 461)
+speed = 150.0

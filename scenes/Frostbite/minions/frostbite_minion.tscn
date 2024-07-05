@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://tjaql10xbp70"]
+
+[ext_resource type="Texture2D" uid="uid://bi1wkb8gesi38" path="res://Assets/Minions/Frosbite Minions/boos3.png" id="1_qx8h2"]
+[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/frostbite_minion.gd" id="1_y131i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0raub"]
+size = Vector2(9, 20)
+
+[node name="Frostbite_minion" type="CharacterBody2D"]
+position = Vector2(0, -14)
+script = ExtResource("1_y131i")
+speed = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qx8h2")
+region_enabled = true
+region_rect = Rect2(24, 13, 16, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 4)
+shape = SubResource("RectangleShape2D_0raub")
