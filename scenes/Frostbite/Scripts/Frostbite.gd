@@ -57,7 +57,7 @@ var Phases : Array = [
 		1 : SnowyStateMachine.State.WAVE_ATTACK,
 		2 : SnowyStateMachine.State.SPAWNING_ENEMIES,
 		3 : SnowyStateMachine.State.SUPER_WAVE_ATTACK,
-		4 : SnowyStateMachine.State.SNOWBALL_TRANSFORMATION,
+		4 : SnowyStateMachine.State.TRANSFORMATION,
 	},
 ]
 
@@ -89,7 +89,7 @@ func _process(delta: float) -> void:
 		SnowyStateMachine.State.SUPER_WAVE_ATTACK:
 			_super_wave_attack_state(delta)
 		
-		SnowyStateMachine.State.SNOWBALL_TRANSFORMATION:
+		SnowyStateMachine.State.TRANSFORMATION:
 			_transformation_state(delta)
 		
 		SnowyStateMachine.State.SPAWNING_ENEMIES:
@@ -114,7 +114,12 @@ func _set_phase_index(index: int):
 ## Initialize Current Phase.
 func _initialize_phase() -> void:
 	current_phase = Phases[phase_index]
-	state_machine.change_state(SnowyStateMachine.State.DECIDE)
+	if phase_index == 1:
+		if global_position != center_position:
+			global_position = center_position
+		animation_player.play("Wolf/Transforming")
+	else:
+		state_machine.change_state(SnowyStateMachine.State.DECIDE)
 
 ## Change Current Phase (Based on Health Component)
 func _manage_phases() -> void:
@@ -217,6 +222,8 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Wolf/ShortAttack" or anim_name == "Wolfman/ShortAttack":
 		state_machine.change_state(SnowyStateMachine.State.DECIDE)
 	if anim_name == "Wolf/WaveAttack" or anim_name == "Wolfman/WaveAttack":
+		state_machine.change_state(SnowyStateMachine.State.DECIDE)
+	if anim_name == "Wolf/Transforming":
 		state_machine.change_state(SnowyStateMachine.State.DECIDE)
 	if anim_name == "Wolfman/Dying":
 		queue_free()
