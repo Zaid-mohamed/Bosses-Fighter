@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkgmmo26c0pec"]
+
+[ext_resource type="Script" path="res://scripts/Deek/deek_fire_ball.gd" id="1_xepgn"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_6radj"]
+radius = 1.5
+height = 3.0
+
+[node name="DeekFireBall" type="CharacterBody2D"]
+script = ExtResource("1_xepgn")
+speed = 2.0
+
+[node name="Mesh" type="MeshInstance2D" parent="."]
+mesh = SubResource("SphereMesh_6radj")

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgs0fix42qjbp"]
+
+[ext_resource type="PackedScene" uid="uid://ca5olpmsm6fxc" path="res://scenes/Deek/deek.tscn" id="1_cqdvf"]
+[ext_resource type="PackedScene" uid="uid://d2toj317momvs" path="res://scenes/player/player.tscn" id="2_ccmxw"]
+
+[node name="DeekTestArea" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Deek" parent="." node_paths=PackedStringArray("arena_center") instance=ExtResource("1_cqdvf")]
+position = Vector2(123, 92)
+arena_center = NodePath("../CenterPos")
+
+[node name="player" parent="." instance=ExtResource("2_ccmxw")]
+
+[node name="CenterPos" type="Marker2D" parent="."]
+position = Vector2(161, 91)
