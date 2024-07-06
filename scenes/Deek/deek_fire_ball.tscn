@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkgmmo26c0pec"]
+[gd_scene load_steps=8 format=3 uid="uid://dkgmmo26c0pec"]
 
 [ext_resource type="Script" path="res://scripts/Deek/deek_fire_ball.gd" id="1_xepgn"]
 
@@ -6,9 +6,42 @@
 radius = 1.5
 height = 3.0
 
+[sub_resource type="Gradient" id="Gradient_65nlh"]
+offsets = PackedFloat32Array(0.459016, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yalmo"]
+gradient = SubResource("Gradient_65nlh")
+
+[sub_resource type="Curve" id="Curve_evlfi"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_443er"]
+curve = SubResource("Curve_evlfi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cegge"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.5
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_443er")
+color_ramp = SubResource("GradientTexture1D_yalmo")
+
 [node name="DeekFireBall" type="CharacterBody2D"]
 script = ExtResource("1_xepgn")
 speed = 2.0
 
 [node name="Mesh" type="MeshInstance2D" parent="."]
 mesh = SubResource("SphereMesh_6radj")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_cegge")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="DespawnTimer" to="." method="queue_free"]

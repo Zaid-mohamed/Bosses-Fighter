@@ -6,11 +6,14 @@ class_name FireyDeek
 @export var accel: float
 @export var decel: float
 @export var arena_center: Marker2D
-
+@export var aim: float = 0.2
+@export var max_bullets: int = 5
+var current_bullets: int = max_bullets
 @onready var thinking_timer: Timer = %ThinkingTimer
 @onready var player = get_tree().get_first_node_in_group("Player")
 @onready var minkar: Marker2D = %Minkar
 @onready var shooting_timer: Timer = %ShootingTimer
+@onready var wave_shoot_indicator: Marker2D = %WaveShootIndicator
 
 enum states {
 	Thinking, # in this state the deek will think what attack it will do.
@@ -25,7 +28,7 @@ enum states {
 # the current_state of the deek
 var current_state: states
 # the index of the current phase
-var phase_index: int = 2
+var phase_index: int = 1
 
 # the phases
 var phases : Array[Dictionary] = [
@@ -37,7 +40,7 @@ var phases : Array[Dictionary] = [
 	{
 		0: states.ThrowingFireyBalls,
 		1: states.FireBallsWave,
-		2: states.OrderingWivesToSpawn
+		#2: states.OrderingWivesToSpawn
 		
 	},
 	# the last phase
@@ -48,8 +51,9 @@ var phases : Array[Dictionary] = [
 	}
 ]
 
+var shooting_wave_state: bool = false
 func _ready() -> void:
-	current_state = states.ThrowingFireyBalls
+	current_state = states.Thinking
 func _physics_process(delta: float) -> void:
 	match current_state:
 		states.Thinking:
@@ -57,7 +61,9 @@ func _physics_process(delta: float) -> void:
 		states.ThrowingFireyBalls:
 			throwing_firey_balls_state()
 		states.FireBallsWave:
-			fire_balls_wave_state()
+			if !shooting_wave_state:
+				
+				fire_balls_wave_state()
 		states.BurnedAttack:
 			burned_attack_state()
 		states.SpawningWives:
@@ -68,6 +74,7 @@ func _physics_process(delta: float) -> void:
 
 # changes the state.
 func change_state(new_state: states):
+	shooting_timer.stop()
 	if new_state == current_state: return
 	current_state = new_state
 	print("new_state : ", current_state)
@@ -81,6 +88,7 @@ func thinking_state():
 
 func _on_thinking_timer_timeout() -> void:
 	choose_attack()
+	print("thinking timer ended")
 	
 # chooses an attack
 func choose_attack():
@@ -101,19 +109,40 @@ func throwing_firey_balls_state():
 
 # ran when shooting timer timeout
 func shoot_firey_ball():
+	print("shot")
 	var direction_to_player = global_position.direction_to(player.global_position)
 	var fire_ball_scene = preload("res://scenes/Deek/deek_fire_ball.tscn")
 	var fire_ball_instance = fire_ball_scene.instantiate()
 	# set the correct velocity
-	fire_ball_instance.velocity = direction_to_player * fire_ball_instance.speed
+	fire_ball_instance.velocity = (direction_to_player * fire_ball_instance.speed).rotated(randf_range(-aim, aim))
 	# put the ball in the correct position
 	fire_ball_instance.global_position =  minkar.global_position
 	# add it
 	get_tree().root.add_child(fire_ball_instance)
-
+	current_bullets -= 1
+	if current_bullets == 0:
+		current_bullets = max_bullets
+		change_state(states.Thinking)
+func shoot_firey_ball_with_direction(direction: Vector2):
+	print("shot")
+	var direction_to_player = global_position.direction_to(player.global_position)
+	var fire_ball_scene = preload("res://scenes/Deek/deek_fire_ball.tscn")
+	var fire_ball_instance = fire_ball_scene.instantiate()
+	# set the correct velocity
+	fire_ball_instance.velocity = (direction * fire_ball_instance.speed).rotated(randf_range(-aim, aim))
+	# put the ball in the correct position
+	fire_ball_instance.global_position =  minkar.global_position
+	# add it
+	get_tree().root.add_child(fire_ball_instance)
 func fire_balls_wave_state():
-	pass
-
+	shooting_wave_state = true
+	for shot in 30:
+		await get_tree().create_timer(0.2).timeout
+		shoot_firey_ball_with_direction(minkar.global_position.direction_to(wave_shoot_indicator.global_position))
+		minkar.rotate(0.5)
+	
+	shooting_wave_state = false
+	change_state(states.Thinking)
 func spawning_wives_state():
 	pass
 
