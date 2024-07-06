@@ -10,15 +10,7 @@ extends Panel
 
 signal slot_clicked (index, mouse_index, dialog)
 
-func _process(delta: float) -> void:
-	if slot_data:
-		
-		if slot_data.quantity <= 0 && slot_data:
-			set_slot_data_to_null()
-		if slot_data:
-			if !slot_data.item_data:
-				set_slot_data(null)
-
+# set the slot data to null, and change the nodes to fit this
 func set_slot_data_to_null():
 	item_texture.texture = null
 	quantity_label.hide()

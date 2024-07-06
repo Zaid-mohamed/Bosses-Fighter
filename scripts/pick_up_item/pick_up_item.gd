@@ -60,7 +60,7 @@ func _on_body_entered(body: Node2D) -> void:
 		# wait until the tween finishes
 		await scale_down_tween.finished
 		# add the item to the player inventory if the hotbar is full,
-		# else add item to the horbar
+		# else add item to the hotbar
 		if player.hotbar.inventory_data.is_full():
 			# teach the player about the item if it is new to him
 			if !item_data.got_before:
@@ -71,7 +71,7 @@ func _on_body_entered(body: Node2D) -> void:
 			# update the UI
 			player.inventory_dialog.update_inventory_dialog()
 		else:
-			# teach the player about the item if it is new to him
+			# inform the player about the item if it is new to him
 			if !item_data.got_before:
 				player.item_info.set_item_data(item_data)
 				player.item_info.open()

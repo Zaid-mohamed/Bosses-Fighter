@@ -24,7 +24,11 @@ func update_inventory_dialog(inventory_data : InventoryData = inventory_data):
 		# add it as a child to the inventory
 		slots_container.add_child(SlotInstance)
 		# give it the corrosponding slot data 
-		SlotInstance.set_slot_data(slot_data)
+		if slot_data == null:
+			
+			SlotInstance.set_slot_data_to_null()
+		else:
+			SlotInstance.set_slot_data(slot_data)
 		# hide the quantity label if there is no slot data
 		if !slot_data: SlotInstance.quantity_label.hide()
 		# the slot clicked signal to the inventory data
