@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2jphmiem5c5s"
-path="res://.godot/imported/Scorpion.png-b9ea2ed211c8891cece4d1648f212c1d.ctex"
+uid="uid://wt3mg870ftx2"
+path="res://.godot/imported/FrostbiteIcons.png-c4b4b33a7198b7aaff415c22c0185257.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Scropion/Scorpion.png"
-dest_files=["res://.godot/imported/Scorpion.png-b9ea2ed211c8891cece4d1648f212c1d.ctex"]
+source_file="res://Assets/Bosses/FrostbiteIcons.png"
+dest_files=["res://.godot/imported/FrostbiteIcons.png-c4b4b33a7198b7aaff415c22c0185257.ctex"]
 
 [params]
 
