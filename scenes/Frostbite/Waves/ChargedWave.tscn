@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://chfplbjhqfenl"]
 
-[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/ChargedWave.gd" id="1_eyrug"]
+[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/Frostbite/ChargedWave.gd" id="1_eyrug"]
 [ext_resource type="Texture2D" uid="uid://b4frmjmq785ih" path="res://Assets/Bosses/WaveAttackWallx.png" id="2_dtptt"]
 
 [node name="ChargedWave" type="Area2D"]

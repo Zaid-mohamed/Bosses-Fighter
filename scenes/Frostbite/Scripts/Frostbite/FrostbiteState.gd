@@ -1,7 +1,7 @@
 ## Welcome to SnowyStateMachine, this is a Dictionary of all States or Options in the Frostbite Fight, Arena.
 ## This is like an Resource or Something. maybe Node has all states and commands.
 
-class_name SnowyStateMachine extends Node
+class_name FrostbiteState extends Node
 
 ## States in the state machine.
 enum State{

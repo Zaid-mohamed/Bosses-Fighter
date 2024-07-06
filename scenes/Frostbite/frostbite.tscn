@@ -1,260 +1,25 @@
-[gd_scene load_steps=30 format=3 uid="uid://ds55qbojh1umy"]
+[gd_scene load_steps=27 format=3 uid="uid://ds55qbojh1umy"]
 
-[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/SnowyStateMachine.gd" id="1_6m6hg"]
-[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/Frostbite.gd" id="1_b10px"]
+[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/Frostbite/FrostbiteState.gd" id="1_6m6hg"]
+[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/Frostbite/Frostbite.gd" id="1_b10px"]
 [ext_resource type="Texture2D" uid="uid://dphhx5ogt4k7o" path="res://Assets/player/player_shadow.png" id="3_5b6dh"]
 [ext_resource type="Texture2D" uid="uid://bg8ukvkf7yv5f" path="res://Assets/Bosses/boos3.png" id="3_6y6i7"]
 [ext_resource type="Shader" path="res://Resources/shaders/DamageFlash.gdshader" id="3_m1xs0"]
 [ext_resource type="Texture2D" uid="uid://bw2hrjmt72ywm" path="res://Assets/Bosses/FrostbiteAttack.png" id="5_qjyfy"]
-[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/Healthcomponent.gd" id="6_mvvim"]
-[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/Hurtbox.gd" id="7_8rkq2"]
+[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/Frostbite/Healthcomponent.gd" id="6_mvvim"]
+[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/Frostbite/Hurtbox.gd" id="7_8rkq2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l6h2m"]
 shader = ExtResource("3_m1xs0")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_range = 0.698761
+shader_parameter/flash_range = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ei6b2"]
-size = Vector2(9, 10)
+size = Vector2(21, 9)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl2tx"]
-size = Vector2(7, 20)
-
-[sub_resource type="Animation" id="Animation_gbdm6"]
-resource_name = "Idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Character:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.5, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1, 0.85), Vector2(1, 1), Vector2(1, 1.2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Character/Sprite:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [ExtResource("3_6y6i7"), ExtResource("3_6y6i7")]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Character/Sprite:region_rect")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Rect2(146, 23, 29, 19), Rect2(146, 23, 29, 19)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Hurtbox/CollisionShape2D:shape")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [SubResource("RectangleShape2D_yl2tx"), SubResource("RectangleShape2D_yl2tx")]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Character/Sprite:material:shader_parameter/flash_range")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MainCollision:disabled")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("MainCollision:shape")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [SubResource("RectangleShape2D_ei6b2"), SubResource("RectangleShape2D_ei6b2")]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Character/Sprite:visible")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, true]
-}
-
-[sub_resource type="Animation" id="Animation_6wj4d"]
-resource_name = "ShortAttack"
-length = 2.0
-step = 0.01
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AttackRegion/ClewSprite:region_rect")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.76, 0.81),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Rect2(8, 21, 0, 0), Rect2(8, 21, 13, 19), Rect2(35, 18, 19, 23), Rect2(53, -5, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AttackRegion/Clew/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7, 0.81),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Character:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AttackRegion/Clew:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(18, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AttackRegion/ClewSprite:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(18, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_0pycq"]
-resource_name = "TakeDamage"
-length = 0.4
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Sprite:material:shader_parameter/flash_range")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.0, 1.0, 0.0]
-}
-
-[sub_resource type="Animation" id="Animation_cj1n0"]
-resource_name = "Transforming"
-length = 6.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Character/Sprite:material:shader_parameter/flash_range")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 4.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Transforming:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_awcdw"]
-resource_name = "WaveAttack"
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"_wave_attack"
-}]
-}
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_axrmn"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ch5xy"]
-_data = {
-"Idle": SubResource("Animation_gbdm6"),
-"ShortAttack": SubResource("Animation_6wj4d"),
-"TakeDamage": SubResource("Animation_0pycq"),
-"Transforming": SubResource("Animation_cj1n0"),
-"WaveAttack": SubResource("Animation_awcdw")
-}
 
 [sub_resource type="Animation" id="Animation_51pk4"]
 resource_name = "ShortAttack"
@@ -362,6 +127,21 @@ tracks/3/keys = {
 "update": 1,
 "values": [true, true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shadow:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl2tx"]
+size = Vector2(23, 16)
 
 [sub_resource type="Animation" id="Animation_gmmc5"]
 resource_name = "IdleWolfman"
@@ -561,6 +341,22 @@ tracks/0/keys = {
 "values": [0.0, 1.0]
 }
 
+[sub_resource type="Animation" id="Animation_mq38l"]
+resource_name = "TransformingOut"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Character/Sprite:material:shader_parameter/flash_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.7, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
 [sub_resource type="Animation" id="Animation_jqdc7"]
 resource_name = "WaveAttack"
 tracks/0/type = "method"
@@ -586,11 +382,12 @@ _data = {
 "ShortAttack": SubResource("Animation_l68j4"),
 "TakeDamage": SubResource("Animation_7tq3w"),
 "Transforming": SubResource("Animation_rcoe4"),
+"TransformingOut": SubResource("Animation_mq38l"),
 "WaveAttack": SubResource("Animation_jqdc7")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iw6ve"]
-size = Vector2(16, 26)
+size = Vector2(16, 32)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3jkxp"]
 particle_flag_disable_z = true
@@ -632,7 +429,7 @@ material = SubResource("ShaderMaterial_l6h2m")
 position = Vector2(0, -11)
 texture = ExtResource("3_6y6i7")
 region_enabled = true
-region_rect = Rect2(146, 23, 29, 19)
+region_rect = Rect2(90, 20, 14, 25)
 
 [node name="Shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.580392)
@@ -648,6 +445,7 @@ shape = SubResource("RectangleShape2D_ei6b2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
+"": SubResource("AnimationLibrary_axrmn"),
 "Wolf": SubResource("AnimationLibrary_ch5xy"),
 "Wolfman": SubResource("AnimationLibrary_7s1c7")
 }

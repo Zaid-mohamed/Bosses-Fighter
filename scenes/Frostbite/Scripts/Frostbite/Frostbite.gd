@@ -32,32 +32,32 @@ var current_attack
 var Phases : Array = [
 	## Easy
 	{
-		0 : SnowyStateMachine.State.RUNNING_TO_PLAYER,
-		1 : SnowyStateMachine.State.WAVE_ATTACK,
+		0 : FrostbiteState.State.RUNNING_TO_PLAYER,
+		1 : FrostbiteState.State.WAVE_ATTACK,
 	},
 	
 	## Medium
 	{
-		0 : SnowyStateMachine.State.RUNNING_TO_PLAYER,
-		1 : SnowyStateMachine.State.WAVE_ATTACK,
-		2 : SnowyStateMachine.State.SPAWNING_ENEMIES,
+		0 : FrostbiteState.State.RUNNING_TO_PLAYER,
+		1 : FrostbiteState.State.WAVE_ATTACK,
+		2 : FrostbiteState.State.SPAWNING_ENEMIES,
 	},
 	
 	## Hard
 	{
-		0 : SnowyStateMachine.State.RUNNING_TO_PLAYER,
-		1 : SnowyStateMachine.State.WAVE_ATTACK,
-		2 : SnowyStateMachine.State.SPAWNING_ENEMIES,
-		3 : SnowyStateMachine.State.SUPER_WAVE_ATTACK,
+		0 : FrostbiteState.State.RUNNING_TO_PLAYER,
+		1 : FrostbiteState.State.WAVE_ATTACK,
+		2 : FrostbiteState.State.SPAWNING_ENEMIES,
+		3 : FrostbiteState.State.SUPER_WAVE_ATTACK,
 	},
 	
 	## Angry
 	{
-		0 : SnowyStateMachine.State.RUNNING_TO_PLAYER,
-		1 : SnowyStateMachine.State.WAVE_ATTACK,
-		2 : SnowyStateMachine.State.SPAWNING_ENEMIES,
-		3 : SnowyStateMachine.State.SUPER_WAVE_ATTACK,
-		4 : SnowyStateMachine.State.TRANSFORMATION,
+		0 : FrostbiteState.State.RUNNING_TO_PLAYER,
+		1 : FrostbiteState.State.WAVE_ATTACK,
+		2 : FrostbiteState.State.SPAWNING_ENEMIES,
+		3 : FrostbiteState.State.SUPER_WAVE_ATTACK,
+		4 : FrostbiteState.State.TRANSFORMATION,
 	},
 ]
 
@@ -74,28 +74,28 @@ func _process(delta: float) -> void:
 	## Manage current State.
 	
 	match state_machine.current_state:
-		SnowyStateMachine.State.DECIDE:
+		FrostbiteState.State.DECIDE:
 			_decide_state(delta)
 			
-		SnowyStateMachine.State.RUNNING_TO_PLAYER:
+		FrostbiteState.State.RUNNING_TO_PLAYER:
 			_running_to_player_state(delta)
 			
-		SnowyStateMachine.State.SHORT_ATTACKING:
+		FrostbiteState.State.SHORT_ATTACKING:
 			_short_attacking_state(delta)
 		
-		SnowyStateMachine.State.WAVE_ATTACK:
+		FrostbiteState.State.WAVE_ATTACK:
 			_wave_attack_state(delta)
 		
-		SnowyStateMachine.State.SUPER_WAVE_ATTACK:
+		FrostbiteState.State.SUPER_WAVE_ATTACK:
 			_super_wave_attack_state(delta)
 		
-		SnowyStateMachine.State.TRANSFORMATION:
+		FrostbiteState.State.TRANSFORMATION:
 			_transformation_state(delta)
 		
-		SnowyStateMachine.State.SPAWNING_ENEMIES:
+		FrostbiteState.State.SPAWNING_ENEMIES:
 			_spawning_enemies_state(delta)
 			
-		SnowyStateMachine.State.DYING:
+		FrostbiteState.State.DYING:
 			_dying_state(delta)
 
 func _physics_process(delta: float) -> void:
@@ -119,7 +119,7 @@ func _initialize_phase() -> void:
 			global_position = center_position
 		animation_player.play("Wolf/Transforming")
 	else:
-		state_machine.change_state(SnowyStateMachine.State.DECIDE)
+		state_machine.change_state(FrostbiteState.State.DECIDE)
 
 ## Change Current Phase (Based on Health Component)
 func _manage_phases() -> void:
@@ -160,7 +160,7 @@ func _running_to_player_state(delta):
 		velocity = direction * max_speed
 		
 		if global_position.distance_to(player.global_position) < 25:
-			state_machine.change_state(SnowyStateMachine.State.SHORT_ATTACKING)
+			state_machine.change_state(FrostbiteState.State.SHORT_ATTACKING)
 			velocity = Vector2.ZERO
 
 ## Short Attack State.
@@ -207,7 +207,7 @@ func _spawning_enemies_state(delta):
 	## Spawning Information.
 	
 	## On Finish Spawning -> :-
-	state_machine.change_state(SnowyStateMachine.State.DECIDE)
+	state_machine.change_state(FrostbiteState.State.DECIDE)
 
 ## I am Waiting to finish the Spawning Mecanic <<Minions>>
 func _on_spawncooldown_timeout() -> void:
@@ -220,11 +220,13 @@ func _dying_state(delta):
 ## When The Animation Finished, Do Something.
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Wolf/ShortAttack" or anim_name == "Wolfman/ShortAttack":
-		state_machine.change_state(SnowyStateMachine.State.DECIDE)
+		state_machine.change_state(FrostbiteState.State.DECIDE)
 	if anim_name == "Wolf/WaveAttack" or anim_name == "Wolfman/WaveAttack":
-		state_machine.change_state(SnowyStateMachine.State.DECIDE)
+		state_machine.change_state(FrostbiteState.State.DECIDE)
 	if anim_name == "Wolf/Transforming":
-		state_machine.change_state(SnowyStateMachine.State.DECIDE)
+		animation_player.play("Wolfman/TransformingOut")
+	if anim_name == "Wolfman/TransformingOut":
+		state_machine.change_state(FrostbiteState.State.DECIDE)
 	if anim_name == "Wolfman/Dying":
 		queue_free()
 	
@@ -235,11 +237,11 @@ func _on_healthcomponent_took_damage(amount: int) -> void:
 
 ## If the Health < Or = 0, The Boss will Die
 func _on_healthcomponent_died() -> void:
-	state_machine.change_state(SnowyStateMachine.State.DYING)
+	state_machine.change_state(FrostbiteState.State.DYING)
 
 ## Else: Change to Decide State.
 func _on_healthcomponent_decide() -> void:
-	state_machine.change_state(SnowyStateMachine.State.DECIDE)
+	state_machine.change_state(FrostbiteState.State.DECIDE)
 
 ## hit Signal from <<Hurtbox.gd>>
 func _on_hurtbox_hit(damage : int) -> void:

@@ -13,4 +13,3 @@ knock_back_force = 10.0
 texture = ExtResource("3_j5xdn")
 anim_library = ExtResource("1_wi5kj")
 stackable = false
-stack_size = 16

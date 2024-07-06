@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dle74xvwiev3e"]
 
-[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/NormalWave.gd" id="1_67xpm"]
+[ext_resource type="Script" path="res://scenes/Frostbite/Scripts/Frostbite/NormalWave.gd" id="1_67xpm"]
 [ext_resource type="Texture2D" uid="uid://b4frmjmq785ih" path="res://Assets/Bosses/WaveAttackWallx.png" id="2_4vxps"]
 
 [node name="NormalWave" type="Area2D"]
