@@ -7,7 +7,7 @@ class_name FireyDeek
 @export var decel: float
 @export var arena_center: Marker2D
 @export var aim: float = 0.2
-@export var max_bullets: int = 5
+@export var max_bullets: int = 15
 var current_bullets: int = max_bullets
 @onready var thinking_timer: Timer = %ThinkingTimer
 @onready var player = get_tree().get_first_node_in_group("Player")
@@ -94,6 +94,7 @@ func _on_thinking_timer_timeout() -> void:
 func choose_attack():
 	# Create a number generator
 	var rng = RandomNumberGenerator.new()
+	rng.seed = randi()
 	# choose an attack state
 	var chosen_attack = phases[phase_index][rng.randi_range(0, phases[phase_index].size() - 1)]
 	# change the state to this chosen attck state
@@ -119,9 +120,11 @@ func shoot_firey_ball():
 	fire_ball_instance.global_position =  minkar.global_position
 	# add it
 	get_tree().root.add_child(fire_ball_instance)
+	# decrease currnent bullets
 	current_bullets -= 1
+	# if it reached zero, think, and reset the bullets
 	if current_bullets == 0:
-		current_bullets = max_bullets
+		current_bullets = randi_range(5, max_bullets)
 		change_state(states.Thinking)
 func shoot_firey_ball_with_direction(direction: Vector2):
 	print("shot")
@@ -135,13 +138,16 @@ func shoot_firey_ball_with_direction(direction: Vector2):
 	# add it
 	get_tree().root.add_child(fire_ball_instance)
 func fire_balls_wave_state():
+	# it is currently shooting the wave
 	shooting_wave_state = true
+	# shoot 30 balls, and change the rotation of the shooting
 	for shot in 30:
 		await get_tree().create_timer(0.2).timeout
 		shoot_firey_ball_with_direction(minkar.global_position.direction_to(wave_shoot_indicator.global_position))
 		minkar.rotate(0.5)
-	
+	# it is not currently shooting the wave
 	shooting_wave_state = false
+	# Decide the next state
 	change_state(states.Thinking)
 func spawning_wives_state():
 	pass
