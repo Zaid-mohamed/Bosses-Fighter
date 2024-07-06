@@ -35,6 +35,7 @@ theme_override_constants/margin_right = 90
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pause menu/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 45
 alignment = 1
 
 [node name="Label" type="Label" parent="Pause menu/MarginContainer/VBoxContainer"]
@@ -42,42 +43,20 @@ layout_mode = 2
 text = "Game Paused"
 horizontal_alignment = 1
 
-[node name="Separator" type="Control" parent="Pause menu/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause menu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Separator2" type="Control" parent="Pause menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Separator3" type="Control" parent="Pause menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Separator4" type="Control" parent="Pause menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Separator5" type="Control" parent="Pause menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Separator6" type="Control" parent="Pause menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Separator7" type="Control" parent="Pause menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Separator8" type="Control" parent="Pause menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Separator9" type="Control" parent="Pause menu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Resume_button" type="Button" parent="Pause menu/MarginContainer/VBoxContainer"]
+[node name="Resume_button" type="Button" parent="Pause menu/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 text = "Resume"
 
-[node name="Quit_button" type="Button" parent="Pause menu/MarginContainer/VBoxContainer"]
+[node name="Quit_button" type="Button" parent="Pause menu/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
 text = "Quit"
 
-[connection signal="pressed" from="Pause menu/MarginContainer/VBoxContainer/Resume_button" to="Pause menu" method="_on_resume_button_pressed"]
-[connection signal="pressed" from="Pause menu/MarginContainer/VBoxContainer/Quit_button" to="Pause menu" method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Pause menu/MarginContainer/VBoxContainer/VBoxContainer/Resume_button" to="Pause menu" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Pause menu/MarginContainer/VBoxContainer/VBoxContainer/Quit_button" to="Pause menu" method="_on_quit_button_pressed"]

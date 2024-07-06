@@ -6,6 +6,9 @@ class_name Frostbite extends CharacterBody2D
 @onready var state_machine = $Statemachine
 @onready var health_component = $Healthcomponent
 @onready var hurtbox = $Hurtbox
+@onready var normal_wave = preload("res://scenes/Frostbite/Waves/NormalWave.tscn")
+@onready var charged_wave = preload("res://scenes/Frostbite/Waves/ChargedWave.tscn")
+@onready var center_position = get_parent().get_node("Center").global_position
 
 ## Settings.
 @export_category("Settings")
@@ -14,6 +17,8 @@ class_name Frostbite extends CharacterBody2D
 @export var max_speed : int = 120
 
 var health : int 
+
+var direction : Vector2
 
 ## Player Node.
 @export var player : Player
@@ -52,7 +57,7 @@ var Phases : Array = [
 		1 : SnowyStateMachine.State.WAVE_ATTACK,
 		2 : SnowyStateMachine.State.SPAWNING_ENEMIES,
 		3 : SnowyStateMachine.State.SUPER_WAVE_ATTACK,
-		4 : SnowyStateMachine.State.SNOWBALL_TRANSFORMATION,
+		4 : SnowyStateMachine.State.TRANSFORMATION,
 	},
 ]
 
@@ -84,7 +89,7 @@ func _process(delta: float) -> void:
 		SnowyStateMachine.State.SUPER_WAVE_ATTACK:
 			_super_wave_attack_state(delta)
 		
-		SnowyStateMachine.State.SNOWBALL_TRANSFORMATION:
+		SnowyStateMachine.State.TRANSFORMATION:
 			_transformation_state(delta)
 		
 		SnowyStateMachine.State.SPAWNING_ENEMIES:
@@ -94,8 +99,10 @@ func _process(delta: float) -> void:
 			_dying_state(delta)
 
 func _physics_process(delta: float) -> void:
+	$AttackRegion.look_at(player.global_position)
+	direction = global_position.direction_to(player.global_position)
 	move_and_slide()
-
+	
 func _set_phase_index(index: int):
 	if phase_index != index:
 		phase_index = index
@@ -107,7 +114,12 @@ func _set_phase_index(index: int):
 ## Initialize Current Phase.
 func _initialize_phase() -> void:
 	current_phase = Phases[phase_index]
-	state_machine.change_state(SnowyStateMachine.State.DECIDE)
+	if phase_index == 1:
+		if global_position != center_position:
+			global_position = center_position
+		animation_player.play("Wolf/Transforming")
+	else:
+		state_machine.change_state(SnowyStateMachine.State.DECIDE)
 
 ## Change Current Phase (Based on Health Component)
 func _manage_phases() -> void:
@@ -123,41 +135,69 @@ func _manage_phases() -> void:
 ## Decide State.
 func _decide_state(delta):
 	if player:
-		var avilable_attacks = current_phase.values()
+		if phase_index == 0:
+			animation_player.play("Wolf/Idle")
+		else:
+			animation_player.play("Wolfman/Idle")
 		
-		var randomization = randi() % avilable_attacks.size()
+		if global_position != center_position:
+			global_position = center_position
 		
-		current_attack = avilable_attacks[randomization]
-		
-		_manage_phases()
-		
-		state_machine.change_state(current_attack)
+		else:
+			var avilable_attacks = current_phase.values()
+			
+			var randomization = randi() % avilable_attacks.size()
+			
+			current_attack = avilable_attacks[randomization]
+			
+			_manage_phases()
+			
+			state_machine.change_state(current_attack)
 
 ## Run Toward Player State.
 func _running_to_player_state(delta):
 	if player:
-		var direction = (player.global_position - global_position).normalized()
-		
 		velocity = direction * max_speed
 		
-		if global_position.distance_to(player.global_position) < 50:
+		if global_position.distance_to(player.global_position) < 25:
 			state_machine.change_state(SnowyStateMachine.State.SHORT_ATTACKING)
 			velocity = Vector2.ZERO
 
 ## Short Attack State.
 func _short_attacking_state(delta):
-	$AttackRegion.look_at(player.global_position)
-	animation_player.play("ShortAttack")
+	if phase_index == 0:
+		animation_player.play("Wolf/ShortAttack")
+	else:
+		animation_player.play("Wolfman/ShortAttack")
 
 func _on_attack_region_body_entered(body: Node2D) -> void:
 	if body is Player && body.has_method("Damage"):
 		pass
 
 func _wave_attack_state(delta):
-	pass
+	if phase_index == 0:
+		animation_player.play("Wolf/WaveAttack")
+	else:
+		animation_player.play("Wolfman/WaveAttack")
+
+func _wave_attack() -> void:
+	var normal_wave_instance = normal_wave.instantiate()
+		
+	normal_wave_instance.global_position = $AttackRegion/ShootRaduis.global_position
+	get_parent().add_child(normal_wave_instance)
+	normal_wave_instance.look_at(player.global_position)
+	normal_wave_instance.direction = direction
 
 func _super_wave_attack_state(delta):
-	pass
+	animation_player.play("Wolfman/Charging")
+
+func _super_wave_attack() -> void:
+	var charged_wave_instance = charged_wave.instantiate()
+		
+	charged_wave_instance.global_position = $AttackRegion/ShootRaduis.global_position
+	get_parent().add_child(charged_wave_instance)
+	charged_wave_instance.look_at(player.global_position)
+	charged_wave_instance.direction = direction
 
 func _transformation_state(delta):
 	pass
@@ -175,17 +215,23 @@ func _on_spawncooldown_timeout() -> void:
 
 ## the End of fight.
 func _dying_state(delta):
-	## This will be an animation
-	queue_free()
+	animation_player.play("Dying")
 
 ## When The Animation Finished, Do Something.
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "ShortAttack":
+	if anim_name == "Wolf/ShortAttack" or anim_name == "Wolfman/ShortAttack":
 		state_machine.change_state(SnowyStateMachine.State.DECIDE)
-
+	if anim_name == "Wolf/WaveAttack" or anim_name == "Wolfman/WaveAttack":
+		state_machine.change_state(SnowyStateMachine.State.DECIDE)
+	if anim_name == "Wolf/Transforming":
+		state_machine.change_state(SnowyStateMachine.State.DECIDE)
+	if anim_name == "Wolfman/Dying":
+		queue_free()
+	
 ## When Take Damage This Signal will emitted.
 func _on_healthcomponent_took_damage(amount: int) -> void:
 	print("Took damage: %d" % amount)
+	health = health_component.current_health
 
 ## If the Health < Or = 0, The Boss will Die
 func _on_healthcomponent_died() -> void:
@@ -202,3 +248,8 @@ func _on_hurtbox_hit(damage : int) -> void:
 	
 	## Play <<Damage Flash Animation>>
 	animation_player.play("TakeDamage")
+
+
+## -> Wolfman -> Snowball.
+## Optimazition.
+## Arena.

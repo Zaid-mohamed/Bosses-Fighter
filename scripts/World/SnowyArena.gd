@@ -4,3 +4,6 @@ extends Node2D
 ## Smooth Camera Moves and Dramitic Camera, ETC.......................
 
 ## DON'T TOUCH IT PLEASE. 
+
+func _process(delta: float) -> void:
+	$BossFight/HealthBar/TextureProgressBar.value = $Frostbite.health

@@ -40,16 +40,31 @@ func grab_slot_data(slot_index : int):
 
 
 
-## Put a slot_data in slot_datas in a certain given index in slot_datas (returbs true if succefull, false if not)
+## Put a slot_data in slot_datas in a certain given index in slot_datas (returns true if succefull, false if not)
 func put_slot_data(slot_index : int , new_slot_data : SlotData):
 	# if there is a slot in this index.
 	if slot_datas[slot_index]:
 		# and have the item of the slot_data that should be put.
 		if slot_datas[slot_index].item_data == new_slot_data.item_data:
+			# if the amount of the slot the player want to put there is equal to the stack size of this item,
+			# don't continue
+			if slot_datas[slot_index].quantity == slot_datas[slot_index].item_data.stack_size: return
 			# and both of them is stackable.
 			if slot_datas[slot_index].item_data.stackable:
+				# store the amount needed to fill up 
+				var needed_amount = slot_datas[slot_index].item_data.stack_size - slot_datas[slot_index].quantity
 				#increase the quantity of the slot
-				slot_datas[slot_index].quantity += new_slot_data.quantity
+				if needed_amount > new_slot_data.quantity: 
+					slot_datas[slot_index].quantity += new_slot_data.quantity
+					slot_datas[slot_index].quantity = 0
+					inventory_updated.emit(self)
+					return false
+				else:
+					slot_datas[slot_index].quantity += needed_amount
+					new_slot_data.quantity -= needed_amount
+				if new_slot_data.quantity > 0:
+					inventory_updated.emit(self)
+					return false
 				# and emit the inventory updated signal
 				inventory_updated.emit(self)
 				# return true
@@ -87,12 +102,33 @@ func add_item(item_data : ItemData, amount : int = 1):
 	## this section should add items on top of each other like 20 apples and 3 one 
 	for slot in slot_datas:
 		if !slot: continue
+		
+		# if the slot item is the needed item
 		if slot.item_data == item_data:
-			slot.quantity += amount
+			# create a variable storing the needed amount to fill the slot
+			var needed_amount = clamp(slot.item_data.stack_size - slot.quantity, 0, slot.item_data.stack_size)
+			# add the needed amount to the quantity
+			if amount >= needed_amount:
+				slot.quantity += needed_amount
+				# decrease the amount by the needed amount, (because they are added to the slot)
+				amount -= needed_amount
+			else:
+				slot.quantity += amount
+				amount = 0
+			
+			# emit the inventory_updated
 			inventory_updated.emit(self)
+			# this item is got, so it is got before
 			item_data.got_before = true
-			return
-			break
+			# if there are amount not added to slots yet
+			print("amount just before if statement. %s" % amount)
+			if amount > 0:
+				# go to the next slot
+				continue
+			else:
+				# if there is no amount to put left, stop and end the function
+				break
+				return true
 			
 	
 	## if there is no item like this in the inventory this section will run (as I expect)
@@ -101,6 +137,8 @@ func add_item(item_data : ItemData, amount : int = 1):
 	var index = -1
 	# move in each slot data in slot datas in inventory
 	for slot in slot_datas:
+		# there is no amount remaining if the prevuis method procceded, don'continue
+		if amount <= 0: return
 		# increase the index (because we moved an iteration)
 		index += 1
 		# if found empty slot
@@ -110,16 +148,35 @@ func add_item(item_data : ItemData, amount : int = 1):
 			var new_slot_data = SlotData.new()
 			# assign the item data of the new slot to the given item data
 			new_slot_data.item_data = item_data
-			# make the quantity one
-			new_slot_data.quantity = amount
+			# if the amount needed to put there is larger than or equal the stack size of the item needed
+			if amount >= new_slot_data.item_data.stack_size:
+				# add the stack size to the quantity (fill up the slot)
+				new_slot_data.quantity = new_slot_data.item_data.stack_size
+				# and remove that amount from the amount
+				amount -= new_slot_data.item_data.stack_size
+			else: # if the amount is less than the stack size
+				# add all the amount to the slot
+				new_slot_data.quantity = amount
+				# the amount is zero (added all amount)
+				amount = 0
+			
 			# add the new slot in the correct index
 			slot_datas[index] = new_slot_data
 			
 			# and emit the inventory updated signal
 			inventory_updated.emit(self)
+			# the item is got, so it is got before
 			item_data.got_before = true
 			# and stop
-			break
+			
+			# if there is more amount remained not added to the inventory
+			if amount > 0:
+				# move to the next slot (i don't know why but it works like that :)#
+				continue
+			
+			else:
+				# if there is not, stop the for loop
+				break
 
 # returns is the inventory full or not
 func is_full() -> bool:

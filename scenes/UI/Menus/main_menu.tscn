@@ -96,8 +96,17 @@ position = Vector2(148, 42)
 item_data = ExtResource("10_sm57w")
 amount = 32
 
+[node name="ArrowPickup3" parent="." instance=ExtResource("7_hwfdt")]
+position = Vector2(113, 44)
+item_data = ExtResource("10_sm57w")
+amount = 8
+
+[node name="ArrowPickup4" parent="." instance=ExtResource("7_hwfdt")]
+position = Vector2(90, 51)
+item_data = ExtResource("10_sm57w")
+
 [node name="ArrowPickup2" parent="." instance=ExtResource("7_hwfdt")]
-position = Vector2(209, 43)
+position = Vector2(203, 41)
 item_data = ExtResource("10_sm57w")
 amount = 32
 

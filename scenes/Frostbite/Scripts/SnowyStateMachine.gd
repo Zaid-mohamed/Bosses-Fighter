@@ -14,7 +14,7 @@ enum State{
 	
 	SUPER_WAVE_ATTACK, ## Third Attack
 	
-	SNOWBALL_TRANSFORMATION, ## Fourth Attack
+	TRANSFORMATION, ## Fourth Attack
 	
 	SPAWNING_ENEMIES, ## Last Attack
 	
@@ -48,8 +48,8 @@ func _enter_state(state):
 			print("Entering Wave Attacking State")
 		State.SUPER_WAVE_ATTACK:
 			print("Entering Super Wave Attacking State")
-		State.SNOWBALL_TRANSFORMATION:
-			print("Entering Snowball Transformation State")
+		State.TRANSFORMATION:
+			print("Entering Transformation State")
 		State.SPAWNING_ENEMIES:
 			print("Entering Spawning Enemies State")
 		State.DYING:
@@ -68,8 +68,8 @@ func _exit_state(state):
 			print("Exiting Wave Attacking State")
 		State.SUPER_WAVE_ATTACK:
 			print("Exiting Super Wave Attacking State")
-		State.SNOWBALL_TRANSFORMATION:
-			print("Exiting Snowball Transformation State")
+		State.TRANSFORMATION:
+			print("Exiting Transformation State")
 		State.SPAWNING_ENEMIES:
 			print("Exiting Spawning Enemies State")
 		State.DYING:
