@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://d287kxjowxl2c"]
+
+[ext_resource type="Texture2D" uid="uid://caca664p1plf4" path="res://Assets/Minions/Katkout minion/boos1.png" id="1_l70xi"]
+[ext_resource type="Script" path="res://scripts/Deek/Katkout/katkout.gd" id="1_quqqy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rihj"]
+size = Vector2(7, 14)
+
+[node name="Katkout" type="CharacterBody2D"]
+motion_mode = 1
+wall_min_slide_angle = 0.0
+script = ExtResource("1_quqqy")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_l70xi")
+region_enabled = true
+region_rect = Rect2(153, 30, 14, 14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_8rihj")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
